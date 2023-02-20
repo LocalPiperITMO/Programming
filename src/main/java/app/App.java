@@ -8,7 +8,7 @@ public class App {
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        InputStreamReader readDataFromFile = null;
+        InputStreamReader readDataFromFile;
         while (true) {
             // read file from env.variable
             readDataFromFile = GetVariableName.getVariableNameFromUser(reader);

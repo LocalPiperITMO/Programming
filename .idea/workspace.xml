@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/CSVtoStringConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/ExitCheck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/GetVariableName.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/VariableNameNullHandler.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +93,7 @@
       <workItem from="1676863777319" duration="1337000" />
       <workItem from="1676865162328" duration="4244000" />
       <workItem from="1676870257823" duration="2035000" />
-      <workItem from="1676872329689" duration="3746000" />
+      <workItem from="1676872329689" duration="6086000" />
     </task>
     <servers />
   </component>

@@ -1,29 +1,28 @@
 package app;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Objects;
 
-public class CSVtoStringConverter {
+public class CSVtoStringListConverter {
     private final BufferedReader reader;
 
-    public CSVtoStringConverter(BufferedReader reader) {
+    public CSVtoStringListConverter(BufferedReader reader) {
         this.reader = reader;
     }
 
-    public String convertCSVtoString() throws IOException {
+    public List<String[]> convertCSVtoStringList() throws IOException, CsvException {
         // read file from env.variable
         InputStreamReader readDataFromFile = getVariableNameFromUser(reader);
         if (readDataFromFile == null) {
             return null;
         }
-        StringBuilder text = new StringBuilder();
-        int currentChar = readDataFromFile.read();
-        while (currentChar != -1) {
-            text.append((char) currentChar);
-            currentChar = readDataFromFile.read();
-        }
-        return String.valueOf(text);
+        CSVReader csvReader = new CSVReader(readDataFromFile);
+        return csvReader.readAll();
     }
 
     public InputStreamReader getVariableNameFromUser(BufferedReader reader) throws IOException {
@@ -84,3 +83,4 @@ public class CSVtoStringConverter {
         return (Objects.equals(userInput.strip().toLowerCase(), "exit"));
     }
 }
+

@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/CSVtoStringConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/CSVtoStringListConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/ExitCheck.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/GetVariableName.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/VariableNameNullHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/CSVtoStringConverter.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,7 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="app.App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.App" />
       <module name="App" />
       <extension name="coverage">
@@ -73,7 +72,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
+        <item itemvalue="Application.app.App" />
       </list>
     </recent_temporary>
   </component>
@@ -93,7 +92,8 @@
       <workItem from="1676863777319" duration="1337000" />
       <workItem from="1676865162328" duration="4244000" />
       <workItem from="1676870257823" duration="2035000" />
-      <workItem from="1676872329689" duration="6086000" />
+      <workItem from="1676872329689" duration="6877000" />
+      <workItem from="1676964001551" duration="2005000" />
     </task>
     <servers />
   </component>

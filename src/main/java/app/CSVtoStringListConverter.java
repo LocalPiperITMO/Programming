@@ -3,8 +3,13 @@ package app;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +21,6 @@ public class CSVtoStringListConverter {
     }
 
     public List<String[]> convertCSVtoStringList() throws IOException, CsvException {
-        // read file from env.variable
         InputStreamReader readDataFromFile = getVariableNameFromUser(reader);
         if (readDataFromFile == null) {
             return null;
@@ -26,13 +30,10 @@ public class CSVtoStringListConverter {
     }
 
     public InputStreamReader getVariableNameFromUser(BufferedReader reader) throws IOException {
-        boolean collectionCreationState = true;
+        boolean collectionCreationForbidden = false;
         InputStreamReader readDataFromFile = null;
-        while (collectionCreationState) {
-            System.out.println("""
-                    Input variable name:
-                    (NOTE: Type "exit" to leave the program).
-                    """);
+        while (!collectionCreationForbidden) {
+            System.out.println("Input variable name:\n(NOTE: Type \"exit\" to leave the program).");
             String userInput = reader.readLine();
             if (userInput == null || checkIfUserLeaves(userInput)) {
                 System.out.println("Leaving the program");
@@ -40,14 +41,14 @@ public class CSVtoStringListConverter {
             }
             String varAddress = System.getenv(userInput);
             try {
-                readDataFromFile = new InputStreamReader(new FileInputStream(varAddress), StandardCharsets.UTF_8);
-                collectionCreationState = false;
+                readDataFromFile = new InputStreamReader(Files.newInputStream(Paths.get(varAddress)), StandardCharsets.UTF_8);
+                collectionCreationForbidden = true;
             } catch (NullPointerException npe) {
                 readDataFromFile = handleNullName(reader);
-                collectionCreationState = false;
+                collectionCreationForbidden = true;
             }
         }
-        return (collectionCreationState) ? null : readDataFromFile;
+        return (!collectionCreationForbidden) ? null : readDataFromFile;
     }
 
     public InputStreamReader handleNullName(BufferedReader reader) throws IOException {
@@ -56,8 +57,7 @@ public class CSVtoStringListConverter {
                     Environment variable not found. Choose from 2 options:
                     1. Try again.
                     2. Create empty file.
-                    Print either 1 or 2 into the console.
-                    """);
+                    Print either 1 or 2 into the console.""");
             String userRequest = reader.readLine();
             if (userRequest == null || checkIfUserLeaves(userRequest.strip())) {
                 System.out.println("Leaving the program");
@@ -72,7 +72,7 @@ public class CSVtoStringListConverter {
                 } else {
                     System.out.println("Empty file already exists");
                 }
-                return new InputStreamReader(new FileInputStream(empty_file), StandardCharsets.UTF_8);
+                return new InputStreamReader(Files.newInputStream(empty_file.toPath()), StandardCharsets.UTF_8);
             } else {
                 System.out.println("Wrong input!");
             }

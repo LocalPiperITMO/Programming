@@ -15,7 +15,9 @@ public class App {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         CSVtoStringListConverter csvToString = new CSVtoStringListConverter(reader);
         List<String[]> text = csvToString.convertCSVtoStringList();
-        StringListToObjectVectorConverter stringToVector = new StringListToObjectVectorConverter(text);
-        Vector<Vehicle> dataSet = stringToVector.convertStringListToObjectVector();
+        if (text != null) {
+            StringListToObjectVectorConverter stringToVector = new StringListToObjectVectorConverter(text);
+            Vector<Vehicle> dataSet = stringToVector.convertStringListToObjectVector();
+        }
     }
 }

@@ -6,4 +6,5 @@ public enum FuelType {
     NUCLEAR,
     PLASMA,
     ANTIMATTER
+
 }

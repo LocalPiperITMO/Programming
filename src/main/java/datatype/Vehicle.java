@@ -12,8 +12,8 @@ public class Vehicle {
     private VehicleType type; //Поле может быть null
     private FuelType fuelType; //Поле может быть null
 
-    public Vehicle(String name, Coordinates coordinates, long enginePower, long fuelConsumption, VehicleType type, FuelType fuelType) {
-        this.id = (int) (Math.random() * 100000);
+    public Vehicle(Integer id, String name, Coordinates coordinates, long enginePower, long fuelConsumption, VehicleType type, FuelType fuelType) {
+        this.id = id;
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = LocalDate.now();

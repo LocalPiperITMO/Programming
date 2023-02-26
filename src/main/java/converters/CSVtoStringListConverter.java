@@ -1,4 +1,4 @@
-package app;
+package converters;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
@@ -48,7 +48,7 @@ public class CSVtoStringListConverter {
                 collectionCreationForbidden = true;
             }
         }
-        return (!collectionCreationForbidden) ? null : readDataFromFile;
+        return (collectionCreationForbidden) ? readDataFromFile : null;
     }
 
     public InputStreamReader handleNullName(BufferedReader reader) throws IOException {

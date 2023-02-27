@@ -2,7 +2,7 @@ package datatype;
 
 import java.time.LocalDate;
 
-public class Vehicle {
+public class Vehicle implements Comparable<Vehicle> {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -53,5 +53,9 @@ public class Vehicle {
 
     public FuelType getFuelType() {
         return fuelType;
+    }
+
+    public int compareTo(Vehicle otherVehicle) {
+        return this.getId() - otherVehicle.getId();
     }
 }

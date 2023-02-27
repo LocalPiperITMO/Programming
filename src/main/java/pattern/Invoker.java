@@ -17,8 +17,8 @@ public class Invoker {
         this.dataSet = receiver;
         this.validator = new UserRequestValidator();
         this.commandHashMap = new HashMap<>();
-        commandHashMap.put("help", new HelpCommand());
-        commandHashMap.put("info", new InfoCommand());
+        commandHashMap.put("help", new HelpCommand(receiver));
+        commandHashMap.put("info", new InfoCommand(receiver));
         commandHashMap.put("show", new ShowCommand(receiver));
     }
 

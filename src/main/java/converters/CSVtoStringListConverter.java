@@ -66,7 +66,7 @@ public class CSVtoStringListConverter {
             if (Objects.equals(userRequest.strip(), "1")) {
                 return getVariableNameFromUser(reader);
             } else if (Objects.equals(userRequest.strip(), "2")) {
-                File empty_file = new File("C:\\Users\\Honor\\IdeaProjects\\App\\empty_file.csv");
+                File empty_file = new File("C:\\Users\\Honor\\IdeaProjects\\App\\src\\main\\java\\files\\empty_file.csv");
                 if (empty_file.createNewFile()) {
                     System.out.println("Empty file created successfully.");
                 } else {

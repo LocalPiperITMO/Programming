@@ -1,6 +1,7 @@
 package pattern;
 
 import datatype.Vehicle;
+import exceptions.EmptyDatasetException;
 import exceptions.NoPreviousSortingException;
 
 import java.util.Collections;
@@ -17,11 +18,18 @@ public class Receiver {
     }
 
     public void show() {
-        System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
-        for (Vehicle vehicle : dataSet) {
-            System.out.println(vehicle.getId() + " " + vehicle.getName() + " " + vehicle.getCreationDate() + " "
-                    + vehicle.getCoordinates() + " " + vehicle.getEnginePower() + " " + vehicle.getFuelConsumption() + " "
-                    + vehicle.getType() + " " + vehicle.getFuelType());
+        try {
+            if (dataSet.size() == 0) {
+                throw new EmptyDatasetException();
+            }
+            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
+            for (Vehicle vehicle : dataSet) {
+                System.out.println(vehicle.getId() + " " + vehicle.getName() + " " + vehicle.getCreationDate() + " "
+                        + vehicle.getCoordinates() + " " + vehicle.getEnginePower() + " " + vehicle.getFuelConsumption() + " "
+                        + vehicle.getType() + " " + vehicle.getFuelType());
+            }
+        } catch (EmptyDatasetException noData) {
+            System.out.println("Dataset is empty: nothing to show");
         }
     }
 
@@ -37,6 +45,7 @@ public class Receiver {
                 info : displays the information about the dataset (type of dataset, creation date, number of elements)
                 show : displays every element of the dataset
                 exit : leaves the program
+                clear : clears the dataset
                 reorder : displays every element of the dataset in reverse order of the current sorting.
                 If no previous sorting was done, uses default sorting by ID
                 print_ascending : displays every element sorted by ID
@@ -45,22 +54,39 @@ public class Receiver {
     }
 
     public void printAscending() {
-        sortingParameter = "ID";
-        Collections.sort(dataSet);
-        show();
+        try {
+            if (dataSet.size() == 0) {
+                throw new EmptyDatasetException();
+            }
+            sortingParameter = "ID";
+            Collections.sort(dataSet);
+            show();
+        } catch (EmptyDatasetException noData) {
+            System.out.println("Dataset is empty: nothing to sort");
+        }
     }
 
     public void printFieldAscendingFuelType() {
-        sortingParameter = "FuelType";
-        Collections.sort(dataSet);
-        System.out.println("ID FuelType");
-        for (Vehicle vehicle : dataSet) {
-            System.out.println(vehicle.getId() + " " + vehicle.getFuelType());
+        try {
+            if (dataSet.size() == 0) {
+                throw new EmptyDatasetException();
+            }
+            sortingParameter = "FuelType";
+            Collections.sort(dataSet);
+            System.out.println("ID FuelType");
+            for (Vehicle vehicle : dataSet) {
+                System.out.println(vehicle.getId() + " " + vehicle.getFuelType());
+            }
+        } catch (EmptyDatasetException noData) {
+            System.out.println("Dataset is empty: nothing to sort");
         }
     }
 
     public void reorder() {
         try {
+            if (dataSet.size() == 0) {
+                throw new EmptyDatasetException();
+            }
             if (sortingParameter == null) {
                 throw new NoPreviousSortingException();
             }
@@ -71,6 +97,13 @@ public class Receiver {
             System.out.println("No previous sorting detected. Switching to default mod: sorting by ID");
             sortingParameter = "ID";
             reorder();
+        } catch (EmptyDatasetException noData) {
+            System.out.println("Dataset is empty: nothing to sort");
         }
+    }
+
+    public void clear() {
+        dataSet.removeAllElements();
+        System.out.println("Collection has been emptied");
     }
 }

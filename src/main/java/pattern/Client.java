@@ -13,7 +13,8 @@ public class Client {
 
     public void runningMode() throws IOException {
         BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-        while (true) {
+        boolean isRunning = true;
+        while (isRunning) {
             System.out.println("""
                     Enter command:
                     NOTE: if the command has additional parameters, input in this exact pattern:
@@ -21,7 +22,7 @@ public class Client {
             String request = userInput.readLine();
             if (request == null || request.equalsIgnoreCase("exit")) {
                 System.out.println("Leaving the program");
-                break;
+                isRunning = false;
             } else {
                 invoker.getRequestFromUser(request.strip());
             }

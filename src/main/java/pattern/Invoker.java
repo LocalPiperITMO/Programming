@@ -19,6 +19,7 @@ public class Invoker {
         commandHashMap.put("help", new HelpCommand(receiver));
         commandHashMap.put("info", new InfoCommand(receiver));
         commandHashMap.put("show", new ShowCommand(receiver));
+        commandHashMap.put("clear", new ClearCommand(receiver));
         commandHashMap.put("reorder",new ReorderCommand(receiver));
         commandHashMap.put("print_ascending", new PrintAscendingCommand(receiver));
         commandHashMap.put("print_field_ascending_fuel_type", new PrintFieldAscendingFuelTypeCommand(receiver));

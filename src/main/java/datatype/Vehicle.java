@@ -1,6 +1,9 @@
 package datatype;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
+import static pattern.Receiver.sortingParameter;
 
 public class Vehicle implements Comparable<Vehicle> {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -56,6 +59,13 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     public int compareTo(Vehicle otherVehicle) {
-        return this.getId() - otherVehicle.getId();
+        System.out.println(sortingParameter);
+        if (Objects.equals(sortingParameter, "ID")) {
+            return this.getId() - otherVehicle.getId();
+        } else {
+            int comparing1 = (this.getFuelType() == null) ? 0 : this.getFuelType().getPosition();
+            int comparing2 = (otherVehicle.getFuelType() == null) ? 0 : otherVehicle.getFuelType().getPosition();
+            return comparing1 - comparing2;
+        }
     }
 }

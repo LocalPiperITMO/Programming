@@ -1,11 +1,10 @@
 package pattern;
 
 
-import commands.HelpCommand;
-import commands.InfoCommand;
-import commands.ShowCommand;
+import commands.*;
 import validators.UserRequestValidator;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Invoker {
@@ -20,6 +19,9 @@ public class Invoker {
         commandHashMap.put("help", new HelpCommand(receiver));
         commandHashMap.put("info", new InfoCommand(receiver));
         commandHashMap.put("show", new ShowCommand(receiver));
+        commandHashMap.put("reorder",new ReorderCommand(receiver));
+        commandHashMap.put("print_ascending", new PrintAscendingCommand(receiver));
+        commandHashMap.put("print_field_ascending_fuel_type", new PrintFieldAscendingFuelTypeCommand(receiver));
     }
 
     public void getRequestFromUser(String userInput) {
@@ -30,7 +32,7 @@ public class Invoker {
             System.out.println();
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
             validator.emptyRequest();
-        } catch (NullPointerException npe) {
+        } catch (NullPointerException | IOException npe) {
             validator.invalidCommandRequest(userInput.split(" ", 2)[0]);
         }
     }

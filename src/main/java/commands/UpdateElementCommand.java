@@ -7,10 +7,10 @@ import pattern.Receiver;
 import java.io.IOException;
 import java.util.Objects;
 
-public class UpdateByIDCommand implements Command {
+public class UpdateElementCommand implements Command {
     private final Receiver receiver;
 
-    public UpdateByIDCommand(Receiver receiver) {
+    public UpdateElementCommand(Receiver receiver) {
         this.receiver = receiver;
     }
 
@@ -23,7 +23,7 @@ public class UpdateByIDCommand implements Command {
         if (Objects.equals(argument, "")) {
             execute();
         } else {
-            receiver.updateByID(Integer.parseInt(argument));
+            receiver.update(Integer.parseInt(argument));
         }
     }
 }

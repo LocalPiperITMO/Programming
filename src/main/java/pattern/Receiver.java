@@ -48,11 +48,15 @@ public class Receiver {
                 help : displays this message
                 info : displays the information about the dataset (type of dataset, creation date, number of elements)
                 show : displays every element of the dataset
+                add : adds element to dataset
+                update id : updates the element with the given ID
                 remove_by_id id : removes an element with the given ID
-                exit : leaves the program
                 clear : clears the dataset
-                reorder : displays every element of the dataset in reverse order of the current sorting.
-                If no previous sorting was done, uses default sorting by ID
+                save : save the dataset to file
+                exit : leaves the program
+                add_if_max : if the element is greater that the greatest element in the dataset, it is added to dataset
+                remove_greater : removes all the elements from the dataset greater than the given one
+                reorder : displays every element of the dataset in reverse order of the current sorting
                 filter_by_fuel_consumption fuelConsumption : displays elements with the given fuelConsumption
                 print_ascending : displays every element sorted by ID
                 print_field_ascending_fuel_type : displays only ID and FuelType of every element, sorted by FuelType
@@ -165,7 +169,7 @@ public class Receiver {
         System.out.println("Object added successfully");
     }
 
-    public void updateByID(int id) throws IOException {
+    public void update(int id) throws IOException {
         boolean isFound = false;
         for (Vehicle vehicle : dataSet) {
             if (id == vehicle.getId()) {
@@ -193,5 +197,13 @@ public class Receiver {
         } else {
             System.out.println("New element has not been added: element with ID " + dataSet.lastElement().getId() + " is greater");
         }
+    }
+
+    public void removeGreaterElements() throws IOException {
+        generator.consecutiveInputMode(true);
+        Vehicle elementToCompare = generator.createOrUpdateObjectByUserInput(null);
+        sortingParameter = "Numeric";
+        dataSet.removeIf(vehicle -> elementToCompare.compareTo(vehicle) < 0);
+        System.out.println("Done");
     }
 }

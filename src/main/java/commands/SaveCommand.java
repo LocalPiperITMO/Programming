@@ -16,4 +16,9 @@ public class SaveCommand implements Command {
     public void execute() throws IOException {
         receiver.save();
     }
+    @Override
+    public void execute(String arg) throws IOException {
+        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
+        execute();
+    }
 }

@@ -8,4 +8,8 @@ public class UserRequestValidator {
     public void invalidCommandRequest(String invalidCommandName) {
         System.out.println("There is no command named \"" + invalidCommandName + "\". Try again");
     }
+
+    public void noArgumentCommandRequest(String commandName) {
+        System.out.println(commandName + " requires an argument: none were given");
+    }
 }

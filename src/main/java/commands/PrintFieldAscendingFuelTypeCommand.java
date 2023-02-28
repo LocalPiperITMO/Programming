@@ -13,4 +13,9 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
     public void execute() {
         receiver.printFieldAscendingFuelType();
     }
+    @Override
+    public void execute(String arg) {
+        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
+        execute();
+    }
 }

@@ -2,7 +2,6 @@ package app;
 
 import com.opencsv.exceptions.CsvException;
 import converters.CSVtoStringListConverter;
-import converters.ObjectVectorToStringListConverter;
 import converters.StringListToObjectVectorConverter;
 import datatype.Vehicle;
 import pattern.Client;
@@ -17,6 +16,7 @@ import java.util.Vector;
 
 public class App {
     public static LocalDate creationDate;
+
     public static void main(String[] args) throws IOException, CsvException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

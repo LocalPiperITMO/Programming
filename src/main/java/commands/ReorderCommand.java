@@ -14,4 +14,9 @@ public class ReorderCommand implements Command {
     public void execute() {
         receiver.reorder();
     }
+    @Override
+    public void execute(String arg) {
+        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
+        execute();
+    }
 }

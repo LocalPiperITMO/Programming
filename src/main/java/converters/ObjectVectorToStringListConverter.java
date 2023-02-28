@@ -15,7 +15,7 @@ public class ObjectVectorToStringListConverter {
     }
 
     public List<String> convertObjectVectorToStringList() {
-        //Opel, 124,4,51,21,CHOPPER,MANPOWER
+        //Opel,124,4,51,21,CHOPPER,MANPOWER
         stringList = new ArrayList<>();
         for (Vehicle vehicle : dataSet) {
             String line = vehicle.getName() + "," + vehicle.getCoordinates().toString() + "," +

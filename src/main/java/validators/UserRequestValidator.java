@@ -12,4 +12,7 @@ public class UserRequestValidator {
     public void noArgumentCommandRequest(String commandName) {
         System.out.println(commandName + " requires an argument: none were given");
     }
+    public void illegalArgumentCommandRequest(String commandName, String argumentType){
+        System.out.println(commandName + " requires a different argument type, but " + argumentType + " was given");
+    }
 }

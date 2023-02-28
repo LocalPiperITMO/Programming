@@ -127,4 +127,19 @@ public class Receiver {
             System.out.println(ioException.getMessage());
         }
     }
+
+    public void remove_by_id(int id) {
+        boolean isFound = false;
+        for (Vehicle vehicle : dataSet) {
+            isFound = (vehicle.getId() == id);
+            if (isFound) {
+                dataSet.remove(vehicle);
+                System.out.println("Object deleted successfully");
+                break;
+            }
+        }
+        if (!isFound) {
+            System.out.println("There is no object by this ID.");
+        }
+    }
 }

@@ -20,11 +20,10 @@ public class Invoker {
         this.dataSet = receiver;
         this.validator = new UserRequestValidator();
         this.commandHashMap = new HashMap<>();
-        this.argument = "";
         commandHashMap.put("help", new HelpCommand(receiver));
         commandHashMap.put("info", new InfoCommand(receiver));
         commandHashMap.put("show", new ShowCommand(receiver));
-        commandHashMap.put("remove_by_id", new RemoveByIDCommand(receiver, argument));
+        commandHashMap.put("remove_by_id", new RemoveByIDCommand(receiver));
         commandHashMap.put("clear", new ClearCommand(receiver));
         commandHashMap.put("save", new SaveCommand(receiver));
         commandHashMap.put("reorder", new ReorderCommand(receiver));
@@ -34,6 +33,7 @@ public class Invoker {
 
     public void getRequestFromUser(String userInput) {
         try {
+            argument = "";
             String[] userInputArray = userInput.trim().split(" ", 2);
             commandName = userInputArray[0];
             if (userInputArray.length == 2) {
@@ -51,6 +51,8 @@ public class Invoker {
             validator.invalidCommandRequest(userInput.split(" ", 2)[0]);
         } catch (NoArgumentException e) {
             validator.noArgumentCommandRequest(commandHashMap.get(commandName).getClass().getName());
+        } catch (NumberFormatException e) {
+            validator.illegalArgumentCommandRequest(commandHashMap.get(commandName).getClass().getName(), argument.getClass().getName());
         }
     }
 }

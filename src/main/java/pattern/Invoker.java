@@ -27,6 +27,7 @@ public class Invoker {
         commandHashMap.put("clear", new ClearCommand(receiver));
         commandHashMap.put("save", new SaveCommand(receiver));
         commandHashMap.put("reorder", new ReorderCommand(receiver));
+        commandHashMap.put("filter_by_fuel_consumption", new FilterByFuelConsumptionCommand(receiver));
         commandHashMap.put("print_ascending", new PrintAscendingCommand(receiver));
         commandHashMap.put("print_field_ascending_fuel_type", new PrintFieldAscendingFuelTypeCommand(receiver));
     }

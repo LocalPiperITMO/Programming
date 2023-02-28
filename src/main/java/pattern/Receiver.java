@@ -29,9 +29,7 @@ public class Receiver {
             }
             System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
             for (Vehicle vehicle : dataSet) {
-                System.out.println(vehicle.getId() + " " + vehicle.getName() + " " + vehicle.getCreationDate() + " "
-                        + vehicle.getCoordinates() + " " + vehicle.getEnginePower() + " " + vehicle.getFuelConsumption() + " "
-                        + vehicle.getType() + " " + vehicle.getFuelType());
+                System.out.println(vehicle.toString());
             }
         } catch (EmptyDatasetException noData) {
             System.out.println("Dataset is empty: nothing to show");
@@ -140,6 +138,21 @@ public class Receiver {
         }
         if (!isFound) {
             System.out.println("There is no object by this ID.");
+        }
+    }
+
+    public void filter_by_fuel_consumption(long fuelConsumption) {
+        Vector<Vehicle> filteredDataSet = new Vector<>();
+        for (Vehicle vehicle : dataSet) {
+            if (fuelConsumption == vehicle.getFuelConsumption()) {
+                filteredDataSet.add(vehicle);
+            }
+        }
+        if (filteredDataSet.size() > 0) {
+            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
+            for (Vehicle vehicle : filteredDataSet) {
+                System.out.println(vehicle.toString());
+            }
         }
     }
 }

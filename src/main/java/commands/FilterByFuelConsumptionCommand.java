@@ -10,11 +10,9 @@ import java.io.IOException;
 public class FilterByFuelConsumptionCommand implements Command {
     private final UserRequestValidator validator = new UserRequestValidator();
     private final Receiver receiver;
-    private String argument;
 
-    public FilterByFuelConsumptionCommand(Receiver receiver, String argument) {
+    public FilterByFuelConsumptionCommand(Receiver receiver) {
         this.receiver = receiver;
-        this.argument = argument;
     }
 
     public void execute() throws IOException, NoArgumentException {
@@ -27,6 +25,6 @@ public class FilterByFuelConsumptionCommand implements Command {
 
     public void execute(String argument) {
 
-        receiver.help();
+        receiver.filter_by_fuel_consumption(Long.parseLong(argument));
     }
 }

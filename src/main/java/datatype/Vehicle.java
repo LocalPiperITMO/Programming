@@ -58,6 +58,12 @@ public class Vehicle implements Comparable<Vehicle> {
         return fuelType;
     }
 
+    public String toString() {
+        return getId() + " " + getName() + " " + getCreationDate() + " "
+                + getCoordinates() + " " + getEnginePower() + " " + getFuelConsumption() + " "
+                + getType() + " " + getFuelType();
+    }
+
     public int compareTo(Vehicle otherVehicle) {
         if (Objects.equals(sortingParameter, "ID")) {
             return this.getId() - otherVehicle.getId();

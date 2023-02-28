@@ -60,7 +60,7 @@ public class Vehicle implements Comparable<Vehicle> {
 
     public String toString() {
         return getId() + " " + getName() + " " + getCreationDate() + " "
-                + getCoordinates() + " " + getEnginePower() + " " + getFuelConsumption() + " "
+                + getCoordinates().getX() + " " + getCoordinates().getY() + " " + getEnginePower() + " " + getFuelConsumption() + " "
                 + getType() + " " + getFuelType();
     }
 

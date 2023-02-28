@@ -9,8 +9,10 @@ public class Coordinates {
         this.y = y;
     }
 
-    @Override
-    public String toString() {
-        return x + "," + y;
+    public float getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
     }
 }

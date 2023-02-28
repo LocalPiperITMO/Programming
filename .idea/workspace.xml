@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/generators/ObjectGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/converters/ObjectVectorToStringListConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/ObjectVectorToStringListConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/converters/StringListToObjectVectorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/StringListToObjectVectorConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pattern/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pattern/Invoker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pattern/Receiver.java" afterDir="false" />
     </list>
@@ -115,6 +121,7 @@
       <workItem from="1677583520413" duration="3160000" />
       <workItem from="1677587193196" duration="8750000" />
       <workItem from="1677603010898" duration="1631000" />
+      <workItem from="1677604774040" duration="14261000" />
     </task>
     <servers />
   </component>

@@ -13,6 +13,7 @@ import java.util.Vector;
 
 import static app.App.creationDate;
 import static converters.CSVtoStringListConverter.varAddress;
+import static converters.StringListToObjectVectorConverter.generator;
 
 public class Receiver {
     Vector<Vehicle> dataSet;
@@ -47,10 +48,12 @@ public class Receiver {
                 help : displays this message
                 info : displays the information about the dataset (type of dataset, creation date, number of elements)
                 show : displays every element of the dataset
+                remove_by_id id : removes an element with the given ID
                 exit : leaves the program
                 clear : clears the dataset
                 reorder : displays every element of the dataset in reverse order of the current sorting.
                 If no previous sorting was done, uses default sorting by ID
+                filter_by_fuel_consumption fuelConsumption : displays elements with the given fuelConsumption
                 print_ascending : displays every element sorted by ID
                 print_field_ascending_fuel_type : displays only ID and FuelType of every element, sorted by FuelType
                 """);
@@ -154,5 +157,11 @@ public class Receiver {
                 System.out.println(vehicle.toString());
             }
         }
+    }
+
+    public void add() throws IOException {
+        generator.consecutiveInputMode(true);
+        dataSet.add(generator.createObjectByUserInput());
+        System.out.println("Object added successfully");
     }
 }

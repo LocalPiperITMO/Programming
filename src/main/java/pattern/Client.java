@@ -18,7 +18,7 @@ public class Client {
             System.out.println("""
                     Enter command:
                     NOTE: if the command has additional parameters, input in this exact pattern:
-                    [command_name] {parameter1,parameter2,parameter3...}""");
+                    [command_name] {parameter}""");
             String request = userInput.readLine();
             if (request == null || request.equalsIgnoreCase("exit")) {
                 System.out.println("Leaving the program");

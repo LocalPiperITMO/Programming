@@ -18,7 +18,6 @@ public class App {
     public static LocalDate creationDate;
 
     public static void main(String[] args) throws IOException, CsvException {
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         CSVtoStringListConverter csvToString = new CSVtoStringListConverter(reader);
 

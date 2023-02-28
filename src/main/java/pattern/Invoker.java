@@ -23,6 +23,7 @@ public class Invoker {
         commandHashMap.put("help", new HelpCommand(receiver));
         commandHashMap.put("info", new InfoCommand(receiver));
         commandHashMap.put("show", new ShowCommand(receiver));
+        commandHashMap.put("add", new AddElementCommand(receiver));
         commandHashMap.put("remove_by_id", new RemoveByIDCommand(receiver));
         commandHashMap.put("clear", new ClearCommand(receiver));
         commandHashMap.put("save", new SaveCommand(receiver));

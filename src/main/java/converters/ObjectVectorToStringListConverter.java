@@ -18,9 +18,11 @@ public class ObjectVectorToStringListConverter {
         //Opel,124,4,51,21,CHOPPER,MANPOWER
         stringList = new ArrayList<>();
         for (Vehicle vehicle : dataSet) {
-            String line = vehicle.getName() + "," + vehicle.getCoordinates().toString() + "," +
-                    vehicle.getEnginePower() + "," +
-                    vehicle.getFuelConsumption() + "," + vehicle.getType() + "," + vehicle.getFuelType();
+            String type = (vehicle.getType() == null) ? "" : String.valueOf(vehicle.getType());
+            String fuelType = (vehicle.getFuelType() == null) ? "" : String.valueOf(vehicle.getFuelType());
+            String line = vehicle.getName() + "," + vehicle.getCoordinates().getX() + ","
+                    + vehicle.getCoordinates().getY() + "," + vehicle.getEnginePower() + "," +
+                    vehicle.getFuelConsumption() + "," + type + "," + fuelType;
             stringList.add(line);
         }
         return stringList;

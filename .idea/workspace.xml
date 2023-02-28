@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateByIDCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/generators/ObjectGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generators/ObjectGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pattern/Invoker.java" afterDir="false" />
@@ -120,6 +118,7 @@
       <workItem from="1677603010898" duration="1631000" />
       <workItem from="1677604774040" duration="14261000" />
       <workItem from="1677620512733" duration="1611000" />
+      <workItem from="1677622209284" duration="1728000" />
     </task>
     <servers />
   </component>

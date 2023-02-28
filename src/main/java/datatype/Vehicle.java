@@ -89,6 +89,15 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     public int compareTo(Vehicle otherVehicle) {
+        if (Objects.equals(sortingParameter, "Numeric")) {
+            long sum1 = this.getId() + (int) this.getCoordinates().getX()
+                    + this.getCoordinates().getY() + this.getEnginePower()
+                    + this.getFuelConsumption();
+            long sum2 = otherVehicle.getId() + (int) otherVehicle.getCoordinates().getX()
+                    + otherVehicle.getCoordinates().getY() + otherVehicle.getEnginePower()
+                    + otherVehicle.getFuelConsumption();
+            return (int) (sum1 - sum2);
+        }
         if (Objects.equals(sortingParameter, "ID")) {
             return this.getId() - otherVehicle.getId();
         } else {

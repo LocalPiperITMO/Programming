@@ -62,30 +62,30 @@ public class ObjectGenerator {
                 System.out.println("Wrong input!");
                 proceedToNextStep = false;
             } else {
-                coordinates = new Coordinates(xCheck(rawInput[0]), yCheck(rawInput[1]));
+                coordinates = new Coordinates(xCheck(rawInput[0].trim()), yCheck(rawInput[1].trim()));
             }
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
             System.out.println("Input enginePower (must be a number, greater than 0): ");
-            enginePower = powerOrConsumptionCheck(reader.readLine());
+            enginePower = powerOrConsumptionCheck(reader.readLine().trim());
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
             System.out.println("Input fuelCapacity (must be a number, greater than 0): ");
-            fuelConsumption = powerOrConsumptionCheck(reader.readLine());
+            fuelConsumption = powerOrConsumptionCheck(reader.readLine().trim());
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
             System.out.println("Input vehicleType (choose one of the following: PLANE,HELICOPTER,BOAT,BICYCLE,CHOPPER):" +
                     "\nNOTE: Field can be blank");
-            type = typeCheck(reader.readLine());
+            type = typeCheck(reader.readLine().trim());
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
             System.out.println("Input fuelType (choose one of the following: KEROSENE,MANPOWER,NUCLEAR,PLASMA,ANTIMATTER):" +
                     "\nNOTE: Field can be blank");
-            fuelType = fuelTypeCheck(reader.readLine());
+            fuelType = fuelTypeCheck(reader.readLine().trim());
         } while (!proceedToNextStep);
         if (vehicle == null) {
             return new Vehicle(idGenerator.generateRandomID(), name, coordinates, enginePower, fuelConsumption, type, fuelType);

@@ -181,4 +181,17 @@ public class Receiver {
             System.out.println("Object with the given ID does not exist.");
         }
     }
+
+    public void addIfMaxElement() throws IOException {
+        generator.consecutiveInputMode(true);
+        Vehicle elementToCompare = generator.createOrUpdateObjectByUserInput(null);
+        sortingParameter = "Numeric";
+        Collections.sort(dataSet);
+        if (elementToCompare.compareTo(dataSet.lastElement()) > 0) {
+            dataSet.add(elementToCompare);
+            System.out.println("New element added successfully");
+        } else {
+            System.out.println("New element has not been added: element with ID " + dataSet.lastElement().getId() + " is greater");
+        }
+    }
 }

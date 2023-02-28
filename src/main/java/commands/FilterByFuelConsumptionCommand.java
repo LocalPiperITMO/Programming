@@ -25,6 +25,6 @@ public class FilterByFuelConsumptionCommand implements Command {
 
     public void execute(String argument) {
 
-        receiver.filter_by_fuel_consumption(Long.parseLong(argument));
+        receiver.filterByFuelConsumption(Long.parseLong(argument));
     }
 }

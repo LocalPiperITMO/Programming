@@ -129,7 +129,7 @@ public class Receiver {
         }
     }
 
-    public void remove_by_id(int id) {
+    public void removeByID(int id) {
         boolean isFound = false;
         for (Vehicle vehicle : dataSet) {
             isFound = (vehicle.getId() == id);
@@ -144,7 +144,7 @@ public class Receiver {
         }
     }
 
-    public void filter_by_fuel_consumption(long fuelConsumption) {
+    public void filterByFuelConsumption(long fuelConsumption) {
         Vector<Vehicle> filteredDataSet = new Vector<>();
         for (Vehicle vehicle : dataSet) {
             if (fuelConsumption == vehicle.getFuelConsumption()) {
@@ -161,7 +161,24 @@ public class Receiver {
 
     public void add() throws IOException {
         generator.consecutiveInputMode(true);
-        dataSet.add(generator.createObjectByUserInput());
+        dataSet.add(generator.createOrUpdateObjectByUserInput(null));
         System.out.println("Object added successfully");
+    }
+
+    public void updateByID(int id) throws IOException {
+        boolean isFound = false;
+        for (Vehicle vehicle : dataSet) {
+            if (id == vehicle.getId()) {
+                isFound = true;
+                generator.consecutiveInputMode(true);
+                generator.createOrUpdateObjectByUserInput(vehicle);
+                System.out.println("Object by ID " + id + " updated successfully");
+                break;
+            }
+
+        }
+        if (!isFound) {
+            System.out.println("Object with the given ID does not exist.");
+        }
     }
 }

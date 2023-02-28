@@ -41,7 +41,7 @@ public class ObjectGenerator {
         return null;
     }
 
-    public Vehicle createObjectByUserInput() throws IOException {
+    public Vehicle createOrUpdateObjectByUserInput(Vehicle vehicle) throws IOException {
         String name;
         Coordinates coordinates = null;
         long enginePower;
@@ -87,7 +87,17 @@ public class ObjectGenerator {
                     "\nNOTE: Field can be blank");
             fuelType = fuelTypeCheck(reader.readLine());
         } while (!proceedToNextStep);
-        return new Vehicle(idGenerator.generateRandomID(), name, coordinates, enginePower, fuelConsumption, type, fuelType);
+        if (vehicle == null) {
+            return new Vehicle(idGenerator.generateRandomID(), name, coordinates, enginePower, fuelConsumption, type, fuelType);
+        } else {
+            vehicle.setName(name);
+            vehicle.setCoordinates(coordinates);
+            vehicle.setEnginePower(enginePower);
+            vehicle.setFuelConsumption(fuelConsumption);
+            vehicle.setType(type);
+            vehicle.setFuelType(fuelType);
+        }
+        return null;
     }
 
     public void consecutiveInputMode(boolean allow) {

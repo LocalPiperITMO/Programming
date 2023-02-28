@@ -1,13 +1,18 @@
 package pattern;
 
+import converters.ObjectVectorToStringListConverter;
 import datatype.Vehicle;
 import exceptions.EmptyDatasetException;
 import exceptions.NoPreviousSortingException;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Vector;
 
 import static app.App.creationDate;
+import static converters.CSVtoStringListConverter.varAddress;
 
 public class Receiver {
     Vector<Vehicle> dataSet;
@@ -105,5 +110,21 @@ public class Receiver {
     public void clear() {
         dataSet.removeAllElements();
         System.out.println("Collection has been emptied");
+    }
+
+    public void save() throws IOException {
+        ObjectVectorToStringListConverter converter = new ObjectVectorToStringListConverter(dataSet);
+        List<String> strings = converter.convertObjectVectorToStringList();
+        new FileOutputStream(varAddress).close();
+        try (FileOutputStream writer = new FileOutputStream(varAddress, true)) {
+            for (String stringLine : strings) {
+                byte[] buffer = stringLine.getBytes();
+                writer.write(buffer, 0, buffer.length);
+                writer.write(10);
+            }
+            System.out.println("File saved successfully.");
+        } catch (IOException ioException) {
+            System.out.println(ioException.getMessage());
+        }
     }
 }

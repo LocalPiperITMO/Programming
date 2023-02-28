@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class CSVtoStringListConverter {
     private final BufferedReader reader;
+    public static String varAddress;
 
     public CSVtoStringListConverter(BufferedReader reader) {
         this.reader = reader;
@@ -39,7 +40,7 @@ public class CSVtoStringListConverter {
                 System.out.println("Leaving the program");
                 break;
             }
-            String varAddress = System.getenv(userInput);
+            varAddress = System.getenv(userInput);
             try {
                 readDataFromFile = new InputStreamReader(Files.newInputStream(Paths.get(varAddress)), StandardCharsets.UTF_8);
                 collectionCreationForbidden = true;

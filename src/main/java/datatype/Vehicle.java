@@ -59,7 +59,6 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     public int compareTo(Vehicle otherVehicle) {
-        System.out.println(sortingParameter);
         if (Objects.equals(sortingParameter, "ID")) {
             return this.getId() - otherVehicle.getId();
         } else {

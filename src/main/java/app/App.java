@@ -2,6 +2,7 @@ package app;
 
 import com.opencsv.exceptions.CsvException;
 import converters.CSVtoStringListConverter;
+import converters.ObjectVectorToStringListConverter;
 import converters.StringListToObjectVectorConverter;
 import datatype.Vehicle;
 import pattern.Client;

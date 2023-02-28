@@ -43,7 +43,7 @@ public class StringListToObjectVectorConverter {
             try {
                 if (line.length == 7) {
                     name = line[0].strip();
-                    coordinates = new Coordinates(Float.parseFloat(line[1]), Integer.parseInt(line[2]));
+                    coordinates = new Coordinates(Float.parseFloat(line[1].trim()), Integer.parseInt(line[2].trim()));
                     enginePower = Long.parseLong(line[3].strip());
                     fuelConsumption = Long.parseLong(line[4].strip());
                     if (enginePower <= 0 || fuelConsumption <= 0) {

@@ -2,19 +2,16 @@ package commands;
 
 
 import exceptions.NoArgumentException;
-import validators.UserRequestValidator;
 
 import java.io.IOException;
 import java.util.HashMap;
 
 public class Invoker {
     private final HashMap<String, Command> commandHashMap;
-    private final UserRequestValidator validator;
     private String argument;
     private String commandName;
 
     public Invoker(Receiver receiver) {
-        this.validator = new UserRequestValidator();
         this.commandHashMap = new HashMap<>();
         commandHashMap.put("help", new HelpCommand());
         commandHashMap.put("info", new InfoCommand(receiver));

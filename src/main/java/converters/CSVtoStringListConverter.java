@@ -45,8 +45,8 @@ public class CSVtoStringListConverter {
                 System.out.println("Leaving the program");
                 break;
             }
-            varAddress = Paths.get(System.getenv(userInput));
             try {
+                varAddress = Paths.get(System.getenv(userInput));
                 readDataFromFile = new InputStreamReader(Files.newInputStream(Paths.get(String.valueOf(varAddress))), StandardCharsets.UTF_8);
                 collectionCreationForbidden = true;
             } catch (NullPointerException npe) {
@@ -73,6 +73,7 @@ public class CSVtoStringListConverter {
                 return getVariableNameFromUser(reader);
             } else if (Objects.equals(userRequest.strip(), "2")) {
                 File empty_file = new File("C:\\Users\\Honor\\IdeaProjects\\App\\src\\main\\java\\files\\empty_file.csv");
+                varAddress = empty_file.toPath();
                 if (empty_file.createNewFile()) {
                     System.out.println("Empty file created successfully.");
                 } else {

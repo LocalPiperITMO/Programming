@@ -1,11 +1,11 @@
 package commands;
 
+import datatype.Vehicle;
 import exceptions.NoArgumentException;
 import pattern.Command;
 import pattern.Receiver;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class RemoveByIDCommand implements Command {
     private final Receiver receiver;
@@ -14,16 +14,23 @@ public class RemoveByIDCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() throws IOException, NoArgumentException {
-        throw new NoArgumentException();
-
-    }
-
     public void execute(String argument) throws IOException, NoArgumentException {
-        if (Objects.equals(argument, "")) {
-            execute();
+        if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
+            int id = Integer.parseInt(argument);
+            boolean isFound = false;
+            for (Vehicle vehicle : receiver.dataSet()) {
+                isFound = (vehicle.getId() == id);
+                if (isFound) {
+                    receiver.dataSet().remove(vehicle);
+                    System.out.println("Object deleted successfully");
+                    break;
+                }
+            }
+            if (!isFound) {
+                System.out.println("There is no object by this ID.");
+            }
         } else {
-            receiver.removeByID(Integer.parseInt(argument));
+            throw new NoArgumentException();
         }
     }
 }

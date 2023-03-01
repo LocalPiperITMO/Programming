@@ -1,9 +1,11 @@
 package commands;
 
+import datatype.Vehicle;
 import pattern.Command;
 import pattern.Receiver;
 
 import java.io.IOException;
+import java.util.Collections;
 
 public class AddIfMaxElementCommand implements Command {
     private final Receiver receiver;
@@ -12,13 +14,23 @@ public class AddIfMaxElementCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() throws IOException {
-        receiver.addIfMaxElement();
-    }
-
-    @Override
     public void execute(String arg) throws IOException {
-        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
-        execute();
+        receiver.vehicleFactory().switchToConsecutiveInputMode(true);
+        Vehicle elementToCompare = receiver.vehicleFactory().createOrUpdateObjectByUserInput(null);
+        int index = 0;
+        do {
+            if (receiver.dataSet().get(index).getSum() > receiver.dataSet().get(index + 1).getSum()) {
+                Collections.swap(receiver.dataSet(), index, index + 1);
+                index = 0;
+            } else {
+                ++index;
+            }
+        } while (index != receiver.dataSet().size() - 1);
+        if (elementToCompare.compareTo(receiver.dataSet().lastElement()) > 0) {
+            receiver.dataSet().add(elementToCompare);
+            System.out.println("New element added successfully");
+        } else {
+            System.out.println("New element has not been added: element with ID " + receiver.dataSet().lastElement().getId() + " is greater");
+        }
     }
 }

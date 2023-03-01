@@ -12,13 +12,8 @@ public class ClearCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() {
-        receiver.clear();
-    }
-
-    @Override
     public void execute(String arg) throws IOException {
-        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
-        execute();
+        receiver.dataSet().removeAllElements();
+        System.out.println("Collection has been emptied");
     }
 }

@@ -1,5 +1,6 @@
 package commands;
 
+import datatype.Vehicle;
 import pattern.Command;
 import pattern.Receiver;
 
@@ -12,13 +13,11 @@ public class RemoveGreaterElementsCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() throws IOException {
-        receiver.removeGreaterElements();
-    }
-
-    @Override
     public void execute(String arg) throws IOException {
-        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
-        execute();
+        receiver.vehicleFactory().switchToConsecutiveInputMode(true);
+        Vehicle elementToCompare = receiver.vehicleFactory().createOrUpdateObjectByUserInput(null);
+        receiver.dataSet().removeIf(vehicle -> vehicle.getSum() > elementToCompare.getSum());
+
+        System.out.println("Done");
     }
 }

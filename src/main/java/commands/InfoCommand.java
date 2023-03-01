@@ -3,6 +3,8 @@ package commands;
 import pattern.Command;
 import pattern.Receiver;
 
+import java.time.LocalDate;
+
 public class InfoCommand implements Command {
     private final Receiver receiver;
 
@@ -10,12 +12,8 @@ public class InfoCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() {
-        receiver.info();
-    }
-    @Override
     public void execute(String arg) {
-        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
-        execute();
+        System.out.println("Dataset type: " + receiver.dataSet().getClass().getName() + "\nDataset creation date: " + LocalDate.now()
+                + "\nDataset number of elements: " + receiver.dataSet().size());
     }
 }

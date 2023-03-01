@@ -1,24 +1,42 @@
 package commands;
 
+import converters.ObjectVectorToStringListConverter;
 import pattern.Command;
 import pattern.Receiver;
 
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 public class SaveCommand implements Command {
     private final Receiver receiver;
+    private final ObjectVectorToStringListConverter converter;
 
     public SaveCommand(Receiver receiver) {
         this.receiver = receiver;
+        this.converter = new ObjectVectorToStringListConverter(receiver.dataSet());
     }
 
-    public void execute() throws IOException {
-        receiver.save();
+    public void prepareFile() throws IOException {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(receiver.varAddress().toString(), false)) {
+            fileOutputStream.write("".getBytes(StandardCharsets.UTF_8));
+        }
     }
-    @Override
+
     public void execute(String arg) throws IOException {
-        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
-        execute();
+        prepareFile();
+        converter.setDataSet(receiver.dataSet());
+        List<String> listOfStrings = converter.convertObjectVectorToStringList();
+        try (FileOutputStream fileOutputStream = new FileOutputStream(receiver.varAddress().toString(), true)) {
+            for (String line : listOfStrings) {
+                byte[] buffer = line.getBytes(StandardCharsets.UTF_8);
+                fileOutputStream.write(buffer, 0, buffer.length);
+                fileOutputStream.write("\n".getBytes(StandardCharsets.UTF_8));
+            }
+        }
+        System.out.println("Saved successfully");
     }
+
 }
+

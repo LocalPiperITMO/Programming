@@ -12,13 +12,9 @@ public class AddElementCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() throws IOException {
-        receiver.add();
-    }
-
-    @Override
     public void execute(String arg) throws IOException {
-        System.out.println(this.getClass().getName() + " does not require any arguments given in this line.");
-        execute();
+        receiver.vehicleFactory().switchToConsecutiveInputMode(true);
+        receiver.dataSet().add(receiver.vehicleFactory().createOrUpdateObjectByUserInput(null));
+        System.out.println("New element added successfully");
     }
 }

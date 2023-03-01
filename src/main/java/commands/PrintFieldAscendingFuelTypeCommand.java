@@ -1,7 +1,11 @@
 package commands;
 
+import datatype.Vehicle;
+import exceptions.EmptyDatasetException;
 import pattern.Command;
 import pattern.Receiver;
+
+import java.util.Collections;
 
 public class PrintFieldAscendingFuelTypeCommand implements Command {
     private final Receiver receiver;
@@ -10,12 +14,28 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() {
-        receiver.printFieldAscendingFuelType();
-    }
-    @Override
     public void execute(String arg) {
-        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
-        execute();
+        try {
+            if (receiver.dataSet().size() == 0) {
+                throw new EmptyDatasetException();
+            }
+            int index = 0;
+            do {
+                int current = (receiver.dataSet().get(index).getFuelType() == null) ? 0 : receiver.dataSet().get(index).getFuelType().getPosition();
+                int next = (receiver.dataSet().get(index + 1).getFuelType() == null) ? 0 : receiver.dataSet().get(index + 1).getFuelType().getPosition();
+                if (current > next) {
+                    Collections.swap(receiver.dataSet(), index, index + 1);
+                    index = 0;
+                } else {
+                    ++index;
+                }
+            } while (index != receiver.dataSet().size() - 1);
+            System.out.println("ID FuelType");
+            for (Vehicle vehicle : receiver.dataSet()) {
+                System.out.println(vehicle.getId() + " " + vehicle.getFuelType());
+            }
+        } catch (EmptyDatasetException noData) {
+            System.out.println("Dataset is empty: nothing to sort");
+        }
     }
 }

@@ -1,9 +1,6 @@
 package datatype;
 
 import java.time.LocalDate;
-import java.util.Objects;
-
-import static pattern.Receiver.sortingParameter;
 
 public class Vehicle implements Comparable<Vehicle> {
     private final Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
@@ -24,6 +21,10 @@ public class Vehicle implements Comparable<Vehicle> {
         this.fuelConsumption = fuelConsumption;
         this.type = type;
         this.fuelType = fuelType;
+    }
+
+    public long getSum() {
+        return (long) (getCoordinates().getX() + getCoordinates().getY() + getEnginePower() + getFuelConsumption());
     }
 
     public Integer getId() {
@@ -89,21 +90,6 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     public int compareTo(Vehicle otherVehicle) {
-        if (Objects.equals(sortingParameter, "Numeric")) {
-            long sum1 = this.getId() + (int) this.getCoordinates().getX()
-                    + this.getCoordinates().getY() + this.getEnginePower()
-                    + this.getFuelConsumption();
-            long sum2 = otherVehicle.getId() + (int) otherVehicle.getCoordinates().getX()
-                    + otherVehicle.getCoordinates().getY() + otherVehicle.getEnginePower()
-                    + otherVehicle.getFuelConsumption();
-            return (int) (sum1 - sum2);
-        }
-        if (Objects.equals(sortingParameter, "ID")) {
-            return this.getId() - otherVehicle.getId();
-        } else {
-            int comparing1 = (this.getFuelType() == null) ? 0 : this.getFuelType().getPosition();
-            int comparing2 = (otherVehicle.getFuelType() == null) ? 0 : otherVehicle.getFuelType().getPosition();
-            return comparing1 - comparing2;
-        }
+        return this.getId() - otherVehicle.getId();
     }
 }

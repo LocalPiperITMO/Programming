@@ -1,11 +1,11 @@
 package commands;
 
+import datatype.Vehicle;
 import exceptions.NoArgumentException;
 import pattern.Command;
 import pattern.Receiver;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class UpdateElementCommand implements Command {
     private final Receiver receiver;
@@ -14,16 +14,25 @@ public class UpdateElementCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() throws IOException, NoArgumentException {
-        throw new NoArgumentException();
-
-    }
 
     public void execute(String argument) throws IOException, NoArgumentException {
-        if (Objects.equals(argument, "")) {
-            execute();
+        if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
+            boolean isFound = false;
+            int id = Integer.parseInt(argument);
+            for (Vehicle vehicle : receiver.dataSet()) {
+                if (id == vehicle.getId()) {
+                    isFound = true;
+                    receiver.vehicleFactory().switchToConsecutiveInputMode(true);
+                    receiver.vehicleFactory().createOrUpdateObjectByUserInput(vehicle);
+                    System.out.println("Object by ID " + id + " updated successfully");
+                    break;
+                }
+            }
+            if (!isFound) {
+                System.out.println("Object with the given ID does not exist.");
+            }
         } else {
-            receiver.update(Integer.parseInt(argument));
+            throw new NoArgumentException();
         }
     }
 }

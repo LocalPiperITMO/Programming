@@ -7,7 +7,6 @@ import validators.UserRequestValidator;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class Invoker {
     HashMap<String, Command> commandHashMap;
@@ -20,7 +19,7 @@ public class Invoker {
         this.dataSet = receiver;
         this.validator = new UserRequestValidator();
         this.commandHashMap = new HashMap<>();
-        commandHashMap.put("help", new HelpCommand(receiver));
+        commandHashMap.put("help", new HelpCommand());
         commandHashMap.put("info", new InfoCommand(receiver));
         commandHashMap.put("show", new ShowCommand(receiver));
         commandHashMap.put("add", new AddElementCommand(receiver));
@@ -44,11 +43,7 @@ public class Invoker {
             if (userInputArray.length == 2) {
                 argument = userInputArray[1];
             }
-            if (Objects.equals(argument, "")) {
-                commandHashMap.get(commandName).execute();
-            } else {
-                commandHashMap.get(commandName).execute(argument);
-            }
+            commandHashMap.get(commandName).execute(argument);
             System.out.println();
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
             validator.emptyRequest();

@@ -1,7 +1,11 @@
 package commands;
 
+import datatype.Vehicle;
+import exceptions.EmptyDatasetException;
 import pattern.Command;
 import pattern.Receiver;
+
+import java.util.Collections;
 
 
 public class ReorderCommand implements Command {
@@ -11,12 +15,17 @@ public class ReorderCommand implements Command {
         this.receiver = receiver;
     }
 
-    public void execute() {
-        receiver.reorder();
-    }
-    @Override
     public void execute(String arg) {
-        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
-        execute();
+        try {
+            if (receiver.dataSet().size() == 0) {
+                throw new EmptyDatasetException();
+            }
+            Collections.reverse(receiver.dataSet());
+            for (Vehicle vehicle : receiver.dataSet()) {
+                System.out.println(vehicle.toString());
+            }
+        } catch (EmptyDatasetException noData) {
+            System.out.println("Dataset is empty: nothing to sort");
+        }
     }
 }

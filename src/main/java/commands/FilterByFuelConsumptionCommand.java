@@ -1,30 +1,28 @@
 package commands;
 
+import datatype.Vehicle;
 import exceptions.NoArgumentException;
 import pattern.Command;
 import pattern.Receiver;
-import validators.UserRequestValidator;
-
-import java.io.IOException;
 
 public class FilterByFuelConsumptionCommand implements Command {
-    private final UserRequestValidator validator = new UserRequestValidator();
     private final Receiver receiver;
 
     public FilterByFuelConsumptionCommand(Receiver receiver) {
         this.receiver = receiver;
     }
 
-    public void execute() throws IOException, NoArgumentException {
-        try {
+    public void execute(String argument) throws NoArgumentException {
+        if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
+            long fuelConsumption = Long.parseLong(argument);
+            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
+            for (Vehicle vehicle : receiver.dataSet()) {
+                if (fuelConsumption == vehicle.getFuelConsumption()) {
+                    System.out.println(vehicle);
+                }
+            }
+        } else {
             throw new NoArgumentException();
-        } catch (NoArgumentException noArgument) {
-            validator.noArgumentCommandRequest(this.getClass().getName());
         }
-    }
-
-    public void execute(String argument) {
-
-        receiver.filterByFuelConsumption(Long.parseLong(argument));
     }
 }

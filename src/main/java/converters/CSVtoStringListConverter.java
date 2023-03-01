@@ -9,16 +9,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 
 public class CSVtoStringListConverter {
     private final BufferedReader reader;
-    public static String varAddress;
+    private Path varAddress;
 
     public CSVtoStringListConverter(BufferedReader reader) {
         this.reader = reader;
+    }
+
+    public Path getVarAddress() {
+        return varAddress;
     }
 
     public List<String[]> convertCSVtoStringList() throws IOException, CsvException {
@@ -40,9 +45,9 @@ public class CSVtoStringListConverter {
                 System.out.println("Leaving the program");
                 break;
             }
-            varAddress = System.getenv(userInput);
+            varAddress = Paths.get(System.getenv(userInput));
             try {
-                readDataFromFile = new InputStreamReader(Files.newInputStream(Paths.get(varAddress)), StandardCharsets.UTF_8);
+                readDataFromFile = new InputStreamReader(Files.newInputStream(Paths.get(String.valueOf(varAddress))), StandardCharsets.UTF_8);
                 collectionCreationForbidden = true;
             } catch (NullPointerException npe) {
                 readDataFromFile = handleNullName(reader);

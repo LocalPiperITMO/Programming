@@ -25,12 +25,12 @@ public class ObjectGenerator {
         this.lineIndex = lineIndex;
         if (data.length == 7) {
             this.data = data;
-            String name = nameCheck(this.data[0].trim());
-            Coordinates coordinates = new Coordinates(xCheck(this.data[1].trim()), yCheck(this.data[2].trim()));
-            long enginePower = powerOrConsumptionCheck(this.data[3].trim());
-            long fuelConsumption = powerOrConsumptionCheck(this.data[4].trim());
-            VehicleType type = typeCheck(this.data[5].trim());
-            FuelType fuelType = fuelTypeCheck(this.data[6].trim());
+            String name = getName(this.data[0].trim());
+            Coordinates coordinates = new Coordinates(getX(this.data[1].trim()), getY(this.data[2].trim()));
+            long enginePower = getPowerOrConsumption(this.data[3].trim());
+            long fuelConsumption = getPowerOrConsumption(this.data[4].trim());
+            VehicleType type = getVehicleType(this.data[5].trim());
+            FuelType fuelType = getFuelType(this.data[6].trim());
             if (!creationForbidden) {
                 return new Vehicle(idGenerator.generateRandomID(), name, coordinates, enginePower, fuelConsumption, type, fuelType);
             }
@@ -52,7 +52,7 @@ public class ObjectGenerator {
         do {
             proceedToNextStep = true;
             System.out.println("Input name: ");
-            name = nameCheck(reader.readLine().trim());
+            name = getName(reader.readLine().trim());
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
@@ -62,30 +62,30 @@ public class ObjectGenerator {
                 System.out.println("Wrong input!");
                 proceedToNextStep = false;
             } else {
-                coordinates = new Coordinates(xCheck(rawInput[0].trim()), yCheck(rawInput[1].trim()));
+                coordinates = new Coordinates(getX(rawInput[0].trim()), getY(rawInput[1].trim()));
             }
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
             System.out.println("Input enginePower (must be a number, greater than 0): ");
-            enginePower = powerOrConsumptionCheck(reader.readLine().trim());
+            enginePower = getPowerOrConsumption(reader.readLine().trim());
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
             System.out.println("Input fuelCapacity (must be a number, greater than 0): ");
-            fuelConsumption = powerOrConsumptionCheck(reader.readLine().trim());
+            fuelConsumption = getPowerOrConsumption(reader.readLine().trim());
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
             System.out.println("Input vehicleType (choose one of the following: PLANE,HELICOPTER,BOAT,BICYCLE,CHOPPER):" +
                     "\nNOTE: Field can be blank");
-            type = typeCheck(reader.readLine().trim());
+            type = getVehicleType(reader.readLine().trim());
         } while (!proceedToNextStep);
         do {
             proceedToNextStep = true;
             System.out.println("Input fuelType (choose one of the following: KEROSENE,MANPOWER,NUCLEAR,PLASMA,ANTIMATTER):" +
                     "\nNOTE: Field can be blank");
-            fuelType = fuelTypeCheck(reader.readLine().trim());
+            fuelType = getFuelType(reader.readLine().trim());
         } while (!proceedToNextStep);
         if (vehicle == null) {
             return new Vehicle(idGenerator.generateRandomID(), name, coordinates, enginePower, fuelConsumption, type, fuelType);
@@ -100,11 +100,11 @@ public class ObjectGenerator {
         return null;
     }
 
-    public void consecutiveInputMode(boolean allow) {
+    public void switchToConsecutiveInputMode(boolean allow) {
         this.allowConsecutiveInput = allow;
     }
 
-    public void stateSwitchesForObjectCreation() {
+    public void switchStateForVehicleCreationProcess() {
         if (!allowConsecutiveInput) {
             creationForbidden = true;
         } else {
@@ -113,36 +113,36 @@ public class ObjectGenerator {
     }
 
 
-    public String nameCheck(String arg) {
+    public String getName(String arg) {
         if (arg != null && !arg.equals("")) {
             return arg;
         }
-        stateSwitchesForObjectCreation();
+        switchStateForVehicleCreationProcess();
         validator.forbiddenNullArgument(this.lineIndex);
         return "";
     }
 
-    public float xCheck(String arg) {
+    public float getX(String arg) {
         try {
             return Float.parseFloat(arg);
         } catch (NumberFormatException e) {
-            stateSwitchesForObjectCreation();
+            switchStateForVehicleCreationProcess();
             validator.nonNumericArgument(this.lineIndex);
         }
         return 0;
     }
 
-    public int yCheck(String arg) {
+    public int getY(String arg) {
         try {
             return Integer.parseInt(arg);
         } catch (NumberFormatException e) {
-            stateSwitchesForObjectCreation();
+            switchStateForVehicleCreationProcess();
             validator.nonNumericArgument(this.lineIndex);
         }
         return 0;
     }
 
-    public long powerOrConsumptionCheck(String arg) {
+    public long getPowerOrConsumption(String arg) {
         try {
             long enginePower = Long.parseLong(arg);
             if (enginePower <= 0) {
@@ -150,33 +150,33 @@ public class ObjectGenerator {
             }
             return enginePower;
         } catch (NumberFormatException e) {
-            stateSwitchesForObjectCreation();
+            switchStateForVehicleCreationProcess();
             validator.nonNumericArgument(this.lineIndex);
         } catch (LessOrEqualToZeroException e) {
-            stateSwitchesForObjectCreation();
+            switchStateForVehicleCreationProcess();
             validator.lessOrEqualToZeroArgument(this.lineIndex);
         }
         return 0;
     }
 
-    public VehicleType typeCheck(String arg) {
+    public VehicleType getVehicleType(String arg) {
         if (!Objects.equals(arg, "")) {
             try {
                 return VehicleType.valueOf(arg);
             } catch (IllegalArgumentException e) {
-                stateSwitchesForObjectCreation();
+                switchStateForVehicleCreationProcess();
                 validator.invalidTypeArgument(this.lineIndex);
             }
         }
         return null;
     }
 
-    public FuelType fuelTypeCheck(String arg) {
+    public FuelType getFuelType(String arg) {
         if (!Objects.equals(arg, "")) {
             try {
                 return FuelType.valueOf(arg);
             } catch (IllegalArgumentException e) {
-                stateSwitchesForObjectCreation();
+                switchStateForVehicleCreationProcess();
                 validator.invalidTypeArgument(this.lineIndex);
             }
         }

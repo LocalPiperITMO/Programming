@@ -1,19 +1,28 @@
 package commands;
 
+import datatype.Vehicle;
+import exceptions.EmptyDatasetException;
 import pattern.Command;
 import pattern.Receiver;
 
 public class ShowCommand implements Command {
     private final Receiver receiver;
-    public ShowCommand(Receiver receiver){
+
+    public ShowCommand(Receiver receiver) {
         this.receiver = receiver;
     }
-    public void execute(){
-        receiver.show();
-    }
-    @Override
+
     public void execute(String arg) {
-        System.out.println(this.getClass().getName() + " does not require any arguments to work.");
-        execute();
+        try {
+            if (receiver.dataSet().size() == 0) {
+                throw new EmptyDatasetException();
+            }
+            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
+            for (Vehicle vehicle : receiver.dataSet()) {
+                System.out.println(vehicle.toString());
+            }
+        } catch (EmptyDatasetException noData) {
+            System.out.println("Dataset is empty: nothing to show");
+        }
     }
 }

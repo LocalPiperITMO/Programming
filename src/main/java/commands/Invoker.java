@@ -1,7 +1,6 @@
-package pattern;
+package commands;
 
 
-import commands.*;
 import exceptions.NoArgumentException;
 import validators.UserRequestValidator;
 
@@ -9,14 +8,12 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class Invoker {
-    HashMap<String, Command> commandHashMap;
-    UserRequestValidator validator;
-    Receiver dataSet;
-    String argument;
-    String commandName;
+    private final HashMap<String, Command> commandHashMap;
+    private final UserRequestValidator validator;
+    private String argument;
+    private String commandName;
 
     public Invoker(Receiver receiver) {
-        this.dataSet = receiver;
         this.validator = new UserRequestValidator();
         this.commandHashMap = new HashMap<>();
         commandHashMap.put("help", new HelpCommand());
@@ -46,13 +43,13 @@ public class Invoker {
             commandHashMap.get(commandName).execute(argument);
             System.out.println();
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-            validator.emptyRequest();
+            System.out.println("Empty request. Try again");
         } catch (NullPointerException | IOException npe) {
-            validator.invalidCommandRequest(userInput.split(" ", 2)[0]);
+            System.out.println("There is no command named \"" + commandName + "\". Try again");
         } catch (NoArgumentException e) {
-            validator.noArgumentCommandRequest(commandHashMap.get(commandName).getClass().getName());
+            System.out.println(commandName + " requires an argument: none were given");
         } catch (NumberFormatException e) {
-            validator.illegalArgumentCommandRequest(commandHashMap.get(commandName).getClass().getName(), argument.getClass().getName());
+            System.out.println(commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given");
         }
     }
 }

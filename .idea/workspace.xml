@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/generators/VehicleBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
@@ -22,15 +22,15 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/converters/CSVtoStringListConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/CSVtoStringListConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/converters/ObjectVectorToStringListConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/ObjectVectorToStringListConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/converters/StringListToObjectVectorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/StringListToObjectVectorConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoPreviousSortingException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/generators/ObjectGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generators/ObjectGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pattern/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pattern/Invoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pattern/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/generators/IDGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generators/IDGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/generators/ObjectGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Invoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pattern/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validators/ConversionValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/validators/ConversionValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/validators/UserRequestValidator.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +144,8 @@
       <workItem from="1677640500639" duration="8601000" />
       <workItem from="1677652591496" duration="551000" />
       <workItem from="1677653157945" duration="184000" />
-      <workItem from="1677653368866" duration="2618000" />
+      <workItem from="1677653368866" duration="4756000" />
+      <workItem from="1677659032460" duration="752000" />
     </task>
     <servers />
   </component>

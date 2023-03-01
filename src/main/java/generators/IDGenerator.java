@@ -3,7 +3,7 @@ package generators;
 import java.util.HashSet;
 
 public class IDGenerator {
-    HashSet<Integer> idSet = new HashSet<>();
+    private final HashSet<Integer> idSet = new HashSet<>();
 
     public int generateRandomID() {
         boolean isGenerated = false;
@@ -11,6 +11,7 @@ public class IDGenerator {
         while (!isGenerated) {
             newId = (int) (Math.random() * 100000);
             if (!idSet.contains(newId)) {
+                idSet.add(newId);
                 isGenerated = true;
             }
         }

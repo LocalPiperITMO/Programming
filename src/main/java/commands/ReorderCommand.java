@@ -2,8 +2,6 @@ package commands;
 
 import datatype.Vehicle;
 import exceptions.EmptyDatasetException;
-import pattern.Command;
-import pattern.Receiver;
 
 import java.util.Collections;
 

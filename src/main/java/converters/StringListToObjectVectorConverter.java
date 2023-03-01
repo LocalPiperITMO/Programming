@@ -1,7 +1,7 @@
 package converters;
 
 import datatype.Vehicle;
-import generators.ObjectGenerator;
+import generators.VehicleBuilder;
 
 import java.util.List;
 import java.util.Vector;
@@ -9,7 +9,7 @@ import java.util.Vector;
 public class StringListToObjectVectorConverter {
     private final List<String[]> text;
     private final Vector<Vehicle> dataSet;
-    private final ObjectGenerator generator = new ObjectGenerator();
+    private final VehicleBuilder vehicleBuilder = new VehicleBuilder();
 
     public StringListToObjectVectorConverter(List<String[]> text) {
         this.dataSet = new Vector<>();
@@ -18,17 +18,18 @@ public class StringListToObjectVectorConverter {
 
     }
 
-    public ObjectGenerator getVehicleFactory() {
-        return generator;
+    public VehicleBuilder getVehicleFactory() {
+        return vehicleBuilder;
     }
 
     public Vector<Vehicle> convertStringListToObjectVector() {
         int corruptedLines = 0;
         int lineCounter = 0;
-        generator.switchToConsecutiveInputMode(false);
+        vehicleBuilder.switchToConsecutiveInputMode(false);
         for (String[] line : this.text) {
             ++lineCounter;
-            Vehicle vehicle = generator.createObjectByData(line, lineCounter);
+            Vehicle vehicle;
+            vehicle = vehicleBuilder.buildVehicleUsingPredefinedData(line, lineCounter);
             if (vehicle == null) {
                 ++corruptedLines;
             } else {

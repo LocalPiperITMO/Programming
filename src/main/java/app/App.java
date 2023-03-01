@@ -4,8 +4,8 @@ import com.opencsv.exceptions.CsvException;
 import converters.CSVtoStringListConverter;
 import converters.StringListToObjectVectorConverter;
 import datatype.Vehicle;
-import pattern.Client;
-import pattern.Receiver;
+import commands.Client;
+import commands.Receiver;
 
 import java.io.BufferedReader;
 import java.io.IOException;

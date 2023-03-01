@@ -2,8 +2,6 @@ package commands;
 
 import datatype.Vehicle;
 import exceptions.NoArgumentException;
-import pattern.Command;
-import pattern.Receiver;
 
 public class FilterByFuelConsumptionCommand implements Command {
     private final Receiver receiver;

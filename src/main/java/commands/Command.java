@@ -1,4 +1,4 @@
-package pattern;
+package commands;
 
 import exceptions.NoArgumentException;
 

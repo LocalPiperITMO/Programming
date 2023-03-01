@@ -1,8 +1,6 @@
 package commands;
 
 import datatype.Vehicle;
-import pattern.Command;
-import pattern.Receiver;
 
 import java.io.IOException;
 
@@ -15,7 +13,7 @@ public class RemoveGreaterElementsCommand implements Command {
 
     public void execute(String arg) throws IOException {
         receiver.vehicleFactory().switchToConsecutiveInputMode(true);
-        Vehicle elementToCompare = receiver.vehicleFactory().createOrUpdateObjectByUserInput(null);
+        Vehicle elementToCompare = receiver.vehicleFactory().buildOrUpdateVehicleUsingUserInput(null);
         receiver.dataSet().removeIf(vehicle -> vehicle.getSum() > elementToCompare.getSum());
 
         System.out.println("Done");

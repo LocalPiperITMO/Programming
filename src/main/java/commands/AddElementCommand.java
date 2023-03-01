@@ -1,8 +1,5 @@
 package commands;
 
-import pattern.Command;
-import pattern.Receiver;
-
 import java.io.IOException;
 
 public class AddElementCommand implements Command {
@@ -14,7 +11,7 @@ public class AddElementCommand implements Command {
 
     public void execute(String arg) throws IOException {
         receiver.vehicleFactory().switchToConsecutiveInputMode(true);
-        receiver.dataSet().add(receiver.vehicleFactory().createOrUpdateObjectByUserInput(null));
+        receiver.dataSet().add(receiver.vehicleFactory().buildOrUpdateVehicleUsingUserInput(null));
         System.out.println("New element added successfully");
     }
 }

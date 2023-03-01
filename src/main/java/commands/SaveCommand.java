@@ -1,8 +1,6 @@
 package commands;
 
 import converters.ObjectVectorToStringListConverter;
-import pattern.Command;
-import pattern.Receiver;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

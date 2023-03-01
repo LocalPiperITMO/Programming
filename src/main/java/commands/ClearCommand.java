@@ -1,8 +1,5 @@
 package commands;
 
-import pattern.Command;
-import pattern.Receiver;
-
 import java.io.IOException;
 
 public class ClearCommand implements Command {

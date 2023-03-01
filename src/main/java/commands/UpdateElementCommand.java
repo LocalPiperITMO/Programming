@@ -2,8 +2,6 @@ package commands;
 
 import datatype.Vehicle;
 import exceptions.NoArgumentException;
-import pattern.Command;
-import pattern.Receiver;
 
 import java.io.IOException;
 
@@ -23,7 +21,7 @@ public class UpdateElementCommand implements Command {
                 if (id == vehicle.getId()) {
                     isFound = true;
                     receiver.vehicleFactory().switchToConsecutiveInputMode(true);
-                    receiver.vehicleFactory().createOrUpdateObjectByUserInput(vehicle);
+                    receiver.vehicleFactory().buildOrUpdateVehicleUsingUserInput(vehicle);
                     System.out.println("Object by ID " + id + " updated successfully");
                     break;
                 }

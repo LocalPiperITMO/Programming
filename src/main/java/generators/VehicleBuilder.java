@@ -12,36 +12,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
-public class ObjectGenerator {
-    ConversionValidator validator = new ConversionValidator();
-    boolean allowConsecutiveInput = false;
-    boolean creationForbidden = false;
-    boolean proceedToNextStep = true;
-    String[] data;
-    int lineIndex;
-    final IDGenerator idGenerator = new IDGenerator();
+public class VehicleBuilder {
+    private final ConversionValidator validator = new ConversionValidator();
+    private boolean allowConsecutiveInput = false;
+    private boolean creationForbidden = false;
+    private boolean proceedToNextStep = true;
+    private int lineIndex;
+    private final IDGenerator idGenerator = new IDGenerator();
 
-    public Vehicle createObjectByData(String[] data, int lineIndex) {
+    public Vehicle buildVehicleUsingPredefinedData(String[] data, int lineIndex) {
         this.lineIndex = lineIndex;
         if (data.length == 7) {
-            this.data = data;
-            String name = getName(this.data[0].trim());
-            Coordinates coordinates = new Coordinates(getX(this.data[1].trim()), getY(this.data[2].trim()));
-            long enginePower = getPowerOrConsumption(this.data[3].trim());
-            long fuelConsumption = getPowerOrConsumption(this.data[4].trim());
-            VehicleType type = getVehicleType(this.data[5].trim());
-            FuelType fuelType = getFuelType(this.data[6].trim());
+            String name = getName(data[0].trim());
+            Coordinates coordinates = new Coordinates(getX(data[1].trim()), getY(data[2].trim()));
+            long enginePower = getPowerOrConsumption(data[3].trim());
+            long fuelConsumption = getPowerOrConsumption(data[4].trim());
+            VehicleType type = getVehicleType(data[5].trim());
+            FuelType fuelType = getFuelType(data[6].trim());
             if (!creationForbidden) {
                 return new Vehicle(idGenerator.generateRandomID(), name, coordinates, enginePower, fuelConsumption, type, fuelType);
             }
         } else {
-            validator.invalidNumberOfArguments(this.lineIndex);
+            validator.getInvalidNumberOfArgumentsExceptionMessage(this.lineIndex);
         }
         creationForbidden = false;
         return null;
     }
 
-    public Vehicle createOrUpdateObjectByUserInput(Vehicle vehicle) throws IOException {
+    public Vehicle buildOrUpdateVehicleUsingUserInput(Vehicle vehicle) throws IOException {
         String name;
         Coordinates coordinates = null;
         long enginePower;
@@ -118,7 +116,7 @@ public class ObjectGenerator {
             return arg;
         }
         switchStateForVehicleCreationProcess();
-        validator.forbiddenNullArgument(this.lineIndex);
+        validator.getForbiddenNullArgumentExceptionMessage(this.lineIndex);
         return "";
     }
 
@@ -127,7 +125,7 @@ public class ObjectGenerator {
             return Float.parseFloat(arg);
         } catch (NumberFormatException e) {
             switchStateForVehicleCreationProcess();
-            validator.nonNumericArgument(this.lineIndex);
+            validator.getNonNumericArgumentExceptionMessage(this.lineIndex);
         }
         return 0;
     }
@@ -137,7 +135,7 @@ public class ObjectGenerator {
             return Integer.parseInt(arg);
         } catch (NumberFormatException e) {
             switchStateForVehicleCreationProcess();
-            validator.nonNumericArgument(this.lineIndex);
+            validator.getNonNumericArgumentExceptionMessage(this.lineIndex);
         }
         return 0;
     }
@@ -151,10 +149,10 @@ public class ObjectGenerator {
             return enginePower;
         } catch (NumberFormatException e) {
             switchStateForVehicleCreationProcess();
-            validator.nonNumericArgument(this.lineIndex);
+            validator.getNonNumericArgumentExceptionMessage(this.lineIndex);
         } catch (LessOrEqualToZeroException e) {
             switchStateForVehicleCreationProcess();
-            validator.lessOrEqualToZeroArgument(this.lineIndex);
+            validator.getLessOrEqualToZeroArgumentExceptionMessage(this.lineIndex);
         }
         return 0;
     }
@@ -165,7 +163,7 @@ public class ObjectGenerator {
                 return VehicleType.valueOf(arg);
             } catch (IllegalArgumentException e) {
                 switchStateForVehicleCreationProcess();
-                validator.invalidTypeArgument(this.lineIndex);
+                validator.getInvalidTypeArgumentExceptionMessage(this.lineIndex);
             }
         }
         return null;
@@ -177,9 +175,10 @@ public class ObjectGenerator {
                 return FuelType.valueOf(arg);
             } catch (IllegalArgumentException e) {
                 switchStateForVehicleCreationProcess();
-                validator.invalidTypeArgument(this.lineIndex);
+                validator.getInvalidTypeArgumentExceptionMessage(this.lineIndex);
             }
         }
         return null;
     }
 }
+

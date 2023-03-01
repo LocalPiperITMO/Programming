@@ -1,8 +1,5 @@
 package commands;
 
-import pattern.Command;
-import pattern.Receiver;
-
 import java.time.LocalDate;
 
 public class InfoCommand implements Command {

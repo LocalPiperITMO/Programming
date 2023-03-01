@@ -1,7 +1,5 @@
 package commands;
 
-import pattern.Command;
-
 public class HelpCommand implements Command {
     public void execute(String arg) {
         System.out.println("""

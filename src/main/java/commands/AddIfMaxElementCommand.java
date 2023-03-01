@@ -1,8 +1,6 @@
 package commands;
 
 import datatype.Vehicle;
-import pattern.Command;
-import pattern.Receiver;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -16,7 +14,7 @@ public class AddIfMaxElementCommand implements Command {
 
     public void execute(String arg) throws IOException {
         receiver.vehicleFactory().switchToConsecutiveInputMode(true);
-        Vehicle elementToCompare = receiver.vehicleFactory().createOrUpdateObjectByUserInput(null);
+        Vehicle elementToCompare = receiver.vehicleFactory().buildOrUpdateVehicleUsingUserInput(null);
         int index = 0;
         do {
             if (receiver.dataSet().get(index).getSum() > receiver.dataSet().get(index + 1).getSum()) {

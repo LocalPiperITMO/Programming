@@ -13,6 +13,7 @@ public class Client {
 
     public void runningMode() throws IOException {
         BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+        // app is running
         boolean isRunning = true;
         while (isRunning) {
             System.out.println("""
@@ -24,7 +25,12 @@ public class Client {
                 System.out.println("Leaving the program");
                 isRunning = false;
             } else {
-                invoker.getRequestFromUser(request.strip());
+                try {
+                    invoker.getRequestFromUser(request.strip());
+                } catch (NullPointerException e) {
+                    System.out.println("Leaving the program");
+                    isRunning = false;
+                }
             }
         }
     }

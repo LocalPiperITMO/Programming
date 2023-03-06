@@ -1,26 +1,24 @@
 package datatype;
 
+import exceptions.LessOrEqualToZeroException;
+import exceptions.NoArgumentException;
+
 import java.time.LocalDate;
 
 public class Vehicle implements Comparable<Vehicle> {
-    private final Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
-    private final java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private Coordinates coordinates = new Coordinates(); //Поле не может быть null
+    private final java.time.LocalDate creationDate = LocalDate.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private long enginePower; //Значение поля должно быть больше 0
     private long fuelConsumption; //Значение поля должно быть больше 0
     private VehicleType type; //Поле может быть null
     private FuelType fuelType; //Поле может быть null
 
-    public Vehicle(Integer id, String name, Coordinates coordinates, long enginePower, long fuelConsumption, VehicleType type, FuelType fuelType) {
+
+    public Vehicle setId(int id) {
         this.id = id;
-        this.name = name;
-        this.coordinates = coordinates;
-        this.creationDate = LocalDate.now();
-        this.enginePower = enginePower;
-        this.fuelConsumption = fuelConsumption;
-        this.type = type;
-        this.fuelType = fuelType;
+        return this;
     }
 
     public long getSum() {
@@ -31,28 +29,51 @@ public class Vehicle implements Comparable<Vehicle> {
         return id;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
+    public Vehicle setEnginePower(String arg) throws LessOrEqualToZeroException {
+        long rawEnginePower = Long.parseLong(arg.trim());
+        if (rawEnginePower <= 0) {
+            throw new LessOrEqualToZeroException();
+        } else {
+            this.enginePower = rawEnginePower;
+            return this;
+        }
     }
 
-    public void setEnginePower(long enginePower) {
-        this.enginePower = enginePower;
+    public Vehicle setFuelConsumption(String arg) throws LessOrEqualToZeroException {
+        long rawFuelConsumption = Long.parseLong(arg.trim());
+        if (rawFuelConsumption <= 0) {
+            throw new LessOrEqualToZeroException();
+        } else {
+            this.fuelConsumption = rawFuelConsumption;
+            return this;
+        }
     }
 
-    public void setFuelConsumption(long fuelConsumption) {
-        this.fuelConsumption = fuelConsumption;
+    public Vehicle setFuelType(String arg) {
+        if (arg.trim().length() == 0) {
+            this.fuelType = null;
+        } else {
+            this.fuelType = FuelType.valueOf(arg.toUpperCase().trim());
+        }
+        return this;
     }
 
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
+    public Vehicle setName(String arg) throws NoArgumentException {
+        if (arg.trim().length() == 0) {
+            throw new NoArgumentException();
+        } else {
+            this.name = arg;
+            return this;
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setType(VehicleType type) {
-        this.type = type;
+    public Vehicle setType(String arg) {
+        if (arg.trim().length() == 0) {
+            this.type = null;
+        } else {
+            this.type = VehicleType.valueOf(arg.toUpperCase().trim());
+        }
+        return this;
     }
 
     public String getName() {

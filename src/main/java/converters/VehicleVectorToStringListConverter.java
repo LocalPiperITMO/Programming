@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class ObjectVectorToStringListConverter {
+public class VehicleVectorToStringListConverter {
     private Vector<Vehicle> dataSet;
 
-    public ObjectVectorToStringListConverter(Vector<Vehicle> dataSet) {
+    public VehicleVectorToStringListConverter(Vector<Vehicle> dataSet) {
         this.dataSet = dataSet;
     }
     public void setDataSet(Vector<Vehicle> vector){

@@ -1,6 +1,7 @@
 package commands;
 
 
+import exceptions.InvalidCommandNameException;
 import exceptions.NoArgumentException;
 
 import java.io.IOException;
@@ -31,22 +32,29 @@ public class Invoker {
 
     public void getRequestFromUser(String userInput) {
         try {
+            // filtering user request, getting command name and arguments, executing the command
             argument = "";
             String[] userInputArray = userInput.trim().split(" ", 2);
             commandName = userInputArray[0];
             if (userInputArray.length == 2) {
                 argument = userInputArray[1];
             }
-            commandHashMap.get(commandName).execute(argument);
+            if (commandHashMap.get(commandName) != null) {
+                commandHashMap.get(commandName).execute(argument);
+            } else {
+                throw new InvalidCommandNameException();
+            }
             System.out.println();
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
             System.out.println("Empty request. Try again");
-        } catch (NullPointerException | IOException npe) {
-            System.out.println("There is no command named \"" + commandName + "\". Try again");
         } catch (NoArgumentException e) {
             System.out.println(commandName + " requires an argument: none were given");
         } catch (NumberFormatException e) {
             System.out.println(commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given");
+        } catch (InvalidCommandNameException e) {
+            System.out.println("There is no command named \"" + commandName + "\". Try again");
+        } catch (IOException e) {
+            System.out.println("Error!");
         }
     }
 }

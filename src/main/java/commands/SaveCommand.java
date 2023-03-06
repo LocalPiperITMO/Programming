@@ -1,6 +1,6 @@
 package commands;
 
-import converters.ObjectVectorToStringListConverter;
+import converters.VehicleVectorToStringListConverter;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,11 +9,11 @@ import java.util.List;
 
 public class SaveCommand implements Command {
     private final Receiver receiver;
-    private final ObjectVectorToStringListConverter converter;
+    private final VehicleVectorToStringListConverter converter;
 
     public SaveCommand(Receiver receiver) {
         this.receiver = receiver;
-        this.converter = new ObjectVectorToStringListConverter(receiver.dataSet());
+        this.converter = new VehicleVectorToStringListConverter(receiver.dataSet());
     }
 
     public void prepareFile() throws IOException {

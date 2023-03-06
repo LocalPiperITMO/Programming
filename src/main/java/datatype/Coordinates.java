@@ -4,15 +4,21 @@ public class Coordinates {
     private Float x;
     private int y;
 
-    public Coordinates(Float x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public float getX(){
+    public float getX() {
         return x;
     }
-    public int getY(){
+
+    public int getY() {
         return y;
+    }
+
+    public Coordinates setX(String arg) {
+        this.x = Float.parseFloat(arg.trim());
+        return this;
+    }
+
+    public Coordinates setY(String arg) {
+        this.y = Integer.parseInt(arg.trim());
+        return this;
     }
 }

@@ -34,7 +34,6 @@ public class CSVtoStringListConverter {
         } else {
             return Optional.empty();
         }
-
     }
 }
 

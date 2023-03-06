@@ -4,7 +4,7 @@ import com.opencsv.exceptions.CsvException;
 import commands.Client;
 import commands.Receiver;
 import converters.CSVtoStringListConverter;
-import converters.StringListToObjectVectorConverter;
+import converters.StringListToVehicleVectorConverter;
 import datatype.Vehicle;
 
 import java.io.FileNotFoundException;
@@ -18,15 +18,13 @@ public class App {
         CSVtoStringListConverter csvToString = new CSVtoStringListConverter();
         try {
             List<String[]> text = csvToString.convertCSVtoStringList();
-            if (text != null) {
-                StringListToObjectVectorConverter stringToVector = new StringListToObjectVectorConverter(text);
-                Vector<Vehicle> dataSet = stringToVector.convertStringListToObjectVector();
-                System.out.println();
+            StringListToVehicleVectorConverter stringToVector = new StringListToVehicleVectorConverter(text);
+            Vector<Vehicle> dataSet = stringToVector.convertStringListToObjectVector();
+            System.out.println();
 
-                Receiver receiver = new Receiver(dataSet, csvToString.getVarAddress(), stringToVector.getVehicleFactory());
-                Client client = new Client(receiver);
-                client.runningMode();
-            }
+            Receiver receiver = new Receiver(dataSet, csvToString.getVarAddress(),stringToVector.getIdGenerator());
+            Client client = new Client(receiver);
+            client.runningMode();
         } catch (FileNotFoundException fileNotFoundException) {
             System.out.println("File " + fileNotFoundException.getMessage() + " not found");
         }

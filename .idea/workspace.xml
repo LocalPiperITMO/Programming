@@ -5,25 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/converters/StringListToVehicleVectorConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/converters/VehicleVectorToStringListConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/InvalidCommandNameException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Invoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/converters/CSVtoStringListConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/CSVtoStringListConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/converters/ObjectVectorToStringListConverter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/converters/StringListToObjectVectorConverter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/generators/VehicleBuilder.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +146,7 @@
       <workItem from="1678036866446" duration="44000" />
       <workItem from="1678051046092" duration="4546000" />
       <workItem from="1678121705368" duration="2969000" />
+      <workItem from="1678191271583" duration="2817000" />
     </task>
     <servers />
   </component>

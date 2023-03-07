@@ -10,6 +10,10 @@ public class FilterByFuelConsumptionCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "Required argument - fuelConsumption(number). Displays elements with the given fuelConsumption";
+    }
+
     public void execute(String argument) throws NoArgumentException {
         if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
             long fuelConsumption = Long.parseLong(argument);

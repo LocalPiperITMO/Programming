@@ -13,6 +13,10 @@ public class ReorderCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "No argument required. Displays every element of the dataset in reverse order of the current sorting";
+    }
+
     public void execute(String arg) {
         try {
             if (receiver.dataSet().size() == 0) {

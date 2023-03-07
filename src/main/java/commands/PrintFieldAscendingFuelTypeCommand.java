@@ -12,6 +12,10 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "No argument required. Displays only ID and FuelType of every element, sorted by FuelType";
+    }
+
     public void execute(String arg) {
         try {
             if (receiver.dataSet().size() == 0) {

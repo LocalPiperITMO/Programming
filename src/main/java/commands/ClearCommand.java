@@ -9,6 +9,10 @@ public class ClearCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "No argument required. Clears the dataset";
+    }
+
     public void execute(String arg) throws IOException {
         receiver.dataSet().removeAllElements();
         System.out.println("Collection has been emptied");

@@ -16,6 +16,10 @@ public class SaveCommand implements Command {
         this.converter = new VehicleVectorToStringListConverter(receiver.dataSet());
     }
 
+    public String showInfo() {
+        return "No argument required. Saves the dataset to file";
+    }
+
     private void prepareFile() throws IOException {
         try (FileOutputStream fileOutputStream = new FileOutputStream(receiver.varAddress().toString(), false)) {
             fileOutputStream.write("".getBytes(StandardCharsets.UTF_8));

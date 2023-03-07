@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public interface Command {
+
+    String showInfo();
+
     default boolean checkIfUserInputMatchesRequiredArgument(String userInput, boolean isArgumentRequired) {
         return userInput.trim().length() != 0 || !isArgumentRequired;
     }

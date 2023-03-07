@@ -12,6 +12,10 @@ public class RemoveByIDCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "Required argument - ID(numeric). Removes an element with the given ID";
+    }
+
     public void execute(String argument) throws IOException, NoArgumentException {
         if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
             int id = Integer.parseInt(argument);

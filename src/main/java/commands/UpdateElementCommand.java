@@ -12,6 +12,9 @@ public class UpdateElementCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "Required argument - ID(numeric). User builds an element. Updates the element with the given ID";
+    }
 
     public void execute(String argument) throws IOException, NoArgumentException {
         if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
@@ -30,6 +33,7 @@ public class UpdateElementCommand implements Command {
                     System.out.println("Element with given ID does not exist");
                 } else {
                     buildVehicleViaUserInput(vehicle);
+                    System.out.println("Vehicle by ID " + vehicle.getId() + " updated successfully");
 
                 }
             } catch (NumberFormatException e) {

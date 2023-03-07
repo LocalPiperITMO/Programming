@@ -11,6 +11,10 @@ public class AddElementCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "No argument required. User builds an element. Adds element to dataset";
+    }
+
     public void execute(String arg) throws IOException {
         Vehicle vehicle = buildVehicleViaUserInput((new Vehicle()).setId(receiver.idGenerator().generateRandomID()));
         receiver.dataSet().add(vehicle);

@@ -12,6 +12,10 @@ public class PrintAscendingCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "No argument required. Displays every element sorted by ID";
+    }
+
     public void execute(String arg) {
         try {
             if (receiver.dataSet().size() == 0) {

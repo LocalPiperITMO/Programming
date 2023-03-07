@@ -10,6 +10,10 @@ public class ShowCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "No argument required. Displays every element of the dataset";
+    }
+
     public void execute(String arg) {
         try {
             if (receiver.dataSet().size() == 0) {

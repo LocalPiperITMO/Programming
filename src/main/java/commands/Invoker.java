@@ -14,7 +14,7 @@ public class Invoker {
 
     public Invoker(Receiver receiver) {
         this.commandHashMap = new HashMap<>();
-        commandHashMap.put("help", new HelpCommand());
+        commandHashMap.put("help", new HelpCommand(commandHashMap));
         commandHashMap.put("info", new InfoCommand(receiver));
         commandHashMap.put("show", new ShowCommand(receiver));
         commandHashMap.put("add", new AddElementCommand(receiver));

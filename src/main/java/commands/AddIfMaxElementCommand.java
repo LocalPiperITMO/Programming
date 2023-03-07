@@ -12,6 +12,10 @@ public class AddIfMaxElementCommand implements Command {
         this.receiver = receiver;
     }
 
+    public String showInfo() {
+        return "No argument required. User builds an element. If the element is greater that the greatest element in the dataset, it is added to dataset";
+    }
+
     public void execute(String arg) throws IOException {
         Vehicle vehicle = buildVehicleViaUserInput((new Vehicle()).setId(receiver.idGenerator().generateRandomID()));
         int index = 0;

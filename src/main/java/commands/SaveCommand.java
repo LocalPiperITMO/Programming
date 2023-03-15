@@ -26,7 +26,7 @@ public class SaveCommand implements Command {
         }
     }
 
-    public void execute(String arg) throws IOException {
+    public void execute(String arg, boolean isCalledByScript) throws IOException {
         prepareFile();
         converter.setDataSet(receiver.dataSet());
         List<String> listOfStrings = converter.convertObjectVectorToStringList();

@@ -5,7 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/InvalidArgumentsWhileVehicleBuildingViaScriptException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/script.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Invoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintAscendingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintAscendingCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintFieldAscendingFuelTypeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintFieldAscendingFuelTypeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ReorderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ReorderCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,18 +58,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Honor/IdeaProjects/App&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.intellij.sdk.settings.AppSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Honor/IdeaProjects/App",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "org.intellij.sdk.settings.AppSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Honor\IdeaProjects\App\src\main\java\files" />
@@ -145,6 +168,12 @@
       <workItem from="1678194348801" duration="5309000" />
       <workItem from="1678216085875" duration="788000" />
       <workItem from="1678216901214" duration="959000" />
+      <workItem from="1678340462055" duration="596000" />
+      <workItem from="1678345378844" duration="270000" />
+      <workItem from="1678345789211" duration="3523000" />
+      <workItem from="1678656193776" duration="7063000" />
+      <workItem from="1678751715453" duration="3619000" />
+      <workItem from="1678841091274" duration="589000" />
     </task>
     <servers />
   </component>
@@ -161,18 +190,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/commands/InfoCommand.java</url>
-          <line>5</line>
-          <properties field="receiver" class="commands.InfoCommand" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

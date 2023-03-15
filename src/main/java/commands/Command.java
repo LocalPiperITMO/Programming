@@ -1,15 +1,16 @@
 package commands;
 
 import datatype.Vehicle;
+import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
 import exceptions.LessOrEqualToZeroException;
 import exceptions.NoArgumentException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public interface Command {
-
     String showInfo();
 
     default boolean checkIfUserInputMatchesRequiredArgument(String userInput, boolean isArgumentRequired) {
@@ -92,5 +93,20 @@ public interface Command {
         return vehicleBase;
     }
 
-    void execute(String arg) throws IOException, NoArgumentException;
+    default Vehicle buildVehicleViaScript(List<String> arguments) throws InvalidArgumentsWhileVehicleBuildingViaScriptException {
+        try {
+            Vehicle vehicle = new Vehicle().setName(arguments.get(0));
+            vehicle.getCoordinates().setX(arguments.get(1))
+                    .setY(arguments.get(2));
+            vehicle.setEnginePower(arguments.get(3))
+                    .setFuelConsumption(arguments.get(4))
+                    .setType(arguments.get(5))
+                    .setFuelType(arguments.get(6));
+            return vehicle;
+        } catch (NoArgumentException | LessOrEqualToZeroException | IndexOutOfBoundsException e) {
+            throw new InvalidArgumentsWhileVehicleBuildingViaScriptException();
+        }
+    }
+
+    void execute(String arg, boolean isCalledByScript) throws IOException, NoArgumentException, InvalidArgumentsWhileVehicleBuildingViaScriptException;
 }

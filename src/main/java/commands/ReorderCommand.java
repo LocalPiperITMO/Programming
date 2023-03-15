@@ -17,12 +17,13 @@ public class ReorderCommand implements Command {
         return "No argument required. Displays every element of the dataset in reverse order of the current sorting";
     }
 
-    public void execute(String arg) {
+    public void execute(String arg, boolean isCalledByScript) {
         try {
             if (receiver.dataSet().size() == 0) {
                 throw new EmptyDatasetException();
             }
             Collections.reverse(receiver.dataSet());
+            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
             for (Vehicle vehicle : receiver.dataSet()) {
                 System.out.println(vehicle.toString());
             }

@@ -14,7 +14,7 @@ public class ShowCommand implements Command {
         return "No argument required. Displays every element of the dataset";
     }
 
-    public void execute(String arg) {
+    public void execute(String arg, boolean isCalledByScript) {
         try {
             if (receiver.dataSet().size() == 0) {
                 throw new EmptyDatasetException();

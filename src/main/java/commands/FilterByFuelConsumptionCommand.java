@@ -14,7 +14,7 @@ public class FilterByFuelConsumptionCommand implements Command {
         return "Required argument - fuelConsumption(number). Displays elements with the given fuelConsumption";
     }
 
-    public void execute(String argument) throws NoArgumentException {
+    public void execute(String argument, boolean isCalledByScript) throws NoArgumentException {
         if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
             long fuelConsumption = Long.parseLong(argument);
             System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");

@@ -16,7 +16,7 @@ public class RemoveByIDCommand implements Command {
         return "Required argument - ID(numeric). Removes an element with the given ID";
     }
 
-    public void execute(String argument) throws IOException, NoArgumentException {
+    public void execute(String argument, boolean isCalledByScript) throws IOException, NoArgumentException {
         if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
             int id = Integer.parseInt(argument);
             boolean isFound = false;

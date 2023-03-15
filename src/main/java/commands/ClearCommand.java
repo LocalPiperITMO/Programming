@@ -13,7 +13,7 @@ public class ClearCommand implements Command {
         return "No argument required. Clears the dataset";
     }
 
-    public void execute(String arg) throws IOException {
+    public void execute(String arg, boolean isCalledByScript) throws IOException {
         receiver.dataSet().removeAllElements();
         System.out.println("Collection has been emptied");
     }

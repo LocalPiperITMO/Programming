@@ -16,7 +16,7 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
         return "No argument required. Displays only ID and FuelType of every element, sorted by FuelType";
     }
 
-    public void execute(String arg) {
+    public void execute(String arg, boolean isCalledByScript) {
         try {
             if (receiver.dataSet().size() == 0) {
                 throw new EmptyDatasetException();

@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * Main class
+ *
+ * @author LocalPiper - Sorokin Artem
+ */
 public class App {
 
     public static void main(String[] args) throws IOException, CsvException {
@@ -22,7 +27,7 @@ public class App {
             Vector<Vehicle> dataSet = stringToVector.convertStringListToObjectVector();
             System.out.println();
 
-            Receiver receiver = new Receiver(dataSet, csvToString.getVarAddress(),stringToVector.getIdGenerator());
+            Receiver receiver = new Receiver(dataSet, csvToString.getVarAddress(), stringToVector.getIdGenerator());
             Client client = new Client(receiver);
             client.runningMode();
         } catch (FileNotFoundException fileNotFoundException) {

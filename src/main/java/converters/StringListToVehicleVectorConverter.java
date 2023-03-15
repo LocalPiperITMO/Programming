@@ -13,6 +13,12 @@ public class StringListToVehicleVectorConverter {
     private final Vector<Vehicle> dataSet;
     private final IDGenerator idGenerator = new IDGenerator();
 
+    /**
+     * Converter class
+     * Turns given list of arguments into vector of elements
+     *
+     * @param text list of arguments
+     */
     public StringListToVehicleVectorConverter(List<String[]> text) {
         this.dataSet = new Vector<>();
         this.text = text;
@@ -20,6 +26,12 @@ public class StringListToVehicleVectorConverter {
 
     }
 
+    /**
+     * Used for converting list of arguments into vector of elements
+     * Invalid arguments will prevent element from building
+     *
+     * @return vector of correctly built elements
+     */
     public Vector<Vehicle> convertStringListToObjectVector() {
         int corruptedLines = 0;
         int lineCounter = 0;
@@ -64,6 +76,11 @@ public class StringListToVehicleVectorConverter {
         return dataSet;
     }
 
+    /**
+     * Used for getting the IDGenerator
+     *
+     * @return IDGenerator
+     */
     public IDGenerator getIdGenerator() {
         return idGenerator;
     }

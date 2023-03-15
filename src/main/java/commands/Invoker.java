@@ -16,6 +16,13 @@ public class Invoker {
     private List<String> listOfArgumentsForBuildingViaScript;
     private Set<String> setOfScriptPaths;
 
+    /**
+     * Invoker class
+     * Used for processing user inputs and sending commands
+     * Stores commandHashMap used for accessing commands
+     *
+     * @param receiver used for storing the collection
+     */
     public Invoker(Receiver receiver) {
         this.commandHashMap = new HashMap<>();
         this.listOfArgumentsForBuildingViaScript = new ArrayList<>();
@@ -37,26 +44,56 @@ public class Invoker {
         commandHashMap.put("print_field_ascending_fuel_type", new PrintFieldAscendingFuelTypeCommand(receiver));
     }
 
+    /**
+     * Used for getting a set of absolute paths that are used by scripts currently active
+     *
+     * @return set of script paths
+     */
     public Set<String> getSetOfScriptPaths() {
         return this.setOfScriptPaths;
     }
 
+    /**
+     * Used for checking if the command was called via script, not by user
+     *
+     * @return true if command was called by script, false otherwise
+     */
     public boolean isCalledByScript() {
         return isCalledByScript;
     }
 
+    /**
+     * Used for toggling script calls
+     *
+     * @param isCalledByScript checks if command was called via script, not by user
+     */
     public void setCalledByScript(boolean isCalledByScript) {
         this.isCalledByScript = isCalledByScript;
     }
 
+    /**
+     * Used for setting list of arguments for element building (script only)
+     *
+     * @param listOfArguments arguments for building
+     */
     public void setListOfArgumentsForBuildingViaScript(List<String> listOfArguments) {
         this.listOfArgumentsForBuildingViaScript = listOfArguments;
     }
 
+    /**
+     * Used for getting list of arguments for element building (script only)
+     *
+     * @return list of arguments
+     */
     public List<String> getListOfArgumentsForBuildingViaScript() {
         return listOfArgumentsForBuildingViaScript;
     }
 
+    /**
+     * Gets user input, preprocesses it, gets the command name and calls the command if it matches user input.
+     *
+     * @param userInput whatever user writes
+     */
     public void getRequestFromUser(String userInput) {
         try {
             // filtering user request, getting command name and arguments, executing the command

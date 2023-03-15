@@ -11,12 +11,31 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public interface Command {
+    /**
+     * Used for showing information.
+     *
+     * @return information about the command
+     */
     String showInfo();
 
+    /**
+     * Checks if type of argument, given by user, matches the type of argument required
+     *
+     * @param userInput          argument, given by user
+     * @param isArgumentRequired tells if command needs an argument to work
+     * @return true if user-written argument matches the requirements of command, false otherwise
+     */
     default boolean checkIfUserInputMatchesRequiredArgument(String userInput, boolean isArgumentRequired) {
         return userInput.trim().length() != 0 || !isArgumentRequired;
     }
 
+    /**
+     * Builds vehicle using real-time communication with user
+     *
+     * @param vehicleBase requires the base of element that will be built (object with generated ID)
+     * @return built element
+     * @throws IOException if unexpected error occurs
+     */
     default Vehicle buildVehicleViaUserInput(Vehicle vehicleBase) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         boolean isAllowedToProceed;
@@ -93,6 +112,13 @@ public interface Command {
         return vehicleBase;
     }
 
+    /**
+     * Builds vehicle using arguments given in the script (used via "execute_script" command)
+     *
+     * @param arguments list of arguments given
+     * @return built element
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given
+     */
     default Vehicle buildVehicleViaScript(List<String> arguments) throws InvalidArgumentsWhileVehicleBuildingViaScriptException {
         try {
             Vehicle vehicle = new Vehicle().setName(arguments.get(0));
@@ -109,5 +135,14 @@ public interface Command {
         }
     }
 
+    /**
+     * Executes command
+     *
+     * @param arg              command argument
+     * @param isCalledByScript checks if command called from script
+     * @throws IOException                                            if unexpected error occurs
+     * @throws NoArgumentException                                    if command requires argument but none were given
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given for building vehicle via script
+     */
     void execute(String arg, boolean isCalledByScript) throws IOException, NoArgumentException, InvalidArgumentsWhileVehicleBuildingViaScriptException;
 }

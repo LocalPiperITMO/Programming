@@ -1,5 +1,9 @@
 package datatype;
 
+/**
+ * Coordinates
+ * Argument type, stores X and Y coordinates
+ */
 public class Coordinates {
     private Float x;
     private int y;

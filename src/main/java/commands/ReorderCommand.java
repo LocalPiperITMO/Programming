@@ -9,14 +9,31 @@ import java.util.Collections;
 public class ReorderCommand implements Command {
     private final Receiver receiver;
 
+    /**
+     * "reorder" command
+     * Reverses the element order of the collection
+     *
+     * @param receiver used for storing the collection
+     */
     public ReorderCommand(Receiver receiver) {
         this.receiver = receiver;
     }
 
+    /**
+     * Used for showing information.
+     *
+     * @return information about the command
+     */
     public String showInfo() {
         return "No argument required. Displays every element of the dataset in reverse order of the current sorting";
     }
 
+    /**
+     * Executes command
+     *
+     * @param arg              command argument
+     * @param isCalledByScript checks if command called from script
+     */
     public void execute(String arg, boolean isCalledByScript) {
         try {
             if (receiver.dataSet().size() == 0) {

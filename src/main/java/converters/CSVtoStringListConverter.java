@@ -9,12 +9,28 @@ import java.util.List;
 import java.util.Optional;
 
 public class CSVtoStringListConverter {
+    /**
+     * Converter class
+     * Used to convert text from CSV-file into list of arguments
+     */
     private Path varPath;
 
+    /**
+     * Used for getting the path of file
+     *
+     * @return file path
+     */
     public Path getVarAddress() {
         return varPath;
     }
 
+    /**
+     * Used for converting CSV into list of arguments
+     *
+     * @return list of arguments
+     * @throws IOException  if unexpected error occurs
+     * @throws CsvException if error related to CSV occurs
+     */
     public List<String[]> convertCSVtoStringList() throws IOException, CsvException {
         String fileName = "FILE";
         InputStreamReader reader;
@@ -26,6 +42,12 @@ public class CSVtoStringListConverter {
         throw new FileNotFoundException(fileName);
     }
 
+    /**
+     * Takes environment variable name and gets the file with that name
+     *
+     * @param fileName environment variable name
+     * @return file if found, empty object otherwise
+     */
     public Optional<File> openFileWithPathFromEnv(String fileName) {
         String path = System.getenv(fileName);
         if (path != null) {

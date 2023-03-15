@@ -8,14 +8,32 @@ import java.util.Collections;
 public class PrintFieldAscendingFuelTypeCommand implements Command {
     private final Receiver receiver;
 
+    /**
+     * "print_field_ascending_fuel_type" command
+     * Sorts the collection in ascending order. Elements are compared using fuelType
+     * Prints the collection after sorting
+     *
+     * @param receiver used for storing the collection
+     */
     public PrintFieldAscendingFuelTypeCommand(Receiver receiver) {
         this.receiver = receiver;
     }
 
+    /**
+     * Used for showing information.
+     *
+     * @return information about the command
+     */
     public String showInfo() {
         return "No argument required. Displays only ID and FuelType of every element, sorted by FuelType";
     }
 
+    /**
+     * Executes command
+     *
+     * @param arg              command argument
+     * @param isCalledByScript checks if command called from script
+     */
     public void execute(String arg, boolean isCalledByScript) {
         try {
             if (receiver.dataSet().size() == 0) {

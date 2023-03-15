@@ -7,10 +7,21 @@ import java.io.InputStreamReader;
 public class Client {
     private final Invoker invoker;
 
+    /**
+     * Client class
+     * Enables communication between user and console.
+     *
+     * @param receiver used for storing the collection
+     */
     public Client(Receiver receiver) {
         this.invoker = new Invoker(receiver);
     }
 
+    /**
+     * Runs the user-console communication
+     *
+     * @throws IOException if unexpected error occurs
+     */
     public void runningMode() throws IOException {
         BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
         // app is running

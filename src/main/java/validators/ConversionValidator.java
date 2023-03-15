@@ -1,5 +1,10 @@
 package validators;
 
+/**
+ * Validator class
+ * Gives information about occurred errors to user
+ * Only when building elements
+ */
 public class ConversionValidator {
     public void getInvalidNumberOfArgumentsExceptionMessage(int lineIndex) {
         System.out.println("Line " + lineIndex + " is missing one or several arguments." +

@@ -15,6 +15,12 @@ public class ExecuteScriptCommand implements Command {
     private final Invoker invoker;
     private final List<String> complexCommandNames = new ArrayList<>();
 
+    /**
+     * "execute_script script" command
+     * Executes script from path given as argument
+     *
+     * @param invoker used for storing command panel and preprocessing lines of script
+     */
     public ExecuteScriptCommand(Invoker invoker) {
         this.invoker = invoker;
         this.complexCommandNames.add("add");
@@ -24,10 +30,23 @@ public class ExecuteScriptCommand implements Command {
 
     }
 
+    /**
+     * Used for showing information.
+     *
+     * @return information about the command
+     */
     public String showInfo() {
         return "Required argument - nameOfText(String). Takes the script from the text and executes it";
     }
 
+    /**
+     * Executes command
+     *
+     * @param fileName         name of script (command argument)
+     * @param isCalledByScript checks if command called from script
+     * @throws IOException         if unexpected error occurs
+     * @throws NoArgumentException if command requires argument but none were given
+     */
     public void execute(String fileName, boolean isCalledByScript) throws IOException, NoArgumentException {
         // execute_script src/main/java/script.txt
         String commandName;

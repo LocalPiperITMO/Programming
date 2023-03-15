@@ -20,7 +20,6 @@ public class AddElementCommand implements Command {
 
     public void execute(String arg, boolean isCalledByScript) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
         Vehicle vehicle;
-        System.out.println(invoker.getListOfArgumentsForBuildingViaScript());
         if (isCalledByScript) {
             vehicle = buildVehicleViaScript(invoker.getListOfArgumentsForBuildingViaScript());
         } else {

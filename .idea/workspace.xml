@@ -5,27 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/InvalidArgumentsWhileVehicleBuildingViaScriptException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/script.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/commands/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Invoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintAscendingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintAscendingCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintFieldAscendingFuelTypeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintFieldAscendingFuelTypeCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ReorderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ReorderCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/script.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +158,7 @@
       <workItem from="1678345789211" duration="3523000" />
       <workItem from="1678656193776" duration="7063000" />
       <workItem from="1678751715453" duration="3619000" />
-      <workItem from="1678841091274" duration="589000" />
+      <workItem from="1678841091274" duration="8563000" />
     </task>
     <servers />
   </component>

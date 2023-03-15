@@ -103,7 +103,8 @@ public interface Command {
                     .setType(arguments.get(5))
                     .setFuelType(arguments.get(6));
             return vehicle;
-        } catch (NoArgumentException | LessOrEqualToZeroException | IndexOutOfBoundsException e) {
+        } catch (NoArgumentException | LessOrEqualToZeroException | IllegalArgumentException |
+                 IndexOutOfBoundsException e) {
             throw new InvalidArgumentsWhileVehicleBuildingViaScriptException();
         }
     }

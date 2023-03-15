@@ -37,6 +37,10 @@ public class Invoker {
         commandHashMap.put("print_field_ascending_fuel_type", new PrintFieldAscendingFuelTypeCommand(receiver));
     }
 
+    public HashMap<String, Command> getCommandHashMap() {
+        return commandHashMap;
+    }
+
     public boolean isCalledByScript() {
         return isCalledByScript;
     }

@@ -29,6 +29,7 @@ public class ExecuteScriptCommand implements Command {
 
     public void execute(String fileName, boolean isCalledByScript) throws IOException, NoArgumentException {
         // execute_script src/main/java/script.txt
+        String commandName;
         invoker.setCalledByScript(true);
         File script = new File(fileName);
         try (BufferedReader reader = new BufferedReader(new FileReader(script))) {
@@ -39,24 +40,29 @@ public class ExecuteScriptCommand implements Command {
                 line = reader.readLine();
             }
             List<String> arguments = new ArrayList<>();
-            for (int i = 0; i < linesOfScript.size(); ++i) {
-                String commandName = linesOfScript.get(i);
-                arguments.clear();
-                invoker.setListOfArgumentsForBuildingViaScript(arguments);
+
+            while (linesOfScript.size() != 0) {
+                String command = linesOfScript.get(0);
+                linesOfScript.remove(command);
+                commandName = command.split(" ")[0];
+
                 if (Objects.equals(commandName, "exit")) {
                     throw new NullPointerException();
                 } else if (complexCommandNames.contains(commandName)) {
-                    invoker.setCalledByScript(true);
-                    arguments = linesOfScript.subList(i + 1, i + 8);
-                    System.out.println(arguments);
-                    i = i + 7;
+
+                    for (int i = 0; i < 7; ++i) {
+                        arguments.add(linesOfScript.get(0));
+                        linesOfScript.remove(0);
+                    }
                     invoker.setListOfArgumentsForBuildingViaScript(arguments);
                 }
-                invoker.getRequestFromUser(commandName);
+                invoker.getRequestFromUser(command);
             }
-            invoker.setCalledByScript(false);
         } catch (IOException e) {
             System.out.println("Error!");
+            invoker.setCalledByScript(false);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Error while building vehicle. Rewrite your script");
             invoker.setCalledByScript(false);
         }
     }

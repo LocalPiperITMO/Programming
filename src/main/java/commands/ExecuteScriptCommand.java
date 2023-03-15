@@ -1,6 +1,7 @@
 package commands;
 
 import exceptions.NoArgumentException;
+import exceptions.RecursionException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,7 +32,9 @@ public class ExecuteScriptCommand implements Command {
         // execute_script src/main/java/script.txt
         String commandName;
         invoker.setCalledByScript(true);
+
         File script = new File(fileName);
+        invoker.getSetOfScriptPaths().add(script.getAbsolutePath());
         try (BufferedReader reader = new BufferedReader(new FileReader(script))) {
             List<String> linesOfScript = new ArrayList<>();
             String line = reader.readLine();
@@ -45,9 +48,17 @@ public class ExecuteScriptCommand implements Command {
                 String command = linesOfScript.get(0);
                 linesOfScript.remove(command);
                 commandName = command.split(" ")[0];
+                arguments.clear();
 
                 if (Objects.equals(commandName, "exit")) {
                     throw new NullPointerException();
+                } else if (Objects.equals(commandName, "execute_script")) {
+                    File nextScript = new File(command.split(" ")[1]);
+                    if (invoker.getSetOfScriptPaths().contains(nextScript.getAbsolutePath())) {
+                        throw new RecursionException();
+                    } else {
+                        invoker.getSetOfScriptPaths().add(nextScript.getAbsolutePath());
+                    }
                 } else if (complexCommandNames.contains(commandName)) {
 
                     for (int i = 0; i < 7; ++i) {
@@ -63,6 +74,9 @@ public class ExecuteScriptCommand implements Command {
             invoker.setCalledByScript(false);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Error while building vehicle. Rewrite your script");
+            invoker.setCalledByScript(false);
+        } catch (RecursionException e) {
+            System.out.println("Recursion avoided. Rewrite your script(s)");
             invoker.setCalledByScript(false);
         }
     }

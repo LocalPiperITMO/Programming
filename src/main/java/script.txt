@@ -1,17 +1,4 @@
-add
-No
-1451
-512
-123
-141
-show
-reorder
-print_field_ascending_fuel_type
 info
+execute_script src/main/java/script.txt
+print_field_ascending_fuel_type
 exit
-add
-No
-1451
-512
-123
-199

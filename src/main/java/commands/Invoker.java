@@ -6,9 +6,7 @@ import exceptions.InvalidCommandNameException;
 import exceptions.NoArgumentException;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Invoker {
     private final HashMap<String, Command> commandHashMap;
@@ -16,10 +14,12 @@ public class Invoker {
     private String commandName;
     private boolean isCalledByScript;
     private List<String> listOfArgumentsForBuildingViaScript;
+    private Set<String> setOfScriptPaths;
 
     public Invoker(Receiver receiver) {
         this.commandHashMap = new HashMap<>();
         this.listOfArgumentsForBuildingViaScript = new ArrayList<>();
+        this.setOfScriptPaths = new HashSet<>();
         commandHashMap.put("help", new HelpCommand(commandHashMap));
         commandHashMap.put("info", new InfoCommand(receiver));
         commandHashMap.put("show", new ShowCommand(receiver));
@@ -37,8 +37,8 @@ public class Invoker {
         commandHashMap.put("print_field_ascending_fuel_type", new PrintFieldAscendingFuelTypeCommand(receiver));
     }
 
-    public HashMap<String, Command> getCommandHashMap() {
-        return commandHashMap;
+    public Set<String> getSetOfScriptPaths() {
+        return this.setOfScriptPaths;
     }
 
     public boolean isCalledByScript() {

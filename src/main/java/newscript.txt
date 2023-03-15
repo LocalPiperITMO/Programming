@@ -1,0 +1,3 @@
+help
+reorder
+execute_script src/main/java/script.txt

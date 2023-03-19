@@ -14,7 +14,7 @@ public class Invoker {
     private String commandName;
     private boolean isCalledByScript;
     private List<String> listOfArgumentsForBuildingViaScript;
-    private Set<String> setOfScriptPaths;
+    private final Set<String> setOfScriptPaths;
 
     /**
      * Invoker class

@@ -18,7 +18,7 @@ public class IDGenerator {
         boolean isGenerated = false;
         int newId = 0;
         while (!isGenerated) {
-            newId = (int) (Math.random() * 100000);
+            newId = (int) (Math.random() * 1000000);
             if (!idSet.contains(newId)) {
                 idSet.add(newId);
                 isGenerated = true;

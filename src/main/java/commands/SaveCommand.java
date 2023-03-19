@@ -1,15 +1,13 @@
 package commands;
 
-import converters.VehicleVectorToStringListConverter;
+import converters.CSVToVectorConverter;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 public class SaveCommand implements Command {
     private final Receiver receiver;
-    private final VehicleVectorToStringListConverter converter;
 
     /**
      * "save" command
@@ -19,7 +17,6 @@ public class SaveCommand implements Command {
      */
     public SaveCommand(Receiver receiver) {
         this.receiver = receiver;
-        this.converter = new VehicleVectorToStringListConverter(receiver.dataSet());
     }
 
     /**
@@ -51,17 +48,11 @@ public class SaveCommand implements Command {
      */
     public void execute(String arg, boolean isCalledByScript) throws IOException {
         prepareFile();
-        converter.setDataSet(receiver.dataSet());
-        List<String> listOfStrings = converter.convertVehicleVectorToStringList();
-        try (FileOutputStream fileOutputStream = new FileOutputStream(receiver.varAddress().toString(), true)) {
-            for (String line : listOfStrings) {
-                byte[] buffer = line.getBytes(StandardCharsets.UTF_8);
-                fileOutputStream.write(buffer, 0, buffer.length);
-                fileOutputStream.write("\n".getBytes(StandardCharsets.UTF_8));
-            }
-        }
+        CSVToVectorConverter converter = new CSVToVectorConverter("FILE");
+        converter.writeToCSV(receiver.dataSet());
         System.out.println("Saved successfully");
     }
 
 }
+
 

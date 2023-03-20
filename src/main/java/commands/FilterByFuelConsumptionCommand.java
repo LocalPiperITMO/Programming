@@ -1,10 +1,10 @@
 package commands;
 
-import datatype.Vehicle;
 import exceptions.NoArgumentException;
+import receivers.SimpleArgumentCommandReceiver;
 
 public class FilterByFuelConsumptionCommand implements Command {
-    private final Receiver receiver;
+    private final SimpleArgumentCommandReceiver receiver;
 
     /**
      * "filter_by_fuel_consumption fuel_consumption" command.
@@ -12,7 +12,7 @@ public class FilterByFuelConsumptionCommand implements Command {
      *
      * @param receiver used for storing the collection
      */
-    public FilterByFuelConsumptionCommand(Receiver receiver) {
+    public FilterByFuelConsumptionCommand(SimpleArgumentCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -28,19 +28,13 @@ public class FilterByFuelConsumptionCommand implements Command {
     /**
      * Executes command
      *
-     * @param argument         command argument
-     * @param isCalledByScript checks if command called from script
+     * @param argument command argument
      * @throws NoArgumentException if command requires argument but none were given
      */
-    public void execute(String argument, boolean isCalledByScript) throws NoArgumentException {
-        if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
+    public void execute(String argument) throws NoArgumentException {
+        if (argument.length() != 0) {
             long fuelConsumption = Long.parseLong(argument);
-            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
-            for (Vehicle vehicle : receiver.dataSet()) {
-                if (fuelConsumption == vehicle.getFuelConsumption()) {
-                    System.out.println(vehicle);
-                }
-            }
+            receiver.filterByFuelConsumption(fuelConsumption);
         } else {
             throw new NoArgumentException();
         }

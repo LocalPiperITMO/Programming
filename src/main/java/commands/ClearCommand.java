@@ -1,9 +1,11 @@
 package commands;
 
+import receivers.CollectionProcessingCommandReceiver;
+
 import java.io.IOException;
 
 public class ClearCommand implements Command {
-    private final Receiver receiver;
+    private final CollectionProcessingCommandReceiver receiver;
 
     /**
      * "clear" command
@@ -11,7 +13,7 @@ public class ClearCommand implements Command {
      *
      * @param receiver used for storing the collection
      */
-    public ClearCommand(Receiver receiver) {
+    public ClearCommand(CollectionProcessingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -28,12 +30,10 @@ public class ClearCommand implements Command {
     /**
      * Executes command
      *
-     * @param arg              command argument
-     * @param isCalledByScript checks if command called from script
+     * @param arg command argument
      * @throws IOException if unexpected error occurs
      */
-    public void execute(String arg, boolean isCalledByScript) throws IOException {
-        receiver.dataSet().removeAllElements();
-        System.out.println("Collection has been emptied");
+    public void execute(String arg) throws IOException {
+        receiver.clear();
     }
 }

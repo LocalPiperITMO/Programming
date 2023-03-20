@@ -1,10 +1,9 @@
 package commands;
 
-import datatype.Vehicle;
-import exceptions.EmptyDatasetException;
+import receivers.DisplayingCommandReceiver;
 
 public class ShowCommand implements Command {
-    private final Receiver receiver;
+    private final DisplayingCommandReceiver receiver;
 
     /**
      * "show" command
@@ -12,7 +11,7 @@ public class ShowCommand implements Command {
      *
      * @param receiver used for storing the collection
      */
-    public ShowCommand(Receiver receiver) {
+    public ShowCommand(DisplayingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -28,20 +27,9 @@ public class ShowCommand implements Command {
     /**
      * Executes command
      *
-     * @param arg              command argument
-     * @param isCalledByScript checks if command called from script
+     * @param arg command argument
      */
-    public void execute(String arg, boolean isCalledByScript) {
-        try {
-            if (receiver.dataSet().size() == 0) {
-                throw new EmptyDatasetException();
-            }
-            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
-            for (Vehicle vehicle : receiver.dataSet()) {
-                System.out.println(vehicle.toString());
-            }
-        } catch (EmptyDatasetException noData) {
-            System.out.println("Dataset is empty: nothing to show");
-        }
+    public void execute(String arg) {
+        receiver.show();
     }
 }

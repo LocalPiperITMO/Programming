@@ -1,45 +1,24 @@
 package commands;
 
-import java.util.HashMap;
-import java.util.Map;
+import receivers.DisplayingCommandReceiver;
 
 public class HelpCommand implements Command {
-    private final HashMap<String, Command> map;
+    private final DisplayingCommandReceiver receiver;
 
-    /**
-     * "help" command
-     * Displays description of every command
-     *
-     * @param map stores commands
-     */
-    public HelpCommand(HashMap<String, Command> map) {
-        this.map = map;
+    public HelpCommand(DisplayingCommandReceiver receiver) {
+        this.receiver = receiver;
     }
 
-    /**
-     * Used for showing information.
-     *
-     * @return information about the command
-     */
     public String showInfo() {
         return "No argument required. Displays this message";
     }
 
     /**
      * Executes command
-     * @param arg              command argument
-     * @param isCalledByScript checks if command called from script
+     *
+     * @param arg command argument
      */
-    public void execute(String arg, boolean isCalledByScript) {
-        System.out.println("""
-                The conventions are as follows:
-                No argument required : after inputting command name one DOES NOT need to input an argument.
-                Required argument - argumentName(argumentType) : after inputting command name press SPACE BAR and then print the value of an argument of the required type
-                User builds an element : after inputting command name and pressing ENTER the user is welcomed by VehicleBuilder
-                                
-                The command names and their descriptions are as follows:""");
-        for (Map.Entry<String, Command> set : map.entrySet()) {
-            System.out.println(set.getKey() + " : " + set.getValue().showInfo());
-        }
+    public void execute(String arg) {
+        receiver.help();
     }
 }

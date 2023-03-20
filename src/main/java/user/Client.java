@@ -1,4 +1,6 @@
-package commands;
+package user;
+
+import collection.CollectionStorage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,10 +13,10 @@ public class Client {
      * Client class
      * Enables communication between user and console.
      *
-     * @param receiver used for storing the collection
+     * @param storage used for storing the collection
      */
-    public Client(Receiver receiver) {
-        this.invoker = new Invoker(receiver);
+    public Client(CollectionStorage storage) {
+        this.invoker = new Invoker(storage);
     }
 
     /**

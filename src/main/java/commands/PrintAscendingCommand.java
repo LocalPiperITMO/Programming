@@ -1,12 +1,9 @@
 package commands;
 
-import datatype.Vehicle;
-import exceptions.EmptyDatasetException;
-
-import java.util.Collections;
+import receivers.SortingCommandReceiver;
 
 public class PrintAscendingCommand implements Command {
-    private final Receiver receiver;
+    private final SortingCommandReceiver receiver;
 
     /**
      * "print_ascending" command
@@ -15,7 +12,7 @@ public class PrintAscendingCommand implements Command {
      *
      * @param receiver used for storing the collection
      */
-    public PrintAscendingCommand(Receiver receiver) {
+    public PrintAscendingCommand(SortingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -31,22 +28,9 @@ public class PrintAscendingCommand implements Command {
     /**
      * Executes command
      *
-     * @param arg              command argument
-     * @param isCalledByScript checks if command called from script
+     * @param arg command argument
      */
-    public void execute(String arg, boolean isCalledByScript) {
-        try {
-            if (receiver.dataSet().size() == 0) {
-                throw new EmptyDatasetException();
-            }
-
-            Collections.sort(receiver.dataSet());
-            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
-            for (Vehicle vehicle : receiver.dataSet()) {
-                System.out.println(vehicle.toString());
-            }
-        } catch (EmptyDatasetException noData) {
-            System.out.println("Dataset is empty: nothing to sort");
-        }
+    public void execute(String arg) {
+        receiver.printAscending();
     }
 }

@@ -1,9 +1,9 @@
 package commands;
 
-import java.time.LocalDate;
+import receivers.DisplayingCommandReceiver;
 
 public class InfoCommand implements Command {
-    private final Receiver receiver;
+    private final DisplayingCommandReceiver receiver;
 
     /**
      * "info" command
@@ -11,7 +11,7 @@ public class InfoCommand implements Command {
      *
      * @param receiver used for storing the collection
      */
-    public InfoCommand(Receiver receiver) {
+    public InfoCommand(DisplayingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -27,11 +27,9 @@ public class InfoCommand implements Command {
     /**
      * Executes command
      *
-     * @param arg              command argument
-     * @param isCalledByScript checks if command called from script
+     * @param arg command argument
      */
-    public void execute(String arg, boolean isCalledByScript) {
-        System.out.println("Dataset type: " + receiver.dataSet().getClass().getName() + "\nDataset creation date: " + LocalDate.now()
-                + "\nDataset number of elements: " + receiver.dataSet().size());
+    public void execute(String arg) {
+        receiver.info();
     }
 }

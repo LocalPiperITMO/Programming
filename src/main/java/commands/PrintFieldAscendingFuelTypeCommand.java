@@ -1,12 +1,9 @@
 package commands;
 
-import datatype.Vehicle;
-import exceptions.EmptyDatasetException;
-
-import java.util.Collections;
+import receivers.SortingCommandReceiver;
 
 public class PrintFieldAscendingFuelTypeCommand implements Command {
-    private final Receiver receiver;
+    private final SortingCommandReceiver receiver;
 
     /**
      * "print_field_ascending_fuel_type" command
@@ -15,7 +12,7 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
      *
      * @param receiver used for storing the collection
      */
-    public PrintFieldAscendingFuelTypeCommand(Receiver receiver) {
+    public PrintFieldAscendingFuelTypeCommand(SortingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -31,31 +28,9 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
     /**
      * Executes command
      *
-     * @param arg              command argument
-     * @param isCalledByScript checks if command called from script
+     * @param arg command argument
      */
-    public void execute(String arg, boolean isCalledByScript) {
-        try {
-            if (receiver.dataSet().size() == 0) {
-                throw new EmptyDatasetException();
-            }
-            int index = 0;
-            do {
-                int current = (receiver.dataSet().get(index).getFuelType() == null) ? 0 : receiver.dataSet().get(index).getFuelType().getPosition();
-                int next = (receiver.dataSet().get(index + 1).getFuelType() == null) ? 0 : receiver.dataSet().get(index + 1).getFuelType().getPosition();
-                if (current > next) {
-                    Collections.swap(receiver.dataSet(), index, index + 1);
-                    index = 0;
-                } else {
-                    ++index;
-                }
-            } while (index != receiver.dataSet().size() - 1);
-            System.out.println("ID FuelType");
-            for (Vehicle vehicle : receiver.dataSet()) {
-                System.out.println(vehicle.getId() + " " + vehicle.getFuelType());
-            }
-        } catch (EmptyDatasetException noData) {
-            System.out.println("Dataset is empty: nothing to sort");
-        }
+    public void execute(String arg) {
+        receiver.printFieldAscendingFuelType();
     }
 }

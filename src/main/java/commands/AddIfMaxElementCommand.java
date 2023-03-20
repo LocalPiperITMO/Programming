@@ -1,14 +1,12 @@
 package commands;
 
-import datatype.Vehicle;
 import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
+import receivers.BuilderCommandReceiver;
 
 import java.io.IOException;
-import java.util.Collections;
 
 public class AddIfMaxElementCommand implements Command {
-    private final Receiver receiver;
-    private final Invoker invoker;
+    private final BuilderCommandReceiver receiver;
 
     /**
      * "add_if_max" command
@@ -17,11 +15,9 @@ public class AddIfMaxElementCommand implements Command {
      * If the created element is greater than the greatest element, it is added to the collection.
      *
      * @param receiver used for storing the collection
-     * @param invoker  used for storing arguments for building (used only via "execute_script" command)
      */
-    public AddIfMaxElementCommand(Receiver receiver, Invoker invoker) {
+    public AddIfMaxElementCommand(BuilderCommandReceiver receiver) {
         this.receiver = receiver;
-        this.invoker = invoker;
     }
 
     /**
@@ -36,33 +32,11 @@ public class AddIfMaxElementCommand implements Command {
     /**
      * Executes command
      *
-     * @param arg              command argument
-     * @param isCalledByScript checks if command called from script
+     * @param arg command argument
      * @throws IOException                                            if unexpected error occurs
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given for building vehicle via script
      */
-    public void execute(String arg, boolean isCalledByScript) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
-        Vehicle vehicle;
-        if (isCalledByScript) {
-            vehicle = buildVehicleViaScript(invoker.getListOfArgumentsForBuildingViaScript());
-        } else {
-            vehicle = buildVehicleViaUserInput((new Vehicle()));
-        }
-        vehicle.setId(receiver.idGenerator().generateRandomID());
-        int index = 0;
-        do {
-            if (receiver.dataSet().get(index).getSum() > receiver.dataSet().get(index + 1).getSum()) {
-                Collections.swap(receiver.dataSet(), index, index + 1);
-                index = 0;
-            } else {
-                ++index;
-            }
-        } while (index != receiver.dataSet().size() - 1);
-        if (vehicle.compareTo(receiver.dataSet().lastElement()) > 0) {
-            receiver.dataSet().add(vehicle);
-            System.out.println("New element added successfully");
-        } else {
-            System.out.println("New element has not been added: element with ID " + receiver.dataSet().lastElement().getId() + " is greater");
-        }
+    public void execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
+        receiver.addIfMax();
     }
 }

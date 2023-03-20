@@ -1,12 +1,12 @@
 package commands;
 
-import datatype.Vehicle;
 import exceptions.NoArgumentException;
+import receivers.SimpleArgumentCommandReceiver;
 
 import java.io.IOException;
 
 public class RemoveByIDCommand implements Command {
-    private final Receiver receiver;
+    private final SimpleArgumentCommandReceiver receiver;
 
     /**
      * "remove_by_id id" command
@@ -14,7 +14,7 @@ public class RemoveByIDCommand implements Command {
      *
      * @param receiver used for storing the collection
      */
-    public RemoveByIDCommand(Receiver receiver) {
+    public RemoveByIDCommand(SimpleArgumentCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -30,26 +30,14 @@ public class RemoveByIDCommand implements Command {
     /**
      * Executes command
      *
-     * @param argument         command argument
-     * @param isCalledByScript checks if command called from script
+     * @param argument command argument
      * @throws IOException         if unexpected error occurs
      * @throws NoArgumentException if command requires argument, but none were given
      */
-    public void execute(String argument, boolean isCalledByScript) throws IOException, NoArgumentException {
-        if (checkIfUserInputMatchesRequiredArgument(argument, true)) {
+    public void execute(String argument) throws IOException, NoArgumentException {
+        if (argument.length() != 0) {
             int id = Integer.parseInt(argument);
-            boolean isFound = false;
-            for (Vehicle vehicle : receiver.dataSet()) {
-                isFound = (vehicle.getId() == id);
-                if (isFound) {
-                    receiver.dataSet().remove(vehicle);
-                    System.out.println("Object deleted successfully");
-                    break;
-                }
-            }
-            if (!isFound) {
-                System.out.println("There is no object by this ID.");
-            }
+            receiver.removeByID(id);
         } else {
             throw new NoArgumentException();
         }

@@ -1,0 +1,93 @@
+package user;
+
+
+import collection.CollectionStorage;
+import commands.*;
+import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
+import exceptions.InvalidCommandNameException;
+import exceptions.NoArgumentException;
+import receivers.*;
+
+import java.io.IOException;
+import java.util.HashMap;
+
+public class Invoker {
+    private final HashMap<String, Command> commandHashMap;
+    private String argument;
+    private String commandName;
+
+    private final BuilderCommandReceiver builderCommandReceiver;
+
+    /**
+     * Invoker class
+     * Used for processing user inputs and sending commands
+     * Stores commandHashMap used for accessing commands
+     *
+     * @param storage used for storing the collection
+     */
+    public Invoker(CollectionStorage storage) {
+        this.commandHashMap = new HashMap<>();
+        DisplayingCommandReceiver displayingCommandReceiver = new DisplayingCommandReceiver(storage, this);
+        SortingCommandReceiver sortingCommandReceiver = new SortingCommandReceiver(storage);
+        CollectionProcessingCommandReceiver collectionProcessingCommandReceiver = new CollectionProcessingCommandReceiver(storage);
+        SimpleArgumentCommandReceiver simpleArgumentCommandReceiver = new SimpleArgumentCommandReceiver(storage);
+        this.builderCommandReceiver = new BuilderCommandReceiver(storage);
+        ExecuteScriptCommandReceiver executeScriptCommandReceiver = new ExecuteScriptCommandReceiver(builderCommandReceiver, this);
+        commandHashMap.put("help", new HelpCommand(displayingCommandReceiver));
+        commandHashMap.put("info", new InfoCommand(displayingCommandReceiver));
+        commandHashMap.put("show", new ShowCommand(displayingCommandReceiver));
+        commandHashMap.put("add", new AddElementCommand(builderCommandReceiver));
+        commandHashMap.put("update", new UpdateElementCommand(builderCommandReceiver));
+        commandHashMap.put("remove_by_id", new RemoveByIDCommand(simpleArgumentCommandReceiver));
+        commandHashMap.put("clear", new ClearCommand(collectionProcessingCommandReceiver));
+        commandHashMap.put("save", new SaveCommand(collectionProcessingCommandReceiver));
+        commandHashMap.put("execute_script", new ExecuteScriptCommand(executeScriptCommandReceiver));
+        commandHashMap.put("add_if_max", new AddIfMaxElementCommand(builderCommandReceiver));
+        commandHashMap.put("remove_greater", new RemoveGreaterElementsCommand(builderCommandReceiver));
+        commandHashMap.put("reorder", new ReorderCommand(sortingCommandReceiver));
+        commandHashMap.put("filter_by_fuel_consumption", new FilterByFuelConsumptionCommand(simpleArgumentCommandReceiver));
+        commandHashMap.put("print_ascending", new PrintAscendingCommand(sortingCommandReceiver));
+        commandHashMap.put("print_field_ascending_fuel_type", new PrintFieldAscendingFuelTypeCommand(sortingCommandReceiver));
+    }
+
+    public HashMap<String, Command> getCommandHashMap() {
+        return commandHashMap;
+    }
+
+    /**
+     * Gets user input, preprocesses it, gets the command name and calls the command if it matches user input.
+     *
+     * @param userInput whatever user writes
+     */
+    public void getRequestFromUser(String userInput) {
+        try {
+            // filtering user request, getting command name and arguments, executing the command
+            argument = "";
+            String[] userInputArray = userInput.trim().split(" ", 2);
+            commandName = userInputArray[0];
+            if (userInputArray.length == 2) {
+                argument = userInputArray[1];
+            }
+            if (commandHashMap.get(commandName) != null) {
+                commandHashMap.get(commandName).execute(argument);
+            } else {
+                throw new InvalidCommandNameException();
+            }
+            System.out.println();
+        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+            System.out.println("Empty request. Try again");
+        } catch (NoArgumentException e) {
+            System.out.println(commandName + " requires an argument: none were given");
+        } catch (NumberFormatException e) {
+            System.out.println(commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given");
+        } catch (InvalidCommandNameException e) {
+            System.out.println("There is no command named \"" + commandName + "\". Try again");
+        } catch (IOException e) {
+            System.out.println("Error!");
+        } catch (InvalidArgumentsWhileVehicleBuildingViaScriptException e) {
+            System.out.println("An error occurred when building vehicle via script");
+            builderCommandReceiver.setScriptMode(false);
+
+        }
+    }
+}

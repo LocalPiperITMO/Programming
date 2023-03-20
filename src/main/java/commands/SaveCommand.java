@@ -1,13 +1,11 @@
 package commands;
 
-import converters.CSVToVectorConverter;
+import receivers.CollectionProcessingCommandReceiver;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 public class SaveCommand implements Command {
-    private final Receiver receiver;
+    private final CollectionProcessingCommandReceiver receiver;
 
     /**
      * "save" command
@@ -15,7 +13,7 @@ public class SaveCommand implements Command {
      *
      * @param receiver used for storing both the collection and the path to file
      */
-    public SaveCommand(Receiver receiver) {
+    public SaveCommand(CollectionProcessingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -29,28 +27,13 @@ public class SaveCommand implements Command {
     }
 
     /**
-     * Used for cleaning the file in order to save to it
-     *
-     * @throws IOException if unexpected error occurs
-     */
-    private void prepareFile() throws IOException {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(receiver.varAddress().toString(), false)) {
-            fileOutputStream.write("".getBytes(StandardCharsets.UTF_8));
-        }
-    }
-
-    /**
      * Executes command
      *
-     * @param arg              command argument
-     * @param isCalledByScript checks if command called from script
+     * @param arg command argument
      * @throws IOException if unexpected error occurs
      */
-    public void execute(String arg, boolean isCalledByScript) throws IOException {
-        prepareFile();
-        CSVToVectorConverter converter = new CSVToVectorConverter("FILE");
-        converter.writeToCSV(receiver.dataSet());
-        System.out.println("Saved successfully");
+    public void execute(String arg) throws IOException {
+        receiver.save();
     }
 
 }

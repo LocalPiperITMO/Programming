@@ -18,7 +18,7 @@ public class HelpCommand implements Command {
      *
      * @param arg command argument
      */
-    public void execute(String arg) {
-        receiver.help();
+    public String execute(String arg) {
+        return receiver.help();
     }
 }

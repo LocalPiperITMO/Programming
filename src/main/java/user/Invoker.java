@@ -15,7 +15,7 @@ public class Invoker {
     private final HashMap<String, Command> commandHashMap;
     private String argument;
     private String commandName;
-
+    private final TextReceiver textReceiver;
     private final BuilderCommandReceiver builderCommandReceiver;
 
     /**
@@ -31,6 +31,7 @@ public class Invoker {
         SortingCommandReceiver sortingCommandReceiver = new SortingCommandReceiver(storage);
         CollectionProcessingCommandReceiver collectionProcessingCommandReceiver = new CollectionProcessingCommandReceiver(storage);
         SimpleArgumentCommandReceiver simpleArgumentCommandReceiver = new SimpleArgumentCommandReceiver(storage);
+        this.textReceiver = new TextReceiver();
         this.builderCommandReceiver = new BuilderCommandReceiver(storage);
         ExecuteScriptCommandReceiver executeScriptCommandReceiver = new ExecuteScriptCommandReceiver(builderCommandReceiver, this);
         commandHashMap.put("help", new HelpCommand(displayingCommandReceiver));
@@ -69,23 +70,23 @@ public class Invoker {
                 argument = userInputArray[1];
             }
             if (commandHashMap.get(commandName) != null) {
-                commandHashMap.get(commandName).execute(argument);
+                textReceiver.printReport(commandHashMap.get(commandName).execute(argument));
             } else {
                 throw new InvalidCommandNameException();
             }
             System.out.println();
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-            System.out.println("Empty request. Try again");
+            textReceiver.printReport("Empty request. Try again");
         } catch (NoArgumentException e) {
-            System.out.println(commandName + " requires an argument: none were given");
+            textReceiver.printReport(commandName + " requires an argument: none were given");
         } catch (NumberFormatException e) {
-            System.out.println(commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given");
+            textReceiver.printReport(commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given");
         } catch (InvalidCommandNameException e) {
-            System.out.println("There is no command named \"" + commandName + "\". Try again");
+            textReceiver.printReport("There is no command named \"" + commandName + "\". Try again");
         } catch (IOException e) {
-            System.out.println("Error!");
+            textReceiver.printReport("Error!");
         } catch (InvalidArgumentsWhileVehicleBuildingViaScriptException e) {
-            System.out.println("An error occurred when building vehicle via script");
+            textReceiver.printReport("An error occurred when building vehicle via script");
             builderCommandReceiver.setScriptMode(false);
 
         }

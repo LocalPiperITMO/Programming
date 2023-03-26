@@ -30,7 +30,7 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
      *
      * @param arg command argument
      */
-    public void execute(String arg) {
-        receiver.printFieldAscendingFuelType();
+    public String execute(String arg) {
+        return receiver.printFieldAscendingFuelType();
     }
 }

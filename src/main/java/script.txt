@@ -1,4 +1,6 @@
 info
 execute_script src/main/java/newscript.txt
 print_field_ascending_fuel_type
+execute_script src/main/java/newscript.txt
+save
 exit

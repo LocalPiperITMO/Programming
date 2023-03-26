@@ -30,7 +30,7 @@ public class PrintAscendingCommand implements Command {
      *
      * @param arg command argument
      */
-    public void execute(String arg) {
-        receiver.printAscending();
+    public String execute(String arg) {
+        return receiver.printAscending();
     }
 }

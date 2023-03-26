@@ -13,23 +13,24 @@ public class SortingCommandReceiver {
         this.storage = storage;
     }
 
-    public void printAscending() {
+    public String printAscending() {
         try {
             if (storage.getDataSet().size() == 0) {
                 throw new EmptyDatasetException();
             }
 
             Collections.sort(storage.getDataSet());
-            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
+            StringBuilder report = new StringBuilder("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
             for (Vehicle vehicle : storage.getDataSet()) {
-                System.out.println(vehicle.toString());
+                report.append(vehicle.toString()).append("\n");
             }
+            return String.valueOf(report);
         } catch (EmptyDatasetException noData) {
-            System.out.println("Dataset is empty: nothing to sort");
+            return "Dataset is empty: nothing to sort";
         }
     }
 
-    public void printFieldAscendingFuelType() {
+    public String printFieldAscendingFuelType() {
         try {
             if (storage.getDataSet().size() == 0) {
                 throw new EmptyDatasetException();
@@ -45,28 +46,29 @@ public class SortingCommandReceiver {
                     ++index;
                 }
             } while (index != storage.getDataSet().size() - 1);
-            System.out.println("ID FuelType");
+            StringBuilder report = new StringBuilder("ID FuelType\n");
             for (Vehicle vehicle : storage.getDataSet()) {
-                System.out.println(vehicle.getId() + " " + vehicle.getFuelType());
+                report.append(vehicle.getId()).append(" ").append(vehicle.getFuelType()).append("\n");
             }
-        } catch (
-                EmptyDatasetException noData) {
-            System.out.println("Dataset is empty: nothing to sort");
+            return String.valueOf(report);
+        } catch (EmptyDatasetException noData) {
+            return "Dataset is empty: nothing to sort";
         }
     }
 
-    public void reorder() {
+    public String reorder() {
         try {
             if (storage.getDataSet().size() == 0) {
                 throw new EmptyDatasetException();
             }
             Collections.reverse(storage.getDataSet());
-            System.out.println("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
+            StringBuilder report = new StringBuilder("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType\n");
             for (Vehicle vehicle : storage.getDataSet()) {
-                System.out.println(vehicle.toString());
+                report.append(vehicle.toString()).append("\n");
             }
+            return String.valueOf(report);
         } catch (EmptyDatasetException noData) {
-            System.out.println("Dataset is empty: nothing to sort");
+            return "Dataset is empty: nothing to sort";
         }
     }
 }

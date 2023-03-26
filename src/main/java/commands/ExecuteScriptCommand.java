@@ -33,8 +33,7 @@ public class ExecuteScriptCommand implements Command {
      * @throws IOException         if unexpected error occurs
      * @throws NoArgumentException if command requires argument but none were given
      */
-    public void execute(String fileName) throws IOException, NoArgumentException {
-        // execute_script src/main/java/script.txt
-        receiver.executeScript(fileName);
+    public String execute(String fileName) throws IOException, NoArgumentException {
+        return receiver.executeScript(fileName);
     }
 }

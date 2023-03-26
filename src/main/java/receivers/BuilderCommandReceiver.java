@@ -124,7 +124,7 @@ public class BuilderCommandReceiver {
         }
     }
 
-    public void addVehicle() throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
+    public String addVehicle() throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
         Vehicle vehicle;
         if (scriptMode) {
             vehicle = buildVehicleViaScript(arguments);
@@ -133,10 +133,10 @@ public class BuilderCommandReceiver {
         }
         vehicle.setId(storage.getIdGenerator().generateRandomID());
         storage.getDataSet().add(vehicle);
-        System.out.println("Vehicle added successfully!");
+        return "Vehicle added successfully!";
     }
 
-    public void addIfMax() throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
+    public String addIfMax() throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
         Vehicle vehicle;
         if (scriptMode) {
             vehicle = buildVehicleViaScript(arguments);
@@ -155,13 +155,12 @@ public class BuilderCommandReceiver {
         } while (index != storage.getDataSet().size() - 1);
         if (vehicle.compareTo(storage.getDataSet().lastElement()) > 0) {
             storage.getDataSet().add(vehicle);
-            System.out.println("New element added successfully");
-        } else {
-            System.out.println("New element has not been added: element with ID " + storage.getDataSet().lastElement().getId() + " is greater");
+            return "New element added successfully";
         }
+        return "New element has not been added: element with ID " + storage.getDataSet().lastElement().getId() + " is greater";
     }
 
-    public void removeGreater() throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
+    public String removeGreater() throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
         Vehicle vehicle;
         if (scriptMode) {
             vehicle = buildVehicleViaScript(arguments);
@@ -170,10 +169,10 @@ public class BuilderCommandReceiver {
         }
         vehicle.setId(storage.getIdGenerator().generateRandomID());
         storage.getDataSet().removeIf(vehicleToCompare -> vehicleToCompare.getSum() > vehicle.getSum());
-        System.out.println("Done");
+        return "Greater elements removed successfully";
     }
 
-    public void update(int id) throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
+    public String update(int id) throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
         boolean isFound = false;
         Vehicle vehicle = new Vehicle();
         for (Vehicle vehicleToFind : storage.getDataSet()) {
@@ -184,16 +183,13 @@ public class BuilderCommandReceiver {
             }
         }
         if (!isFound) {
-            System.out.println("Element with given ID does not exist");
-        } else {
-            if (scriptMode) {
-                vehicle = buildVehicleViaScript(arguments);
-            } else {
-                buildVehicleViaUserInput(vehicle);
-            }
-            System.out.println("Vehicle by ID " + vehicle.getId() + " updated successfully");
-
+            return "Element with given ID does not exist";
         }
+        if (scriptMode) {
+            vehicle = buildVehicleViaScript(arguments);
+        } else {
+            buildVehicleViaUserInput(vehicle);
+        }
+        return "Vehicle by ID " + vehicle.getId() + " updated successfully";
     }
-
 }

@@ -32,8 +32,8 @@ public class SaveCommand implements Command {
      * @param arg command argument
      * @throws IOException if unexpected error occurs
      */
-    public void execute(String arg) throws IOException {
-        receiver.save();
+    public String execute(String arg) throws IOException {
+        return receiver.save();
     }
 
 }

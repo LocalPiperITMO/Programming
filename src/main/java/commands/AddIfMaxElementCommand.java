@@ -36,7 +36,7 @@ public class AddIfMaxElementCommand implements Command {
      * @throws IOException                                            if unexpected error occurs
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given for building vehicle via script
      */
-    public void execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
-        receiver.addIfMax();
+    public String execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
+        return receiver.addIfMax();
     }
 }

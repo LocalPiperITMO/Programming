@@ -38,10 +38,10 @@ public class UpdateElementCommand implements Command {
      * @throws NoArgumentException                                    if command requires argument, but none were given
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given for building vehicle via script
      */
-    public void execute(String argument) throws IOException, NoArgumentException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
+    public String execute(String argument) throws IOException, NoArgumentException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
         if (argument.length() != 0) {
             int id = Integer.parseInt(argument);
-            receiver.update(id);
+            return receiver.update(id);
         } else {
             throw new NoArgumentException();
         }

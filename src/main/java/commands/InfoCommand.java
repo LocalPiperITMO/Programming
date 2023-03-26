@@ -29,7 +29,7 @@ public class InfoCommand implements Command {
      *
      * @param arg command argument
      */
-    public void execute(String arg) {
-        receiver.info();
+    public String execute(String arg) {
+        return receiver.info();
     }
 }

@@ -21,5 +21,5 @@ public interface Command {
      * @throws NoArgumentException                                    if command requires argument but none were given
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given for building vehicle via script
      */
-    void execute(String arg) throws IOException, NoArgumentException, InvalidArgumentsWhileVehicleBuildingViaScriptException;
+    String execute(String arg) throws IOException, NoArgumentException, InvalidArgumentsWhileVehicleBuildingViaScriptException;
 }

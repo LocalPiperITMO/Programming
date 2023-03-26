@@ -33,7 +33,7 @@ public class AddElementCommand implements Command {
      * @throws IOException                                            if unexpected error occurs
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given for building vehicle via script
      */
-    public void execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
-        receiver.addVehicle();
+    public String execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
+        return receiver.addVehicle();
     }
 }

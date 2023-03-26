@@ -29,7 +29,7 @@ public class ReorderCommand implements Command {
      *
      * @param arg command argument
      */
-    public void execute(String arg) {
-        receiver.reorder();
+    public String execute(String arg) {
+        return receiver.reorder();
     }
 }

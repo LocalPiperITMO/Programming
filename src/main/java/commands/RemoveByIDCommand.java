@@ -34,10 +34,10 @@ public class RemoveByIDCommand implements Command {
      * @throws IOException         if unexpected error occurs
      * @throws NoArgumentException if command requires argument, but none were given
      */
-    public void execute(String argument) throws IOException, NoArgumentException {
+    public String execute(String argument) throws IOException, NoArgumentException {
         if (argument.length() != 0) {
             int id = Integer.parseInt(argument);
-            receiver.removeByID(id);
+            return receiver.removeByID(id);
         } else {
             throw new NoArgumentException();
         }

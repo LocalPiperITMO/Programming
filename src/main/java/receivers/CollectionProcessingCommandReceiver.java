@@ -14,16 +14,16 @@ public class CollectionProcessingCommandReceiver {
         this.storage = storage;
     }
 
-    public void clear() {
+    public String clear() {
         storage.getDataSet().removeAllElements();
-        System.out.println("Collection has been emptied");
+        return "Collection has been emptied";
     }
 
-    public void save() throws IOException {
+    public String save() throws IOException {
         prepareFile();
         CSVToVectorConverter converter = new CSVToVectorConverter("FILE");
         converter.writeToCSV(storage.getDataSet());
-        System.out.println("Saved successfully");
+        return "Saved successfully";
     }
 
     private void prepareFile() throws IOException {

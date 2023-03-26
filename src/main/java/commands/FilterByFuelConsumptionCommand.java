@@ -31,10 +31,10 @@ public class FilterByFuelConsumptionCommand implements Command {
      * @param argument command argument
      * @throws NoArgumentException if command requires argument but none were given
      */
-    public void execute(String argument) throws NoArgumentException {
+    public String execute(String argument) throws NoArgumentException {
         if (argument.length() != 0) {
             long fuelConsumption = Long.parseLong(argument);
-            receiver.filterByFuelConsumption(fuelConsumption);
+            return receiver.filterByFuelConsumption(fuelConsumption);
         } else {
             throw new NoArgumentException();
         }

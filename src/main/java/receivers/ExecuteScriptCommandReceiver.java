@@ -1,7 +1,7 @@
 package receivers;
 
-import user.Invoker;
 import exceptions.RecursionException;
+import user.Invoker;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,13 +11,14 @@ import java.util.*;
 
 public class ExecuteScriptCommandReceiver {
     private final BuilderCommandReceiver builderCommandReceiver;
+    private final TextReceiver textReceiver;
     private final Invoker invoker;
     private final List<String> complexCommandNames = new ArrayList<>();
-
     private final Set<String> setOfScriptPaths;
 
     public ExecuteScriptCommandReceiver(BuilderCommandReceiver builderCommandReceiver, Invoker invoker) {
         this.builderCommandReceiver = builderCommandReceiver;
+        this.textReceiver = new TextReceiver();
         this.invoker = invoker;
         this.setOfScriptPaths = new HashSet<>();
         this.complexCommandNames.add("add");
@@ -26,9 +27,9 @@ public class ExecuteScriptCommandReceiver {
         this.complexCommandNames.add("update");
     }
 
-    public void executeScript(String fileName) {
+    public String executeScript(String fileName) {
         String commandName;
-
+        // execute_script src/main/java/script.txt
         File script = new File(fileName);
         setOfScriptPaths.add(script.getAbsolutePath());
         try (BufferedReader reader = new BufferedReader(new FileReader(script))) {
@@ -52,6 +53,7 @@ public class ExecuteScriptCommandReceiver {
                 } else if (Objects.equals(commandName, "execute_script")) {
                     File nextScript = new File(command.split(" ")[1]);
                     if (setOfScriptPaths.contains(nextScript.getAbsolutePath())) {
+                        setOfScriptPaths.remove(script.getAbsolutePath());
                         throw new RecursionException();
                     }
                 } else if (complexCommandNames.contains(commandName)) {
@@ -63,16 +65,18 @@ public class ExecuteScriptCommandReceiver {
                 }
                 invoker.getRequestFromUser(command);
             }
+            setOfScriptPaths.remove(script.getAbsolutePath());
             builderCommandReceiver.setScriptMode(false);
         } catch (IOException e) {
-            System.out.println("Error!");
+            textReceiver.printReport("Error!");
             builderCommandReceiver.setScriptMode(false);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error while building vehicle. Rewrite your script");
+            textReceiver.printReport("Error while building vehicle. Rewrite your script");
             builderCommandReceiver.setScriptMode(false);
         } catch (RecursionException e) {
-            System.out.println("Recursion avoided. Rewrite your script(s)");
+            textReceiver.printReport("Recursion avoided. Rewrite your script(s)");
             builderCommandReceiver.setScriptMode(false);
         }
+        return "Script " + fileName + " executed successfully";
     }
 }

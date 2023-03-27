@@ -60,11 +60,11 @@ public class Invoker {
      *
      * @param userInput whatever user writes
      */
-    public void getRequestFromUser(String userInput) {
+    public void readUserRequest(String userInput) {
         try {
             // filtering user request, getting command name and arguments, executing the command
             argument = "";
-            String[] userInputArray = userInput.trim().split(" ", 2);
+            String[] userInputArray = userInput.split(" ", 2);
             commandName = userInputArray[0];
             if (userInputArray.length == 2) {
                 argument = userInputArray[1];
@@ -74,7 +74,6 @@ public class Invoker {
             } else {
                 throw new InvalidCommandNameException();
             }
-            System.out.println();
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
             textReceiver.printReport("Empty request. Try again");
         } catch (NoArgumentException e) {

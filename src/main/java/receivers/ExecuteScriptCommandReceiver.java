@@ -63,7 +63,7 @@ public class ExecuteScriptCommandReceiver {
                     }
                     builderCommandReceiver.setArguments(arguments);
                 }
-                invoker.getRequestFromUser(command);
+                invoker.readUserRequest(command);
             }
             setOfScriptPaths.remove(script.getAbsolutePath());
             builderCommandReceiver.setScriptMode(false);

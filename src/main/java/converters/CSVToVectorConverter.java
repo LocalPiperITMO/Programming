@@ -7,9 +7,9 @@ import datatype.Vehicle;
 import exceptions.LessOrEqualToZeroException;
 import exceptions.NoArgumentException;
 import generators.IDGenerator;
+import receivers.TextReceiver;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,16 +17,14 @@ import java.util.Vector;
 
 public class CSVToVectorConverter {
     private final String fileName;
-    private Path varPath;
+    private final TextReceiver textReceiver;
     private final IDGenerator idGenerator = new IDGenerator();
 
     public CSVToVectorConverter(String fileName) {
         this.fileName = fileName;
+        this.textReceiver = new TextReceiver();
     }
 
-    public Path getVarPath() {
-        return varPath;
-    }
 
     public IDGenerator getIdGenerator() {
         return idGenerator;
@@ -66,7 +64,6 @@ public class CSVToVectorConverter {
     private Optional<File> openFileWithPathFromEnv(String fileName) {
         String path = System.getenv(fileName);
         if (path != null) {
-            varPath = Path.of(path);
             return Optional.of(new File(path));
         } else {
             return Optional.empty();
@@ -93,28 +90,28 @@ public class CSVToVectorConverter {
                             .setId(idGenerator.generateRandomID());
                     dataSet.add(vehicle);
                 } else {
-                    System.out.println("Line " + lineCounter + " has incorrect number of arguments. Vehicle creation failed");
+                    textReceiver.printReport("Line " + lineCounter + " has incorrect number of arguments. Vehicle creation failed");
                     ++corruptedLines;
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println("Line " + lineCounter + " has a string value instead of numeric one. Vehicle creation failed");
+                textReceiver.printReport("Line " + lineCounter + " has a string value instead of numeric one. Vehicle creation failed");
                 ++corruptedLines;
             } catch (NullPointerException npe) {
-                System.out.println("Line " + lineCounter + " has an illegal null value. Vehicle creation failed");
+                textReceiver.printReport("Line " + lineCounter + " has an illegal null value. Vehicle creation failed");
                 ++corruptedLines;
             } catch (IllegalArgumentException iae) {
-                System.out.println("Line " + lineCounter + " has an illegal VehicleType/FuelType value. Vehicle creation failed");
+                textReceiver.printReport("Line " + lineCounter + " has an illegal VehicleType/FuelType value. Vehicle creation failed");
                 ++corruptedLines;
             } catch (NoArgumentException e) {
-                System.out.println("Line " + lineCounter + " has no argument. Vehicle creation failed");
+                textReceiver.printReport("Line " + lineCounter + " has no argument. Vehicle creation failed");
                 ++corruptedLines;
             } catch (LessOrEqualToZeroException e) {
-                System.out.println("Line " + lineCounter + " has an argument that is less or equal to zero. Vehicle creation failed");
+                textReceiver.printReport("Line " + lineCounter + " has an argument that is less or equal to zero. Vehicle creation failed");
                 ++corruptedLines;
             }
 
         }
-        System.out.println("Dataset is ready for use. Number of corrupted lines: " + corruptedLines);
+        textReceiver.printReport("Dataset is ready for use. Number of corrupted lines: " + corruptedLines);
         return dataSet;
     }
 

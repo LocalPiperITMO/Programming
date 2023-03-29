@@ -131,28 +131,28 @@ public class CSVToVectorConverter {
                             .setId(idGenerator.generateRandomID());
                     dataSet.add(vehicle);
                 } else {
-                    textReceiver.printReport("Line " + lineCounter + " has incorrect number of arguments. Vehicle creation failed");
+                    textReceiver.print("Line " + lineCounter + " has incorrect number of arguments. Vehicle creation failed");
                     ++corruptedLines;
                 }
             } catch (NumberFormatException nfe) {
-                textReceiver.printReport("Line " + lineCounter + " has a string value instead of numeric one. Vehicle creation failed");
+                textReceiver.print("Line " + lineCounter + " has a string value instead of numeric one. Vehicle creation failed");
                 ++corruptedLines;
             } catch (NullPointerException npe) {
-                textReceiver.printReport("Line " + lineCounter + " has an illegal null value. Vehicle creation failed");
+                textReceiver.print("Line " + lineCounter + " has an illegal null value. Vehicle creation failed");
                 ++corruptedLines;
             } catch (IllegalArgumentException iae) {
-                textReceiver.printReport("Line " + lineCounter + " has an illegal VehicleType/FuelType value. Vehicle creation failed");
+                textReceiver.print("Line " + lineCounter + " has an illegal VehicleType/FuelType value. Vehicle creation failed");
                 ++corruptedLines;
             } catch (NoArgumentException e) {
-                textReceiver.printReport("Line " + lineCounter + " has no argument. Vehicle creation failed");
+                textReceiver.print("Line " + lineCounter + " has no argument. Vehicle creation failed");
                 ++corruptedLines;
             } catch (LessOrEqualToZeroException e) {
-                textReceiver.printReport("Line " + lineCounter + " has an argument that is less or equal to zero. Vehicle creation failed");
+                textReceiver.print("Line " + lineCounter + " has an argument that is less or equal to zero. Vehicle creation failed");
                 ++corruptedLines;
             }
 
         }
-        textReceiver.printReport("Dataset is ready for use. Number of corrupted lines: " + corruptedLines);
+        textReceiver.print("Dataset is ready for use. Number of corrupted lines: " + corruptedLines);
         return dataSet;
     }
 

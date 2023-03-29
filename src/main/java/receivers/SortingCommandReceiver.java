@@ -30,7 +30,7 @@ public class SortingCommandReceiver {
             }
 
             Collections.sort(storage.getDataSet());
-            StringBuilder report = new StringBuilder("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType");
+            StringBuilder report = new StringBuilder("ID Name CreationDate X Y EnginePower FuelConsumption Type FuelType\n");
             for (Vehicle vehicle : storage.getDataSet()) {
                 report.append(vehicle.toString()).append("\n");
             }

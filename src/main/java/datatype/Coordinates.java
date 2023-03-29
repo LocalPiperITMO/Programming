@@ -36,6 +36,9 @@ public class Coordinates {
      */
     public Coordinates setX(String arg) {
         this.x = Float.parseFloat(arg.trim());
+        if (this.x<-2000000000 || this.x>2000000000){
+            throw new NumberFormatException();
+        }
         return this;
     }
     /**
@@ -46,6 +49,9 @@ public class Coordinates {
      */
     public Coordinates setY(String arg) {
         this.y = Integer.parseInt(arg.trim());
+        if (this.x<-2000000000 || this.x>2000000000){
+            throw new NumberFormatException();
+        }
         return this;
     }
 }

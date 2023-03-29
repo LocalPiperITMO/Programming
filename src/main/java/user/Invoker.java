@@ -10,6 +10,7 @@ import receivers.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+
 /**
  * Invoker class
  * Used for processing user inputs and sending commands
@@ -86,22 +87,22 @@ public class Invoker {
                 argument = userInputArray[1];
             }
             if (commandHashMap.get(commandName) != null) {
-                textReceiver.printReport(commandHashMap.get(commandName).execute(argument));
+                textReceiver.print(commandHashMap.get(commandName).execute(argument));
             } else {
                 throw new InvalidCommandNameException();
             }
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-            textReceiver.printReport("Empty request. Try again");
+            textReceiver.print("Empty request. Try again");
         } catch (NoArgumentException e) {
-            textReceiver.printReport(commandName + " requires an argument: none were given");
+            textReceiver.print(commandName + " requires an argument: none were given");
         } catch (NumberFormatException e) {
-            textReceiver.printReport(commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given");
+            textReceiver.print(commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given");
         } catch (InvalidCommandNameException e) {
-            textReceiver.printReport("There is no command named \"" + commandName + "\". Try again");
+            textReceiver.print("There is no command named \"" + commandName + "\". Try again");
         } catch (IOException e) {
-            textReceiver.printReport("Error!");
+            textReceiver.print("Error!");
         } catch (InvalidArgumentsWhileVehicleBuildingViaScriptException e) {
-            textReceiver.printReport("An error occurred when building vehicle via script");
+            textReceiver.print("An error occurred when building vehicle via script");
             builderCommandReceiver.setScriptMode(false);
 
         }

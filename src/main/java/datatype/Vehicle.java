@@ -47,21 +47,13 @@ public class Vehicle implements Comparable<Vehicle> {
     /**
      * ID is set by IDGenerator
      * Used for chaining
+     *
      * @param id new ID
      * @return this instance of Vehicle
      */
     public Vehicle setId(int id) {
         this.id = id;
         return this;
-    }
-
-    /**
-     * Used for getting sum of integer arguments (sum is used to compare elements)
-     *
-     * @return sum of integer arguments
-     */
-    public long getSum() {
-        return (long) (getCoordinates().getX() + getCoordinates().getY() + getEnginePower() + getFuelConsumption());
     }
 
     /**
@@ -74,6 +66,7 @@ public class Vehicle implements Comparable<Vehicle> {
     /**
      * Sets new enginePower. Returns Vehicle
      * Used for chaining
+     *
      * @param arg new enginePower
      * @return this instance of Vehicle
      * @throws LessOrEqualToZeroException if argument is less or equal to zero
@@ -82,14 +75,18 @@ public class Vehicle implements Comparable<Vehicle> {
         long rawEnginePower = Long.parseLong(arg.trim());
         if (rawEnginePower <= 0) {
             throw new LessOrEqualToZeroException();
-        } else {
-            this.enginePower = rawEnginePower;
-            return this;
+        } else if (rawEnginePower > Long.parseLong("4000000000")) {
+            throw new NumberFormatException();
         }
+        this.enginePower = rawEnginePower;
+        return this;
     }
+
+
     /**
      * Sets new fuelConsumption. Returns Vehicle
      * Used for chaining
+     *
      * @param arg new fuelConsumption
      * @return this instance of Vehicle
      * @throws LessOrEqualToZeroException if argument is less or equal to zero
@@ -98,6 +95,8 @@ public class Vehicle implements Comparable<Vehicle> {
         long rawFuelConsumption = Long.parseLong(arg.trim());
         if (rawFuelConsumption <= 0) {
             throw new LessOrEqualToZeroException();
+        } else if (rawFuelConsumption > Long.parseLong("4000000000")) {
+            throw new NumberFormatException();
         } else {
             this.fuelConsumption = rawFuelConsumption;
             return this;
@@ -107,6 +106,7 @@ public class Vehicle implements Comparable<Vehicle> {
     /**
      * Sets new fuelType. Returns Vehicle
      * Used for chaining
+     *
      * @param arg new fuelType
      * @return this instance of Vehicle
      */
@@ -118,9 +118,11 @@ public class Vehicle implements Comparable<Vehicle> {
         }
         return this;
     }
+
     /**
      * Sets new name. Returns Vehicle
      * Used for chaining
+     *
      * @param arg new name
      * @return this instance of Vehicle
      */
@@ -132,9 +134,11 @@ public class Vehicle implements Comparable<Vehicle> {
             return this;
         }
     }
+
     /**
      * Sets new vehicleType. Returns Vehicle
      * Used for chaining
+     *
      * @param arg new vehicleType
      * @return this instance of Vehicle
      */
@@ -174,6 +178,7 @@ public class Vehicle implements Comparable<Vehicle> {
     public long getEnginePower() {
         return enginePower;
     }
+
     /**
      * @return fuelConsumption
      */
@@ -207,12 +212,19 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     /**
-     * Compares elements by sum
+     * Compares elements by enginePower. If they are equal, compares by fuelConsumption
      *
      * @param otherVehicle the object to be compared.
      * @return result of comparison
      */
     public int compareTo(Vehicle otherVehicle) {
-        return (int) (this.getSum() - otherVehicle.getSum());
+        int result = Long.compare(this.getEnginePower(), otherVehicle.getEnginePower());
+        if (result == 0) {
+            result = Long.compare(this.getFuelConsumption(), otherVehicle.getFuelConsumption());
+            if (result == 0) {
+                result = Integer.compare(this.getId(), otherVehicle.getId());
+            }
+        }
+        return result;
     }
 }

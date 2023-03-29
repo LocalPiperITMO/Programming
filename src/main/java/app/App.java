@@ -26,7 +26,7 @@ public class App {
             Client client = new Client(storage);
             client.runningMode();
         } catch (FileNotFoundException fileNotFoundException) {
-            textReceiver.printReport("File " + fileNotFoundException.getMessage() + " not found");
+            textReceiver.print("File " + fileNotFoundException.getMessage() + " not found");
         }
     }
 }

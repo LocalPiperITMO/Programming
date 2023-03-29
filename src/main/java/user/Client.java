@@ -34,19 +34,19 @@ public class Client {
         // app is running
         boolean isRunning = true;
         while (isRunning) {
-            textReceiver.printReport("""
+            textReceiver.print("""
                     Enter command:
                     NOTE: if the command has additional parameters, input in this exact pattern:
                     [command_name] {parameter}""");
             String request = userInput.readLine();
             if (request == null || request.equalsIgnoreCase("exit")) {
-                textReceiver.printReport("Leaving the program");
+                textReceiver.print("Leaving the program");
                 isRunning = false;
             } else {
                 try {
                     invoker.readUserRequest(request.trim());
                 } catch (NullPointerException e) {
-                    textReceiver.printReport("Leaving the program");
+                    textReceiver.print("Leaving the program");
                     isRunning = false;
                 }
             }

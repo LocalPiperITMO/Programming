@@ -59,6 +59,7 @@ public class BuilderCommandReceiver {
     /**
      * Builds instances of Vehicle using user input (if scriptMode=false)
      * Private method
+     *
      * @param vehicleBase instance of Vehicle
      * @return the same instance but with tweaked arguments
      */
@@ -77,7 +78,7 @@ public class BuilderCommandReceiver {
         } while (!isAllowedToProceed);
         do {
             isAllowedToProceed = true;
-            System.out.println("Input x (numerical, must not be empty):");
+            System.out.println("Input x (Float value, -2 000 000 000<=x<=2 000 000 000, must not be empty):");
             try {
                 vehicleBase.getCoordinates().setX(reader.readLine());
             } catch (NumberFormatException e) {
@@ -87,7 +88,7 @@ public class BuilderCommandReceiver {
         } while (!isAllowedToProceed);
         do {
             isAllowedToProceed = true;
-            System.out.println("Input y (numerical, must not be empty):");
+            System.out.println("Input y (Integer value, -2 000 000 000<=y<=2 000 000 000, must not be empty):");
             try {
                 vehicleBase.getCoordinates().setY(reader.readLine());
             } catch (NumberFormatException e) {
@@ -97,7 +98,7 @@ public class BuilderCommandReceiver {
         } while (!isAllowedToProceed);
         do {
             isAllowedToProceed = true;
-            System.out.println("Input enginePower (numerical, greater than 0, must not be null):");
+            System.out.println("Input enginePower (Long value, 0<y<=4 000 000 000, must not be null):");
             try {
                 vehicleBase.setEnginePower(reader.readLine());
             } catch (LessOrEqualToZeroException | NumberFormatException e) {
@@ -107,7 +108,7 @@ public class BuilderCommandReceiver {
         } while (!isAllowedToProceed);
         do {
             isAllowedToProceed = true;
-            System.out.println("Input fuelConsumption (numerical, greater than 0, must not be null):");
+            System.out.println("Input fuelConsumption (Long value, 0<y<=4 000 000 000, must not be null):");
             try {
                 vehicleBase.setFuelConsumption(reader.readLine());
             } catch (LessOrEqualToZeroException | NumberFormatException e) {
@@ -141,6 +142,7 @@ public class BuilderCommandReceiver {
     /**
      * Builds instances of Vehicle using script arguments (if scriptMode=true)
      * Private method
+     *
      * @param arguments list of arguments
      * @return instance of Vehicle
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
@@ -164,6 +166,7 @@ public class BuilderCommandReceiver {
 
     /**
      * 'add' command realization
+     *
      * @return command execution report (sent to TextReceiver)
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
      */
@@ -178,8 +181,10 @@ public class BuilderCommandReceiver {
         storage.getDataSet().add(vehicle);
         return "Vehicle added successfully!";
     }
+
     /**
      * 'add_if_max' command realization
+     *
      * @return command execution report (sent to TextReceiver)
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
      */
@@ -191,23 +196,17 @@ public class BuilderCommandReceiver {
             vehicle = buildVehicleViaUserInput(new Vehicle());
         }
         vehicle.setId(storage.getIdGenerator().generateRandomID());
-        int index = 0;
-        do {
-            if (storage.getDataSet().get(index).getSum() > storage.getDataSet().get(index + 1).getSum()) {
-                Collections.swap(storage.getDataSet(), index, index + 1);
-                index = 0;
-            } else {
-                ++index;
-            }
-        } while (index != storage.getDataSet().size() - 1);
+        Collections.sort(storage.getDataSet());
         if (vehicle.compareTo(storage.getDataSet().lastElement()) > 0) {
             storage.getDataSet().add(vehicle);
             return "New element added successfully";
         }
         return "New element has not been added: element with ID " + storage.getDataSet().lastElement().getId() + " is greater";
     }
+
     /**
      * 'remove_greater' command realization
+     *
      * @return command execution report (sent to TextReceiver)
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
      */
@@ -219,12 +218,13 @@ public class BuilderCommandReceiver {
             vehicle = buildVehicleViaUserInput(new Vehicle());
         }
         vehicle.setId(storage.getIdGenerator().generateRandomID());
-        storage.getDataSet().removeIf(vehicleToCompare -> vehicleToCompare.getSum() > vehicle.getSum());
+        storage.getDataSet().removeIf(vehicleToCompare -> vehicleToCompare.compareTo(vehicle) > 0);
         return "Greater elements removed successfully";
     }
 
     /**
      * 'update id' command realization
+     *
      * @return command execution report (sent to TextReceiver)
      * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
      */

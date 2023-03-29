@@ -93,14 +93,16 @@ public class ExecuteScriptCommandReceiver {
             setOfScriptPaths.remove(script.getAbsolutePath());
             builderCommandReceiver.setScriptMode(false);
         } catch (IOException e) {
-            textReceiver.printReport("Error!");
             builderCommandReceiver.setScriptMode(false);
+            return "Incorrect path to file";
         } catch (IndexOutOfBoundsException e) {
-            textReceiver.printReport("Error while building vehicle. Rewrite your script");
+            textReceiver.print("Error while building vehicle. Rewrite your script");
             builderCommandReceiver.setScriptMode(false);
         } catch (RecursionException e) {
-            textReceiver.printReport("Recursion avoided. Rewrite your script(s)");
             builderCommandReceiver.setScriptMode(false);
+            textReceiver.print("Recursion avoided. Rewrite your script(s)");
+
+
         }
         return "Script " + fileName + " executed successfully";
     }

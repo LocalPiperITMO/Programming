@@ -5,22 +5,23 @@ import receivers.SimpleArgumentCommandReceiver;
 
 import java.io.IOException;
 
+/**
+ * Command for removing existing elements
+ */
 public class RemoveByIDCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final SimpleArgumentCommandReceiver receiver;
 
     /**
-     * "remove_by_id id" command
-     * Removes element with given ID from the collection, if one exists
-     *
-     * @param receiver used for storing the collection
+     * @param receiver receiver with command realization
      */
     public RemoveByIDCommand(SimpleArgumentCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -28,15 +29,15 @@ public class RemoveByIDCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
-     * @param argument command argument
-     * @throws IOException         if unexpected error occurs
-     * @throws NoArgumentException if command requires argument, but none were given
+     * @param arg command argument
+     * @return report on command execution
+     * @throws NoArgumentException if no argument was given
      */
-    public String execute(String argument) throws IOException, NoArgumentException {
-        if (argument.length() != 0) {
-            int id = Integer.parseInt(argument);
+    public String execute(String arg) throws IOException, NoArgumentException {
+        if (arg.length() != 0) {
+            int id = Integer.parseInt(arg);
             return receiver.removeByID(id);
         } else {
             throw new NoArgumentException();

@@ -3,22 +3,23 @@ package commands;
 import exceptions.NoArgumentException;
 import receivers.SimpleArgumentCommandReceiver;
 
+/**
+ * Command for printing Vehicles that match the condition (if Vehicle's fuelConsumption is equal to the given)
+ */
 public class FilterByFuelConsumptionCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final SimpleArgumentCommandReceiver receiver;
 
     /**
-     * "filter_by_fuel_consumption fuel_consumption" command.
-     * Deletes all elements with the fuel_consumption value lower than one given as argument from the collection
-     *
-     * @param receiver used for storing the collection
+     * @param receiver receiver with command realization
      */
     public FilterByFuelConsumptionCommand(SimpleArgumentCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -26,14 +27,15 @@ public class FilterByFuelConsumptionCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
-     * @param argument command argument
-     * @throws NoArgumentException if command requires argument but none were given
+     * @param arg fuelConsumption
+     * @return report on command execution
+     * @throws NoArgumentException if no argument was given
      */
-    public String execute(String argument) throws NoArgumentException {
-        if (argument.length() != 0) {
-            long fuelConsumption = Long.parseLong(argument);
+    public String execute(String arg) throws NoArgumentException {
+        if (arg.length() != 0) {
+            long fuelConsumption = Long.parseLong(arg);
             return receiver.filterByFuelConsumption(fuelConsumption);
         } else {
             throw new NoArgumentException();

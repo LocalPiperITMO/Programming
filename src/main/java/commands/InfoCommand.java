@@ -2,22 +2,24 @@ package commands;
 
 import receivers.DisplayingCommandReceiver;
 
+/**
+ * Command for printing information about the collection.
+ * Shows number of elements, creation date and collection type
+ */
 public class InfoCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final DisplayingCommandReceiver receiver;
 
     /**
-     * "info" command
-     * Displays information about the collection (collection type, creation date, number of elements)
-     *
-     * @param receiver used for storing the collection
+     * @param receiver receiver with command realization
      */
     public InfoCommand(DisplayingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -25,9 +27,10 @@ public class InfoCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
      * @param arg command argument
+     * @return report on command execution
      */
     public String execute(String arg) {
         return receiver.info();

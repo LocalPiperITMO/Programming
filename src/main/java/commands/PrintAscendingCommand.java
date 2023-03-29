@@ -2,23 +2,23 @@ package commands;
 
 import receivers.SortingCommandReceiver;
 
+/**
+ * Command for printing elements in ascending order (elements sorted by sum)
+ */
 public class PrintAscendingCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final SortingCommandReceiver receiver;
 
     /**
-     * "print_ascending" command
-     * Sorts the list in ascending order, then prints it
-     * Sorting is done by comparing sums of integer arguments of element
-     *
-     * @param receiver used for storing the collection
+     * @param receiver receiver with command realization
      */
     public PrintAscendingCommand(SortingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -26,9 +26,10 @@ public class PrintAscendingCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
      * @param arg command argument
+     * @return report on command execution
      */
     public String execute(String arg) {
         return receiver.printAscending();

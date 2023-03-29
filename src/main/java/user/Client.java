@@ -7,16 +7,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Client class
+ * Enables connection to Invoker
+ * User can leave the program by typing 'exit' into the console
+ */
 public class Client {
-    private final Invoker invoker;
-    private final TextReceiver textReceiver;
-
     /**
-     * Client class
-     * Enables communication between user and console.
-     *
-     * @param storage used for storing the collection
+     * Stores Invoker for communication user and the program
      */
+    private final Invoker invoker;
+    /**
+     * Stores TextReceiver that gives feedback to user
+     */
+    private final TextReceiver textReceiver;
     public Client(CollectionStorage storage) {
         this.invoker = new Invoker(storage);
         this.textReceiver = new TextReceiver();
@@ -24,8 +28,6 @@ public class Client {
 
     /**
      * Runs the user-console communication
-     *
-     * @throws IOException if unexpected error occurs
      */
     public void runningMode() throws IOException {
         BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));

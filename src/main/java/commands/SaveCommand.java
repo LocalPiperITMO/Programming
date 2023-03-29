@@ -4,22 +4,23 @@ import receivers.CollectionProcessingCommandReceiver;
 
 import java.io.IOException;
 
+/**
+ * Command for saving collection to the file it was taken from
+ */
 public class SaveCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final CollectionProcessingCommandReceiver receiver;
 
     /**
-     * "save" command
-     * Saves the collection to the file it was taken from
-     *
-     * @param receiver used for storing both the collection and the path to file
+     * @param receiver receiver with command realization
      */
     public SaveCommand(CollectionProcessingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -27,10 +28,10 @@ public class SaveCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
      * @param arg command argument
-     * @throws IOException if unexpected error occurs
+     * @return report on command execution
      */
     public String execute(String arg) throws IOException {
         return receiver.save();

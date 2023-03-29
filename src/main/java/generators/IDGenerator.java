@@ -7,10 +7,13 @@ import java.util.HashSet;
  * Used in element building
  */
 public class IDGenerator {
+    /**
+     * Contains every existing ID
+     */
     private final HashSet<Integer> idSet = new HashSet<>();
 
     /**
-     * Used to generate unique ID. Remembers all the IDs
+     * Used to generate unique ID
      *
      * @return ID
      */

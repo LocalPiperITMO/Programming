@@ -15,9 +15,21 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
 
+/**
+ * Converter that can turn CSV file to Vector and Vector to CSV file
+ */
 public class CSVToVectorConverter {
+    /**
+     * Used when writing to file
+     */
     private final String fileName;
+    /**
+     * Used as an output stream
+     */
     private final TextReceiver textReceiver;
+    /**
+     * Used when generating Vehicles from CSV file
+     */
     private final IDGenerator idGenerator = new IDGenerator();
 
     public CSVToVectorConverter(String fileName) {
@@ -25,15 +37,25 @@ public class CSVToVectorConverter {
         this.textReceiver = new TextReceiver();
     }
 
-
+    /**
+     * @return IDGenerator
+     */
     public IDGenerator getIdGenerator() {
         return idGenerator;
     }
 
+    /**
+     * @return vector of Vehicles
+     * @throws CsvException if there is a problem parsing CSV file
+     */
     public Vector<Vehicle> getVector() throws IOException, CsvException {
         return convertStringListToVehicleVector(convertCSVtoStringList(this.fileName));
     }
 
+    /**
+     * Writes collection to CSV file
+     * @param dataSet vector of Vehicles
+     */
     public void writeToCSV(Vector<Vehicle> dataSet) throws IOException {
         FileWriter writer;
         if (openFileWithPathFromEnv(fileName).isPresent()) {
@@ -48,6 +70,13 @@ public class CSVToVectorConverter {
 
     }
 
+    /**
+     * Converts CSV to list of String arrays (used for creating vector of Vehicles).
+     * Private method
+     * @param fileName name of file the list is taken from
+     * @return list of String arrays (arguments for Vehicle building)
+     * @throws CsvException if there is a problem parsing CSV file
+     */
     private List<String[]> convertCSVtoStringList(String fileName) throws IOException, CsvException {
         InputStreamReader reader;
         if (openFileWithPathFromEnv(fileName).isPresent()) {
@@ -61,6 +90,12 @@ public class CSVToVectorConverter {
         throw new FileNotFoundException(fileName);
     }
 
+    /**
+     * Checks if file exists. If it does, returns file, otherwise returns empty object (used for creating vector of Vehicles).
+     * Private method
+     * @param fileName name of file to find
+     * @return CSV file otherwise empty object
+     */
     private Optional<File> openFileWithPathFromEnv(String fileName) {
         String path = System.getenv(fileName);
         if (path != null) {
@@ -70,6 +105,12 @@ public class CSVToVectorConverter {
         }
     }
 
+    /**
+     * Converts list of String arrays to collection of Vehicles (final step in vector creation).
+     * Private method.
+     * @param text arguments for building
+     * @return Vehicle vector
+     */
     private Vector<Vehicle> convertStringListToVehicleVector(List<String[]> text) {
         int corruptedLines = 0;
         int lineCounter = 0;
@@ -115,6 +156,11 @@ public class CSVToVectorConverter {
         return dataSet;
     }
 
+    /**
+     * Converts Vehicle vector to list of String arrays (used for saving to CSV file)
+     * @param dataSet vector of Vehicles
+     * @return list of arguments
+     */
     private List<String[]> convertVehicleVectorToStringList(Vector<Vehicle> dataSet) {
         //Opel,124,4,51,21,CHOPPER,MANPOWER
         List<String[]> stringList = new ArrayList<>();

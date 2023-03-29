@@ -13,9 +13,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Receiver class
+ * Stores realization for building commands (such as 'add','add_if_max','update id' and 'remove_if_greater')
+ */
 public class BuilderCommandReceiver {
+    /**
+     * Stores Vehicle vector
+     */
     private final CollectionStorage storage;
+    /**
+     * Stores mode
+     * If true, building Vehicles is done using script arguments, otherwise user input
+     */
     private boolean scriptMode;
+    /**
+     * Arguments for building via script
+     */
     private List<String> arguments;
 
     public BuilderCommandReceiver(CollectionStorage storage) {
@@ -24,14 +38,30 @@ public class BuilderCommandReceiver {
         this.arguments = new ArrayList<>();
     }
 
+    /**
+     * Switches modes
+     *
+     * @param scriptMode new mode
+     */
     public void setScriptMode(boolean scriptMode) {
         this.scriptMode = scriptMode;
     }
 
+    /**
+     * Sets new list of arguments
+     *
+     * @param arguments new list of arguments
+     */
     public void setArguments(List<String> arguments) {
         this.arguments = arguments;
     }
 
+    /**
+     * Builds instances of Vehicle using user input (if scriptMode=false)
+     * Private method
+     * @param vehicleBase instance of Vehicle
+     * @return the same instance but with tweaked arguments
+     */
     private Vehicle buildVehicleViaUserInput(Vehicle vehicleBase) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         boolean isAllowedToProceed;
@@ -108,6 +138,14 @@ public class BuilderCommandReceiver {
         return vehicleBase;
     }
 
+    /**
+     * Builds instances of Vehicle using script arguments (if scriptMode=true)
+     * Private method
+     * @param arguments list of arguments
+     * @return instance of Vehicle
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
+     */
+
     private Vehicle buildVehicleViaScript(List<String> arguments) throws InvalidArgumentsWhileVehicleBuildingViaScriptException {
         try {
             Vehicle vehicle = new Vehicle().setName(arguments.get(0));
@@ -124,6 +162,11 @@ public class BuilderCommandReceiver {
         }
     }
 
+    /**
+     * 'add' command realization
+     * @return command execution report (sent to TextReceiver)
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
+     */
     public String addVehicle() throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
         Vehicle vehicle;
         if (scriptMode) {
@@ -135,7 +178,11 @@ public class BuilderCommandReceiver {
         storage.getDataSet().add(vehicle);
         return "Vehicle added successfully!";
     }
-
+    /**
+     * 'add_if_max' command realization
+     * @return command execution report (sent to TextReceiver)
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
+     */
     public String addIfMax() throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
         Vehicle vehicle;
         if (scriptMode) {
@@ -159,7 +206,11 @@ public class BuilderCommandReceiver {
         }
         return "New element has not been added: element with ID " + storage.getDataSet().lastElement().getId() + " is greater";
     }
-
+    /**
+     * 'remove_greater' command realization
+     * @return command execution report (sent to TextReceiver)
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
+     */
     public String removeGreater() throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
         Vehicle vehicle;
         if (scriptMode) {
@@ -172,6 +223,11 @@ public class BuilderCommandReceiver {
         return "Greater elements removed successfully";
     }
 
+    /**
+     * 'update id' command realization
+     * @return command execution report (sent to TextReceiver)
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
+     */
     public String update(int id) throws InvalidArgumentsWhileVehicleBuildingViaScriptException, IOException {
         boolean isFound = false;
         Vehicle vehicle = new Vehicle();

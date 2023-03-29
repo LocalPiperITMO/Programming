@@ -9,15 +9,29 @@ import user.Invoker;
 import java.time.LocalDate;
 import java.util.Map;
 
+/**
+ * Receiver class
+ * Stores realization for displaying commands (such as 'help', 'show' and 'info')
+ */
 public class DisplayingCommandReceiver {
+    /**
+     * Stores Vehicle vector
+     */
     private final CollectionStorage storage;
+    /**
+     * Stores Invoker with the commandHashMap (used by 'help' command)
+     */
     private final Invoker invoker;
 
     public DisplayingCommandReceiver(CollectionStorage storage, Invoker invoker) {
         this.storage = storage;
         this.invoker = invoker;
     }
-
+    /**
+     * 'help' command realization
+     *
+     * @return command execution report (sent to TextReceiver)
+     */
     public String help() {
         Map<String, Command> commandMap = invoker.getCommandHashMap();
         StringBuilder report = new StringBuilder("""
@@ -33,12 +47,20 @@ public class DisplayingCommandReceiver {
         }
         return String.valueOf(report);
     }
-
+    /**
+     * 'info' command realization
+     *
+     * @return command execution report (sent to TextReceiver)
+     */
     public String info() {
         return "Dataset type: " + storage.getDataSet().getClass().getSimpleName() + "\nDataset creation date: " + LocalDate.now()
                 + "\nDataset number of elements: " + storage.getDataSet().size();
     }
-
+    /**
+     * 'show' command realization
+     *
+     * @return command execution report (sent to TextReceiver)
+     */
     public String show() {
         try {
             if (storage.getDataSet().size() == 0) {

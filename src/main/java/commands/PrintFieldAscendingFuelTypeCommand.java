@@ -2,23 +2,23 @@ package commands;
 
 import receivers.SortingCommandReceiver;
 
+/**
+ * Command for printing elements sorted by their fuelType
+ */
 public class PrintFieldAscendingFuelTypeCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final SortingCommandReceiver receiver;
 
     /**
-     * "print_field_ascending_fuel_type" command
-     * Sorts the collection in ascending order. Elements are compared using fuelType
-     * Prints the collection after sorting
-     *
-     * @param receiver used for storing the collection
+     * @param receiver receiver with command realization
      */
     public PrintFieldAscendingFuelTypeCommand(SortingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -26,9 +26,10 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
      * @param arg command argument
+     * @return report on command execution
      */
     public String execute(String arg) {
         return receiver.printFieldAscendingFuelType();

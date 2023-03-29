@@ -5,12 +5,18 @@ import receivers.ExecuteScriptCommandReceiver;
 
 import java.io.IOException;
 
+/**
+ * Command for executing script. Script should contain commands and (if needed) arguments for building
+ * May not execute everything if syntax errors are present
+ */
 public class ExecuteScriptCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final ExecuteScriptCommandReceiver receiver;
 
     /**
-     * "execute_script script" command
-     * Executes script from path given as argument
+     * @param receiver receiver with command realization
      */
     public ExecuteScriptCommand(ExecuteScriptCommandReceiver receiver) {
         this.receiver = receiver;
@@ -18,8 +24,6 @@ public class ExecuteScriptCommand implements Command {
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -27,13 +31,13 @@ public class ExecuteScriptCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
-     * @param fileName name of script (command argument)
-     * @throws IOException         if unexpected error occurs
-     * @throws NoArgumentException if command requires argument but none were given
+     * @param filePath path to the script
+     * @return report on command execution
+     * @throws NoArgumentException if no argument was given
      */
-    public String execute(String fileName) throws IOException, NoArgumentException {
-        return receiver.executeScript(fileName);
+    public String execute(String filePath) throws IOException, NoArgumentException {
+        return receiver.executeScript(filePath);
     }
 }

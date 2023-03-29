@@ -2,22 +2,23 @@ package commands;
 
 import receivers.DisplayingCommandReceiver;
 
+/**
+ * Command for printing the collection
+ */
 public class ShowCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final DisplayingCommandReceiver receiver;
 
     /**
-     * "show" command
-     * Displays the collection
-     *
-     * @param receiver used for storing the collection
+     * @param receiver receiver with command realization
      */
     public ShowCommand(DisplayingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -25,9 +26,10 @@ public class ShowCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
      * @param arg command argument
+     * @return report on command execution
      */
     public String execute(String arg) {
         return receiver.show();

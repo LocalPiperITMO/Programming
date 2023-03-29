@@ -4,22 +4,22 @@ import receivers.CollectionProcessingCommandReceiver;
 
 import java.io.IOException;
 
+/**
+ * Command for clearing the collection.
+ */
 public class ClearCommand implements Command {
-    private final CollectionProcessingCommandReceiver receiver;
-
     /**
-     * "clear" command
-     * Clears the collection
-     *
-     * @param receiver used for storing the collection
+     * Receiver that contains required method for the command
+     */
+    private final CollectionProcessingCommandReceiver receiver;
+    /**
+     * @param receiver receiver with command realization
      */
     public ClearCommand(CollectionProcessingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
 
@@ -28,10 +28,10 @@ public class ClearCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
      * @param arg command argument
-     * @throws IOException if unexpected error occurs
+     * @return report on command execution
      */
     public String execute(String arg) throws IOException {
         return receiver.clear();

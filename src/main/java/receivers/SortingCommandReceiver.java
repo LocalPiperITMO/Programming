@@ -5,14 +5,24 @@ import datatype.Vehicle;
 import exceptions.EmptyDatasetException;
 
 import java.util.Collections;
-
+/**
+ * Receiver class
+ * Stores realization for sorting commands (such as 'print_ascending', 'print_field_ascending_fuel_type' and 'reorder')
+ */
 public class SortingCommandReceiver {
+    /**
+     * Stores Vehicle vector
+     */
     private final CollectionStorage storage;
 
     public SortingCommandReceiver(CollectionStorage storage) {
         this.storage = storage;
     }
-
+    /**
+     * 'print_ascending' command realization
+     *
+     * @return command execution report (sent to TextReceiver)
+     */
     public String printAscending() {
         try {
             if (storage.getDataSet().size() == 0) {
@@ -29,7 +39,11 @@ public class SortingCommandReceiver {
             return "Dataset is empty: nothing to sort";
         }
     }
-
+    /**
+     * 'print_field_ascending_fuel_type' command realization
+     *
+     * @return command execution report (sent to TextReceiver)
+     */
     public String printFieldAscendingFuelType() {
         try {
             if (storage.getDataSet().size() == 0) {
@@ -55,7 +69,11 @@ public class SortingCommandReceiver {
             return "Dataset is empty: nothing to sort";
         }
     }
-
+    /**
+     * 'reorder' command realization
+     *
+     * @return command execution report (sent to TextReceiver)
+     */
     public String reorder() {
         try {
             if (storage.getDataSet().size() == 0) {

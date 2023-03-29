@@ -5,21 +5,24 @@ import receivers.BuilderCommandReceiver;
 
 import java.io.IOException;
 
+/**
+ * Command for adding elements to the collection.
+ * Has 2 different realizations: by user input and by script arguments
+ */
 public class AddElementCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final BuilderCommandReceiver receiver;
 
     /**
-     * "add" command
-     * Creates a new element, asking user for arguments in the process. Created element then added to the collection
+     * @param receiver receiver with command realization
      */
-
     public AddElementCommand(BuilderCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -27,11 +30,10 @@ public class AddElementCommand implements Command {
     }
 
     /**
-     * Executes command
-     *
+     * Calls method from the receiver
      * @param arg command argument
-     * @throws IOException                                            if unexpected error occurs
-     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given for building vehicle via script
+     * @return report on command execution
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
      */
     public String execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
         return receiver.addVehicle();

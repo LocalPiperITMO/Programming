@@ -9,11 +9,31 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Receiver class
+ * Stores realization for 'execute_script script' command
+ * Uses BuilderCommandReceiver to tweak building commands' realization
+ */
 public class ExecuteScriptCommandReceiver {
+    /**
+     * Used for tweaking realization
+     */
     private final BuilderCommandReceiver builderCommandReceiver;
+    /**
+     * Used as an output stream
+     */
     private final TextReceiver textReceiver;
+    /**
+     * Used for sending commands to corresponding receivers
+     */
     private final Invoker invoker;
+    /**
+     * Stores names of building commands
+     */
     private final List<String> complexCommandNames = new ArrayList<>();
+    /**
+     * Stores paths of opened scripts (used for solving recursion problems)
+     */
     private final Set<String> setOfScriptPaths;
 
     public ExecuteScriptCommandReceiver(BuilderCommandReceiver builderCommandReceiver, Invoker invoker) {
@@ -27,6 +47,11 @@ public class ExecuteScriptCommandReceiver {
         this.complexCommandNames.add("update");
     }
 
+    /**
+     * 'execute_script script' command realization
+     * @param fileName name of script
+     * @return command execution report (sent to TextReceiver)
+     */
     public String executeScript(String fileName) {
         String commandName;
         // execute_script src/main/java/script.txt

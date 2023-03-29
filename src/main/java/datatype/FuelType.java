@@ -10,6 +10,9 @@ public enum FuelType {
     NUCLEAR(3),
     PLASMA(4),
     ANTIMATTER(5);
+    /**
+     * Used for sorting via fuelType
+     */
     private final int position;
 
     /**
@@ -19,6 +22,9 @@ public enum FuelType {
         this.position = position;
     }
 
+    /**
+     * @return position
+     */
     public int getPosition() {
         return this.position;
     }

@@ -7,11 +7,39 @@
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/collection/CollectionStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/collection/CollectionStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintAscendingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintAscendingCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintFieldAscendingFuelTypeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintFieldAscendingFuelTypeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ReorderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ReorderCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/converters/CSVToVectorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/CSVToVectorConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/FuelType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/FuelType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/generators/IDGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generators/IDGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newscript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newscript.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/BuilderCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/BuilderCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/CollectionProcessingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/CollectionProcessingCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/DisplayingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/DisplayingCommandReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/receivers/ExecuteScriptCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/ExecuteScriptCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/SimpleArgumentCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/SimpleArgumentCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/SortingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/SortingCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/TextReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/TextReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/user/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/user/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/Invoker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/validators/ConversionValidator.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +204,8 @@
       <workItem from="1679561018809" duration="14000" />
       <workItem from="1679851596421" duration="3592000" />
       <workItem from="1679891184253" duration="1291000" />
+      <workItem from="1680049589175" duration="7081000" />
+      <workItem from="1680056759715" duration="319000" />
     </task>
     <servers />
   </component>

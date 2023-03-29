@@ -2,22 +2,23 @@ package commands;
 
 import receivers.SortingCommandReceiver;
 
+/**
+ * Command for printing elements in reversed order
+ */
 public class ReorderCommand implements Command {
+    /**
+     * Receiver that contains required method for the command
+     */
     private final SortingCommandReceiver receiver;
 
     /**
-     * "reorder" command
-     * Reverses the element order of the collection
-     *
-     * @param receiver used for storing the collection
+     * @param receiver receiver with command realization
      */
     public ReorderCommand(SortingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -25,9 +26,10 @@ public class ReorderCommand implements Command {
     }
 
     /**
-     * Executes command
+     * Calls method from the receiver
      *
      * @param arg command argument
+     * @return report on command execution
      */
     public String execute(String arg) {
         return receiver.reorder();

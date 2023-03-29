@@ -10,21 +10,34 @@ import receivers.*;
 
 import java.io.IOException;
 import java.util.HashMap;
-
+/**
+ * Invoker class
+ * Used for processing user inputs and sending commands
+ * Stores commandHashMap used for accessing commands
+ */
 public class Invoker {
+    /**
+     * Contains every command
+     */
     private final HashMap<String, Command> commandHashMap;
+    /**
+     * User argument (if the command requires one)
+     */
     private String argument;
+    /**
+     * User-inputted command name
+     */
     private String commandName;
+    /**
+     * Enables output stream
+     */
     private final TextReceiver textReceiver;
+    /**
+     * Sent to ExecuteScriptCommandReceiver
+     */
     private final BuilderCommandReceiver builderCommandReceiver;
 
-    /**
-     * Invoker class
-     * Used for processing user inputs and sending commands
-     * Stores commandHashMap used for accessing commands
-     *
-     * @param storage used for storing the collection
-     */
+
     public Invoker(CollectionStorage storage) {
         this.commandHashMap = new HashMap<>();
         DisplayingCommandReceiver displayingCommandReceiver = new DisplayingCommandReceiver(storage, this);
@@ -51,6 +64,9 @@ public class Invoker {
         commandHashMap.put("print_field_ascending_fuel_type", new PrintFieldAscendingFuelTypeCommand(sortingCommandReceiver));
     }
 
+    /**
+     * @return map of commands
+     */
     public HashMap<String, Command> getCommandHashMap() {
         return commandHashMap;
     }

@@ -4,25 +4,23 @@ import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
 import receivers.BuilderCommandReceiver;
 
 import java.io.IOException;
-
+/**
+ * Command for adding elements to the collection if the condition (greater than the greatest) is matched.
+ * Has 2 different realizations: by user input and by script arguments
+ */
 public class AddIfMaxElementCommand implements Command {
-    private final BuilderCommandReceiver receiver;
-
     /**
-     * "add_if_max" command
-     * Creates a new element, asking user for arguments in the process.
-     * Created element then compared with the greatest element in the collection (compared using sums of integer arguments, excluding ID)
-     * If the created element is greater than the greatest element, it is added to the collection.
-     *
-     * @param receiver used for storing the collection
+     * Receiver that contains required method for the command
+     */
+    private final BuilderCommandReceiver receiver;
+    /**
+     * @param receiver receiver with command realization
      */
     public AddIfMaxElementCommand(BuilderCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
     /**
-     * Used for showing information.
-     *
      * @return information about the command
      */
     public String showInfo() {
@@ -30,11 +28,10 @@ public class AddIfMaxElementCommand implements Command {
     }
 
     /**
-     * Executes command
-     *
+     * Calls method from the receiver
      * @param arg command argument
-     * @throws IOException                                            if unexpected error occurs
-     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if invalid arguments given for building vehicle via script
+     * @return report on command execution
+     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
      */
     public String execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
         return receiver.addIfMax();

@@ -10,12 +10,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * Main class
+ * Main class of this program. Starts the console application
  *
  * @author LocalPiper - Sorokin Artem
  */
 public class App {
-
+    /**
+     * @throws CsvException - if there is a problem parsing CSV file
+     */
     public static void main(String[] args) throws IOException, CsvException {
         CSVToVectorConverter converter = new CSVToVectorConverter("FILE");
         TextReceiver textReceiver = new TextReceiver();

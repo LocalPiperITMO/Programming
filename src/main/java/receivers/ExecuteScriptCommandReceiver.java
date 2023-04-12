@@ -38,6 +38,9 @@ public class ExecuteScriptCommandReceiver {
      * Stores paths of opened scripts (used for solving recursion problems)
      */
     private final Set<String> setOfScriptPaths;
+    private String commandName;
+    private String commandArgument;
+    private final List<String> arguments = new ArrayList<>();
 
     public ExecuteScriptCommandReceiver(CollectionModifyingCommandReceiver receiver, ScriptBuildingReceiver scriptBuildingReceiver, Invoker invoker) {
         this.receiver = receiver;
@@ -57,59 +60,125 @@ public class ExecuteScriptCommandReceiver {
      * @param fileName name of script
      * @return command execution report (sent to TextReceiver)
      */
-    public String executeScript(String fileName) {
-        String commandName = "";
-        String commandArgument = "";
-        // execute_script src/main/java/script.txt
-        File script = new File(fileName);
-        setOfScriptPaths.add(script.getAbsolutePath());
+    public String execute(String fileName) {
+        clearCommandParameters();
+        File script = createScriptFile(fileName);
+        addScriptFileToSet(script);
+        readScriptAndExecuteItsCommandsElseThrowError(script);
+        return "Script " + fileName + " executed successfully";
+    }
+
+    private void clearCommandParameters() {
+        commandName = "";
+        commandArgument = "";
+    }
+
+    private void setCommandParameters(String command) {
+        commandName = command.split(" ", 2)[0];
+        if (command.split(" ").length == 2) {
+            commandArgument = command.split(" ", 2)[1];
+        }
+    }
+
+    private void clearBuildingArguments() {
+        arguments.clear();
+    }
+
+    private File createScriptFile(String fileName) {
+        return new File(fileName);
+    }
+
+    private void addScriptFileToSet(File file) {
+        setOfScriptPaths.add(file.getAbsolutePath());
+    }
+
+    private void removeScriptFileFromSet(File file) {
+        setOfScriptPaths.remove(file.getAbsolutePath());
+    }
+
+    private void readScriptAndExecuteItsCommandsElseThrowError(File script) {
         try (BufferedReader reader = new BufferedReader(new FileReader(script))) {
-            List<String> linesOfScript = new ArrayList<>();
-            String line = reader.readLine();
-            while (line != null) {
-                linesOfScript.add(line);
-                line = reader.readLine();
-            }
-            List<String> arguments = new ArrayList<>();
-
-            while (linesOfScript.size() != 0) {
-                String command = linesOfScript.get(0);
-                linesOfScript.remove(command);
-                commandName = command.split(" ", 2)[0];
-                if (command.split(" ", 2).length == 2) {
-                    commandArgument = command.split(" ", 2)[1];
-                }
-                arguments.clear();
-
-                if (Objects.equals(commandName, "exit")) {
-                    throw new NullPointerException();
-                } else if (Objects.equals(commandName, "execute_script")) {
-                    File nextScript = new File(commandArgument);
-                    if (setOfScriptPaths.contains(nextScript.getAbsolutePath())) {
-                        setOfScriptPaths.remove(script.getAbsolutePath());
-                        throw new RecursionException();
-                    }
-                } else if (complexCommandNames.contains(commandName)) {
-                    for (int i = 0; i < 7; ++i) {
-                        arguments.add(linesOfScript.get(0));
-                        linesOfScript.remove(0);
-                    }
-                    receiver.setCurrentVehicle(scriptBuildingReceiver.buildOrThrowError(arguments));
-                }
-                textReceiver.print(invoker.getCommandHashMap().get(commandName).execute(commandArgument));
-            }
-            setOfScriptPaths.remove(script.getAbsolutePath());
+            readAndExecuteScriptLines(getScriptLines(reader));
+            removeScriptFileFromSet(script);
         } catch (IOException e) {
-            return "Incorrect path to file";
+            textReceiver.print("Incorrect path to file");
+        }
+    }
+
+    private List<String> getScriptLines(BufferedReader reader) throws IOException {
+        List<String> linesOfScript = new ArrayList<>();
+        String line = reader.readLine();
+        while (line != null) {
+            linesOfScript.add(line);
+            line = reader.readLine();
+        }
+        return linesOfScript;
+    }
+
+    private void checkExit() {
+        if (Objects.equals(commandName, "exit")) {
+            throw new NullPointerException();
+        }
+    }
+
+    private void checkScriptCall() throws RecursionException {
+        if (Objects.equals(commandName, "execute_script")) {
+            File newScript = createScriptFile(commandArgument);
+            checkRecursion(newScript);
+            addScriptFileToSet(newScript);
+        }
+    }
+
+    private void checkRecursion(File newScript) throws RecursionException {
+        if (setOfScriptPaths.contains(newScript.getAbsolutePath())) {
+            removeScriptFileFromSet(newScript);
+            throw new RecursionException();
+        }
+    }
+
+    private void checkComplexCommandAndReturnNewScriptLines(List<String> scriptLines) throws ScriptBuildingException {
+        if (complexCommandNames.contains(commandName)) {
+            buildVehicleAndReturnNewScriptLines(scriptLines);
+        }
+    }
+
+    private void buildVehicleAndReturnNewScriptLines(List<String> scriptLines) throws ScriptBuildingException {
+        for (int i = 0; i < 7; ++i) {
+            arguments.add(scriptLines.get(0));
+            scriptLines.remove(0);
+        }
+        buildVehicle();
+    }
+
+    private void buildVehicle() throws ScriptBuildingException {
+        receiver.setCurrentVehicle(scriptBuildingReceiver.buildOrThrowError(arguments));
+    }
+
+    private void callCommandAndPrintReport() {
+        try {
+            textReceiver.print(invoker.getCommandHashMap().get(commandName).execute(commandArgument));
         } catch (NoArgumentException e) {
             textReceiver.print("Command " + commandName + " requires an argument: none were given");
-        } catch (ScriptBuildingException e) {
-            textReceiver.print("Error while building vehicle. Rewrite your script");
-        } catch (RecursionException e) {
-            textReceiver.print("Recursion avoided. Rewrite your script(s)");
-
-
+        } catch (IOException e) {
+            textReceiver.print("Something went wrong");
         }
-        return "Script " + fileName + " executed successfully";
+    }
+
+    private void readAndExecuteScriptLines(List<String> scriptLines) {
+        while (scriptLines.size() != 0) {
+            try {
+                setCommandParameters(scriptLines.get(0));
+                scriptLines.remove(scriptLines.get(0));
+                clearBuildingArguments();
+                checkExit();
+                checkScriptCall();
+                checkComplexCommandAndReturnNewScriptLines(scriptLines);
+                callCommandAndPrintReport();
+            } catch (RecursionException e) {
+                textReceiver.print("Recursion avoided. Rewrite your script(s)");
+            } catch (ScriptBuildingException e) {
+                textReceiver.print("Error while building vehicle. Rewrite your script");
+            }
+        }
     }
 }

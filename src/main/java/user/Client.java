@@ -44,7 +44,7 @@ public class Client {
                 isRunning = false;
             } else {
                 try {
-                    invoker.readUserRequest(request.trim());
+                    invoker.workWithUser(request.trim());
                 } catch (NullPointerException e) {
                     textReceiver.print("Leaving the program");
                     isRunning = false;

@@ -38,6 +38,6 @@ public class ExecuteScriptCommand implements Command {
      * @throws NoArgumentException if no argument was given
      */
     public String execute(String filePath) throws IOException, NoArgumentException {
-        return receiver.executeScript(filePath);
+        return receiver.execute(filePath);
     }
 }

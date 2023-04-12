@@ -1,5 +1,3 @@
 info
 print_field_ascending_fuel_type
-execute_script src/main/java/newscript.txt
-execute_script src/main/java/newscript.txt
 save

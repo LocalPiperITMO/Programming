@@ -5,23 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/ScriptBuildingException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/receivers/CollectionModifyingCommandReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/receivers/ManualBuildingReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/receivers/ScriptBuildingReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/InvalidArgumentsWhileVehicleBuildingViaScriptException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newscript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newscript.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/BuilderCommandReceiver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/CollectionModifyingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/CollectionModifyingCommandReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/receivers/ExecuteScriptCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/ExecuteScriptCommandReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/script.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/user/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/user/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/Invoker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -208,6 +198,7 @@
       <workItem from="1681271786165" duration="2872000" />
       <workItem from="1681277716292" duration="2809000" />
       <workItem from="1681281303886" duration="606000" />
+      <workItem from="1681282117377" duration="7754000" />
     </task>
     <servers />
   </component>

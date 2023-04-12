@@ -3,6 +3,7 @@ package user;
 
 import collection.CollectionStorage;
 import commands.*;
+import datatype.Vehicle;
 import exceptions.InvalidCommandNameException;
 import exceptions.NoArgumentException;
 import receivers.*;
@@ -89,33 +90,55 @@ public class Invoker {
      *
      * @param userInput whatever user writes
      */
-    public void readUserRequest(String userInput) {
+    public void workWithUser(String userInput) {
         try {
-            // filtering user request, getting command name and arguments, executing the command
-            argument = "";
-            String[] userInputArray = userInput.split(" ", 2);
-            commandName = userInputArray[0];
-            if (userInputArray.length == 2) {
-                argument = userInputArray[1];
+            setCommandNameAndArgument(readRequest(userInput));
+            if (checkIfComplexCommand()) {
+                askUserToInputArgumentsAndSetBuiltVehicle();
             }
-            if (commandHashMap.get(commandName) != null) {
-                if (complexCommandSet.contains(commandName)) {
-                    collectionModifyingCommandReceiver.setCurrentVehicle(manualBuildingReceiver.build());
-                }
-                textReceiver.print(commandHashMap.get(commandName).execute(argument));
-            } else {
-                throw new InvalidCommandNameException();
-            }
-        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
-            textReceiver.print("Empty request. Try again");
-        } catch (NoArgumentException e) {
-            textReceiver.print(commandName + " requires an argument: none were given");
-        } catch (NumberFormatException e) {
-            textReceiver.print(commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given");
+            textReceiver.print(callCommandAndReturnExecutionReport(findCommandElseThrowError()));
         } catch (InvalidCommandNameException e) {
             textReceiver.print("There is no command named \"" + commandName + "\". Try again");
+        }
+
+    }
+
+    private String[] readRequest(String userInput) {
+        return userInput.split(" ", 2);
+    }
+
+    private void setCommandNameAndArgument(String[] request) {
+        commandName = request[0];
+        argument = (request.length == 2) ? request[1] : "";
+    }
+
+    private Command findCommandElseThrowError() throws InvalidCommandNameException {
+        Command command = commandHashMap.get(commandName);
+        if (command != null) {
+            return command;
+        }
+        throw new InvalidCommandNameException();
+    }
+
+    private boolean checkIfComplexCommand() {
+        return complexCommandSet.contains(commandName);
+    }
+
+    private void askUserToInputArgumentsAndSetBuiltVehicle() {
+        Vehicle vehicle = manualBuildingReceiver.build();
+        collectionModifyingCommandReceiver.setCurrentVehicle(vehicle);
+    }
+
+    private String callCommandAndReturnExecutionReport(Command command) {
+        try {
+            return command.execute(argument);
         } catch (IOException e) {
-            textReceiver.print("Error!");
+            return "Error!";
+        } catch (NoArgumentException e) {
+            return commandName + " requires an argument: none were given";
+        } catch (NumberFormatException e) {
+            return commandName + " requires a different argument type, but " + argument.getClass().getSimpleName() + " was given";
         }
     }
+
 }

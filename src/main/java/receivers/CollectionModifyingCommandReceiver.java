@@ -50,6 +50,7 @@ public class CollectionModifyingCommandReceiver {
             }
         }
         if (!isFound) {
+            currentVehicle.setId(id);
             storage.getDataSet().add(currentVehicle);
             return "Element with given ID does not exist. New Vehicle with the given ID was added to the collection";
         }

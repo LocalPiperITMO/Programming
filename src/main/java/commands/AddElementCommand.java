@@ -1,7 +1,6 @@
 package commands;
 
-import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
-import receivers.BuilderCommandReceiver;
+import receivers.CollectionModifyingCommandReceiver;
 
 import java.io.IOException;
 
@@ -13,12 +12,12 @@ public class AddElementCommand implements Command {
     /**
      * Receiver that contains required method for the command
      */
-    private final BuilderCommandReceiver receiver;
+    private final CollectionModifyingCommandReceiver receiver;
 
     /**
      * @param receiver receiver with command realization
      */
-    public AddElementCommand(BuilderCommandReceiver receiver) {
+    public AddElementCommand(CollectionModifyingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -31,11 +30,11 @@ public class AddElementCommand implements Command {
 
     /**
      * Calls method from the receiver
+     *
      * @param arg command argument
      * @return report on command execution
-     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
      */
-    public String execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
+    public String execute(String arg) throws IOException {
         return receiver.addVehicle();
     }
 }

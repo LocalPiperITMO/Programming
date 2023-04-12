@@ -31,25 +31,28 @@ public class Coordinates {
     /**
      * Sets new X, returning Coordinates
      * Used for chaining.
+     *
      * @param arg new argument
      * @return this instance of Coordinates
      */
     public Coordinates setX(String arg) {
-        this.x = Float.parseFloat(arg.trim());
-        if (this.x<-2000000000 || this.x>2000000000){
+        x = Float.parseFloat(arg.trim());
+        if (Float.compare(x, -2000000) < 0 || Float.compare(x, 2000000) > 0) {
             throw new NumberFormatException();
         }
         return this;
     }
+
     /**
      * Sets new Y, returning Coordinates
      * Used for chaining.
+     *
      * @param arg new argument
      * @return this instance of Coordinates
      */
     public Coordinates setY(String arg) {
         this.y = Integer.parseInt(arg.trim());
-        if (this.x<-2000000000 || this.x>2000000000){
+        if (y < -2000000000 || y > 2000000000) {
             throw new NumberFormatException();
         }
         return this;

@@ -1,10 +1,10 @@
 package commands;
 
-import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
 import exceptions.NoArgumentException;
-import receivers.BuilderCommandReceiver;
+import receivers.CollectionModifyingCommandReceiver;
 
 import java.io.IOException;
+
 /**
  * Command for rewriting existing elements.
  * Has 2 different realizations: by user input and by script arguments
@@ -13,12 +13,12 @@ public class UpdateElementCommand implements Command {
     /**
      * Receiver that contains required method for the command
      */
-    private final BuilderCommandReceiver receiver;
+    private final CollectionModifyingCommandReceiver receiver;
 
     /**
      * @param receiver receiver with command realization
      */
-    public UpdateElementCommand(BuilderCommandReceiver receiver) {
+    public UpdateElementCommand(CollectionModifyingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -34,10 +34,9 @@ public class UpdateElementCommand implements Command {
      *
      * @param arg command argument
      * @return report on command execution
-     * @throws NoArgumentException                                    if no argument was given
-     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
+     * @throws NoArgumentException if no argument was given
      */
-    public String execute(String arg) throws IOException, NoArgumentException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
+    public String execute(String arg) throws IOException, NoArgumentException {
         if (arg.length() != 0) {
             int id = Integer.parseInt(arg);
             return receiver.update(id);

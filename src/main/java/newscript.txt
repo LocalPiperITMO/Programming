@@ -8,4 +8,3 @@ Bomb
 124
 
 MANPOWER
-execute_script src/main/java/script.txt

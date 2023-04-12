@@ -3,13 +3,13 @@ package user;
 
 import collection.CollectionStorage;
 import commands.*;
-import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
 import exceptions.InvalidCommandNameException;
 import exceptions.NoArgumentException;
 import receivers.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Invoker class
@@ -21,6 +21,7 @@ public class Invoker {
      * Contains every command
      */
     private final HashMap<String, Command> commandHashMap;
+    private final HashSet<String> complexCommandSet;
     /**
      * User argument (if the command requires one)
      */
@@ -36,29 +37,40 @@ public class Invoker {
     /**
      * Sent to ExecuteScriptCommandReceiver
      */
-    private final BuilderCommandReceiver builderCommandReceiver;
+    private final ManualBuildingReceiver manualBuildingReceiver;
+    private final CollectionModifyingCommandReceiver collectionModifyingCommandReceiver;
 
 
     public Invoker(CollectionStorage storage) {
         this.commandHashMap = new HashMap<>();
+        this.complexCommandSet = new HashSet<>();
+
         DisplayingCommandReceiver displayingCommandReceiver = new DisplayingCommandReceiver(storage, this);
         SortingCommandReceiver sortingCommandReceiver = new SortingCommandReceiver(storage);
         CollectionProcessingCommandReceiver collectionProcessingCommandReceiver = new CollectionProcessingCommandReceiver(storage);
         SimpleArgumentCommandReceiver simpleArgumentCommandReceiver = new SimpleArgumentCommandReceiver(storage);
         this.textReceiver = new TextReceiver();
-        this.builderCommandReceiver = new BuilderCommandReceiver(storage);
-        ExecuteScriptCommandReceiver executeScriptCommandReceiver = new ExecuteScriptCommandReceiver(builderCommandReceiver, this);
+        ScriptBuildingReceiver scriptBuildingReceiver = new ScriptBuildingReceiver(storage.getIdGenerator(), this.textReceiver);
+        this.manualBuildingReceiver = new ManualBuildingReceiver(storage.getIdGenerator(), this.textReceiver);
+        this.collectionModifyingCommandReceiver = new CollectionModifyingCommandReceiver(storage);
+        ExecuteScriptCommandReceiver executeScriptCommandReceiver = new ExecuteScriptCommandReceiver(collectionModifyingCommandReceiver, scriptBuildingReceiver, this);
+
+        complexCommandSet.add("add");
+        complexCommandSet.add("update");
+        complexCommandSet.add("add_if_max");
+        complexCommandSet.add("remove_greater");
+
         commandHashMap.put("help", new HelpCommand(displayingCommandReceiver));
         commandHashMap.put("info", new InfoCommand(displayingCommandReceiver));
         commandHashMap.put("show", new ShowCommand(displayingCommandReceiver));
-        commandHashMap.put("add", new AddElementCommand(builderCommandReceiver));
-        commandHashMap.put("update", new UpdateElementCommand(builderCommandReceiver));
+        commandHashMap.put("add", new AddElementCommand(collectionModifyingCommandReceiver));
+        commandHashMap.put("update", new UpdateElementCommand(collectionModifyingCommandReceiver));
         commandHashMap.put("remove_by_id", new RemoveByIDCommand(simpleArgumentCommandReceiver));
         commandHashMap.put("clear", new ClearCommand(collectionProcessingCommandReceiver));
         commandHashMap.put("save", new SaveCommand(collectionProcessingCommandReceiver));
         commandHashMap.put("execute_script", new ExecuteScriptCommand(executeScriptCommandReceiver));
-        commandHashMap.put("add_if_max", new AddIfMaxElementCommand(builderCommandReceiver));
-        commandHashMap.put("remove_greater", new RemoveGreaterElementsCommand(builderCommandReceiver));
+        commandHashMap.put("add_if_max", new AddIfMaxElementCommand(collectionModifyingCommandReceiver));
+        commandHashMap.put("remove_greater", new RemoveGreaterElementsCommand(collectionModifyingCommandReceiver));
         commandHashMap.put("reorder", new ReorderCommand(sortingCommandReceiver));
         commandHashMap.put("filter_by_fuel_consumption", new FilterByFuelConsumptionCommand(simpleArgumentCommandReceiver));
         commandHashMap.put("print_ascending", new PrintAscendingCommand(sortingCommandReceiver));
@@ -87,6 +99,9 @@ public class Invoker {
                 argument = userInputArray[1];
             }
             if (commandHashMap.get(commandName) != null) {
+                if (complexCommandSet.contains(commandName)) {
+                    collectionModifyingCommandReceiver.setCurrentVehicle(manualBuildingReceiver.build());
+                }
                 textReceiver.print(commandHashMap.get(commandName).execute(argument));
             } else {
                 throw new InvalidCommandNameException();
@@ -101,10 +116,6 @@ public class Invoker {
             textReceiver.print("There is no command named \"" + commandName + "\". Try again");
         } catch (IOException e) {
             textReceiver.print("Error!");
-        } catch (InvalidArgumentsWhileVehicleBuildingViaScriptException e) {
-            textReceiver.print("An error occurred when building vehicle via script");
-            builderCommandReceiver.setScriptMode(false);
-
         }
     }
 }

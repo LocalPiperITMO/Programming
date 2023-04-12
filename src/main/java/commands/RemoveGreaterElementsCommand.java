@@ -1,7 +1,6 @@
 package commands;
 
-import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
-import receivers.BuilderCommandReceiver;
+import receivers.CollectionModifyingCommandReceiver;
 
 import java.io.IOException;
 /**
@@ -12,12 +11,12 @@ public class RemoveGreaterElementsCommand implements Command {
     /**
      * Receiver that contains required method for the command
      */
-    private final BuilderCommandReceiver receiver;
+    private final CollectionModifyingCommandReceiver receiver;
 
     /**
      * @param receiver receiver with command realization
      */
-    public RemoveGreaterElementsCommand(BuilderCommandReceiver receiver) {
+    public RemoveGreaterElementsCommand(CollectionModifyingCommandReceiver receiver) {
         this.receiver = receiver;
     }
 
@@ -33,9 +32,8 @@ public class RemoveGreaterElementsCommand implements Command {
      *
      * @param arg command argument
      * @return report on command execution
-     * @throws InvalidArgumentsWhileVehicleBuildingViaScriptException if script building went wrong
      */
-    public String execute(String arg) throws IOException, InvalidArgumentsWhileVehicleBuildingViaScriptException {
+    public String execute(String arg) throws IOException {
         return receiver.removeGreater();
     }
 }

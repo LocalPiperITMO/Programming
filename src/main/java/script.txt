@@ -1,4 +1,5 @@
 info
 print_field_ascending_fuel_type
 execute_script src/main/java/newscript.txt
-exit
+execute_script src/main/java/newscript.txt
+save

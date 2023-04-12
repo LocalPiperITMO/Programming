@@ -1,6 +1,5 @@
 package commands;
 
-import exceptions.InvalidArgumentsWhileVehicleBuildingViaScriptException;
 import exceptions.NoArgumentException;
 
 import java.io.IOException;
@@ -16,8 +15,9 @@ public interface Command {
 
     /**
      * Calls method from the receiver
+     *
      * @param arg command argument
      * @return report on command execution
      */
-    String execute(String arg) throws IOException, NoArgumentException, InvalidArgumentsWhileVehicleBuildingViaScriptException;
+    String execute(String arg) throws IOException, NoArgumentException;
 }

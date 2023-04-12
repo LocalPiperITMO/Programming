@@ -5,18 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/ScriptBuildingException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/receivers/CollectionModifyingCommandReceiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/receivers/ManualBuildingReceiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/receivers/ScriptBuildingReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/converters/CSVToVectorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/CSVToVectorConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/BuilderCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/BuilderCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/InvalidArgumentsWhileVehicleBuildingViaScriptException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newscript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newscript.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/BuilderCommandReceiver.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/receivers/ExecuteScriptCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/ExecuteScriptCommandReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/SortingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/SortingCommandReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/TextReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/TextReceiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/script.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/user/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/user/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/Invoker.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +60,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Honor/IdeaProjects/App&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Honor/IdeaProjects/DBLab2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -190,6 +195,19 @@
       <workItem from="1680086633663" duration="12000" />
       <workItem from="1680088044038" duration="9222000" />
       <workItem from="1680098570149" duration="563000" />
+      <workItem from="1680170724288" duration="10000" />
+      <workItem from="1680195130197" duration="329000" />
+      <workItem from="1680195743982" duration="12000" />
+      <workItem from="1680779747793" duration="156000" />
+      <workItem from="1680780029011" duration="2000" />
+      <workItem from="1681153191857" duration="12000" />
+      <workItem from="1681213647194" duration="5285000" />
+      <workItem from="1681234420340" duration="6666000" />
+      <workItem from="1681244131286" duration="59000" />
+      <workItem from="1681244527972" duration="2410000" />
+      <workItem from="1681271786165" duration="2872000" />
+      <workItem from="1681277716292" duration="2809000" />
+      <workItem from="1681281303886" duration="606000" />
     </task>
     <servers />
   </component>

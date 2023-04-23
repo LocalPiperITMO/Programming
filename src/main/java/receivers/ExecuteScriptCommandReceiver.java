@@ -1,14 +1,14 @@
 package receivers;
 
+import commands.UpdateElementCommand;
 import exceptions.NoArgumentException;
 import exceptions.RecursionException;
 import exceptions.ScriptBuildingException;
+import exceptions.UnreadableFileException;
 import user.Invoker;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -17,31 +17,30 @@ import java.util.*;
  * Uses BuilderCommandReceiver to tweak building commands' realization
  */
 public class ExecuteScriptCommandReceiver {
-    /**
-     * Used for tweaking realization
-     */
+
     private final CollectionModifyingCommandReceiver receiver;
-    /**
-     * Used as an output stream
-     */
+
     private final ScriptBuildingReceiver scriptBuildingReceiver;
+
     private final TextReceiver textReceiver;
-    /**
-     * Used for sending commands to corresponding receivers
-     */
+
     private final Invoker invoker;
-    /**
-     * Stores names of building commands
-     */
+
     private final List<String> complexCommandNames = new ArrayList<>();
-    /**
-     * Stores paths of opened scripts (used for solving recursion problems)
-     */
+
     private final Set<String> setOfScriptPaths;
     private String commandName;
     private String commandArgument;
     private final List<String> arguments = new ArrayList<>();
 
+    /**
+     * Gets collection modifying receiver that is used for setting pre-built element<br>
+     * Gets script building receiver for building elements using script data<br>
+     * Gets invoker for altering the way command processes
+     * @param receiver commands that use building
+     * @param scriptBuildingReceiver builds elements
+     * @param invoker calls commands
+     */
     public ExecuteScriptCommandReceiver(CollectionModifyingCommandReceiver receiver, ScriptBuildingReceiver scriptBuildingReceiver, Invoker invoker) {
         this.receiver = receiver;
         this.textReceiver = new TextReceiver();
@@ -61,11 +60,32 @@ public class ExecuteScriptCommandReceiver {
      * @return command execution report (sent to TextReceiver)
      */
     public String execute(String fileName) {
-        clearCommandParameters();
-        File script = createScriptFile(fileName);
-        addScriptFileToSet(script);
-        readScriptAndExecuteItsCommandsElseThrowError(script);
-        return "Script " + fileName + " executed successfully";
+        try {
+            clearCommandParameters();
+            File script = createScriptFile(fileName);
+            checkIfScriptExistsElseThrowError(script);
+            checkIfScriptReadableElseThrowError(script);
+            addScriptFileToSet(script);
+            textReceiver.print("Entering script " + script.getPath() + " ...");
+            readScriptAndExecuteItsCommandsElseThrowError(script);
+            return "Script " + fileName + " finished its execution";
+        } catch (FileNotFoundException fileNotFoundException) {
+            return "Script " + fileName + " was not found";
+        } catch (UnreadableFileException unreadableFileException) {
+            return "Script " + fileName + " cannot be read. Access denied";
+        }
+    }
+
+    private void checkIfScriptExistsElseThrowError(File file) throws FileNotFoundException {
+        if (!Files.exists(file.toPath())) {
+            throw new FileNotFoundException();
+        }
+    }
+
+    private void checkIfScriptReadableElseThrowError(File file) throws UnreadableFileException {
+        if (!Files.isReadable(file.toPath())) {
+            throw new UnreadableFileException();
+        }
     }
 
     private void clearCommandParameters() {
@@ -101,7 +121,7 @@ public class ExecuteScriptCommandReceiver {
             readAndExecuteScriptLines(getScriptLines(reader));
             removeScriptFileFromSet(script);
         } catch (IOException e) {
-            textReceiver.print("Incorrect path to file");
+            textReceiver.print("File either not found or unreadable");
         }
     }
 
@@ -138,25 +158,47 @@ public class ExecuteScriptCommandReceiver {
 
     private void checkComplexCommandAndReturnNewScriptLines(List<String> scriptLines) throws ScriptBuildingException {
         if (complexCommandNames.contains(commandName)) {
-            buildVehicleAndReturnNewScriptLines(scriptLines);
+            buildVehicleAndReturnNewScriptLinesElseThrowError(scriptLines);
         }
     }
 
-    private void buildVehicleAndReturnNewScriptLines(List<String> scriptLines) throws ScriptBuildingException {
-        for (int i = 0; i < 7; ++i) {
-            arguments.add(scriptLines.get(0));
-            scriptLines.remove(0);
+    private void buildVehicleAndReturnNewScriptLinesElseThrowError(List<String> scriptLines) throws ScriptBuildingException {
+        try {
+            for (int i = 0; i < 7; ++i) {
+                arguments.add(scriptLines.get(0));
+                scriptLines.remove(0);
+            }
+            buildVehicle();
+        } catch (IndexOutOfBoundsException e) {
+            textReceiver.print("Not enough arguments to build an object. Rewrite your script");
+            throw new ScriptBuildingException();
         }
-        buildVehicle();
     }
 
     private void buildVehicle() throws ScriptBuildingException {
         receiver.setCurrentVehicle(scriptBuildingReceiver.buildOrThrowError(arguments));
     }
 
+    private boolean checkUpdateCommand() {
+        return Objects.equals(commandName, "update");
+    }
+
+    private boolean checkIfValidID() {
+        UpdateElementCommand command = (UpdateElementCommand) invoker.getCommandHashMap().get("update");
+        return command.checkIfValidID(commandArgument);
+    }
+
     private void callCommandAndPrintReport() {
         try {
-            textReceiver.print(invoker.getCommandHashMap().get(commandName).execute(commandArgument));
+            if (checkUpdateCommand()) {
+                if (checkIfValidID()) {
+                    textReceiver.print(invoker.getCommandHashMap().get(commandName).execute(commandArgument));
+                }
+            } else {
+                textReceiver.print(invoker.getCommandHashMap().get(commandName).execute(commandArgument));
+            }
+        } catch (NullPointerException e) {
+            textReceiver.print("Command " + commandName + " does not exist");
         } catch (NoArgumentException e) {
             textReceiver.print("Command " + commandName + " requires an argument: none were given");
         } catch (IOException e) {

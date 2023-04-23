@@ -6,9 +6,7 @@ import receivers.DisplayingCommandReceiver;
  * Command for printing the collection
  */
 public class ShowCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final DisplayingCommandReceiver receiver;
 
     /**

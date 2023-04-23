@@ -6,12 +6,9 @@ import java.io.IOException;
 
 /**
  * Command for adding elements to the collection.
- * Has 2 different realizations: by user input and by script arguments
  */
 public class AddElementCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final CollectionModifyingCommandReceiver receiver;
 
     /**
@@ -25,7 +22,7 @@ public class AddElementCommand implements Command {
      * @return information about the command
      */
     public String showInfo() {
-        return "No argument required. User builds an element. Adds element to dataset";
+        return "No argument required. Adds pre-built element to dataset. May call user to build element manually";
     }
 
     /**

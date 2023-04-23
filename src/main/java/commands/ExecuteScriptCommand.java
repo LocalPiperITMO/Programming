@@ -10,9 +10,7 @@ import java.io.IOException;
  * May not execute everything if syntax errors are present
  */
 public class ExecuteScriptCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final ExecuteScriptCommandReceiver receiver;
 
     /**
@@ -27,7 +25,7 @@ public class ExecuteScriptCommand implements Command {
      * @return information about the command
      */
     public String showInfo() {
-        return "Required argument - nameOfText(String). Takes the script from the text and executes it";
+        return "Required argument - nameOfScript(String). Takes the script from the text and executes it. Use with caution";
     }
 
     /**

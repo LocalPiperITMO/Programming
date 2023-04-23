@@ -10,17 +10,18 @@ import java.io.InputStreamReader;
 /**
  * Client class
  * Enables connection to Invoker
- * User can leave the program by typing 'exit' into the console
+ * User can leave the program by typing 'exit' into the console (pressing Ctrl+D will also kill the program)
  */
 public class Client {
-    /**
-     * Stores Invoker for communication user and the program
-     */
     private final Invoker invoker;
-    /**
-     * Stores TextReceiver that gives feedback to user
-     */
     private final TextReceiver textReceiver;
+
+    /**
+     * Gets collection from Converter
+     * Creates Invoker, which is given current collection
+     * Creates text receiver for output purposes
+     * @param storage contains the collection
+     */
     public Client(CollectionStorage storage) {
         this.invoker = new Invoker(storage);
         this.textReceiver = new TextReceiver();
@@ -46,6 +47,7 @@ public class Client {
                 try {
                     invoker.workWithUser(request.trim());
                 } catch (NullPointerException e) {
+                    e.printStackTrace();
                     textReceiver.print("Leaving the program");
                     isRunning = false;
                 }

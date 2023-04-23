@@ -6,9 +6,7 @@ import receivers.SortingCommandReceiver;
  * Command for printing elements in reversed order
  */
 public class ReorderCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final SortingCommandReceiver receiver;
 
     /**

@@ -1,6 +1,7 @@
 package receivers;
 
 import datatype.Vehicle;
+import exceptions.BuildingInterruptionException;
 import exceptions.LessOrEqualToZeroException;
 import exceptions.NoArgumentException;
 import generators.IDGenerator;
@@ -8,12 +9,24 @@ import generators.IDGenerator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
+/**
+ * Building receiver<br>
+ * Builds objects using manual input<br>
+ * User can stop the process by entering "/stop"
+ */
 public class ManualBuildingReceiver {
     private final IDGenerator idGenerator;
     private final TextReceiver textReceiver;
     private final BufferedReader reader;
 
+    /**
+     * Gets IDGenerator for building purposes and text receiver for printing output
+     *
+     * @param idGenerator  generates random ID for objects
+     * @param textReceiver prints output
+     */
     public ManualBuildingReceiver(IDGenerator idGenerator, TextReceiver textReceiver) {
         this.idGenerator = idGenerator;
         this.textReceiver = textReceiver;
@@ -24,18 +37,29 @@ public class ManualBuildingReceiver {
         textReceiver.print(message);
     }
 
-    class VehicleBuilder {
+    private class VehicleBuilder {
         private final Vehicle vehicle;
 
+        /**
+         * Creates base for new element
+         */
         public VehicleBuilder() {
             this.vehicle = new Vehicle();
         }
 
-        private void requestNameUntilFits() {
+        private void checkIfUserStops(String userInput) throws BuildingInterruptionException {
+            if (Objects.equals(userInput, "/stop")) {
+                throw new BuildingInterruptionException();
+            }
+        }
+
+        private void requestNameUntilFits() throws BuildingInterruptionException {
             while (true) {
                 try {
-                    showMessageToUser("Input name (must not be empty):");
-                    vehicle.setName(reader.readLine());
+                    showMessageToUser("Input name (number of characters: from 1 to 20, must not be empty):");
+                    String userInput = reader.readLine();
+                    checkIfUserStops(userInput);
+                    vehicle.setName(userInput);
                     return;
                 } catch (NoArgumentException noArgumentException) {
                     showMessageToUser("Wrong input! Please, try again");
@@ -45,11 +69,13 @@ public class ManualBuildingReceiver {
             }
         }
 
-        private void requestCoordinateXUntilFits() {
+        private void requestCoordinateXUntilFits() throws BuildingInterruptionException {
             while (true) {
                 try {
                     showMessageToUser("Input x (Float value, -2 000 000 <=x<=2 000 000, must not be empty):");
-                    vehicle.getCoordinates().setX(reader.readLine());
+                    String userInput = reader.readLine();
+                    checkIfUserStops(userInput);
+                    vehicle.getCoordinates().setX(userInput);
                     return;
                 } catch (NumberFormatException numberFormatException) {
                     showMessageToUser("Wrong input! Please, try again");
@@ -59,11 +85,13 @@ public class ManualBuildingReceiver {
             }
         }
 
-        private void requestCoordinateYUntilFits() {
+        private void requestCoordinateYUntilFits() throws BuildingInterruptionException {
             while (true) {
                 try {
                     showMessageToUser("Input y (Integer value, -2 000 000 000<=x<=2 000 000 000, must not be empty):");
-                    vehicle.getCoordinates().setY(reader.readLine());
+                    String userInput = reader.readLine();
+                    checkIfUserStops(userInput);
+                    vehicle.getCoordinates().setY(userInput);
                     return;
                 } catch (NumberFormatException numberFormatException) {
                     showMessageToUser("Wrong input! Please, try again");
@@ -73,11 +101,13 @@ public class ManualBuildingReceiver {
             }
         }
 
-        private void requestEnginePowerUntilFits() {
+        private void requestEnginePowerUntilFits() throws BuildingInterruptionException {
             while (true) {
                 try {
                     showMessageToUser("Input enginePower (Long value, 0<y<=4 000 000 000, must not be null):");
-                    vehicle.setEnginePower(reader.readLine());
+                    String userInput = reader.readLine();
+                    checkIfUserStops(userInput);
+                    vehicle.setEnginePower(userInput);
                     return;
                 } catch (LessOrEqualToZeroException | NumberFormatException illegalArgumentException) {
                     showMessageToUser("Wrong input! Please, try again");
@@ -87,11 +117,13 @@ public class ManualBuildingReceiver {
             }
         }
 
-        private void requestFuelConsumptionUntilFits() {
+        private void requestFuelConsumptionUntilFits() throws BuildingInterruptionException {
             while (true) {
                 try {
                     showMessageToUser("Input fuelConsumption (Long value, 0<y<=4 000 000 000, must not be null):");
-                    vehicle.setFuelConsumption(reader.readLine());
+                    String userInput = reader.readLine();
+                    checkIfUserStops(userInput);
+                    vehicle.setFuelConsumption(userInput);
                     return;
                 } catch (LessOrEqualToZeroException | NumberFormatException illegalArgumentException) {
                     showMessageToUser("Wrong input! Please, try again");
@@ -101,11 +133,13 @@ public class ManualBuildingReceiver {
             }
         }
 
-        private void requestVehicleTypeUntilFits() {
+        private void requestVehicleTypeUntilFits() throws BuildingInterruptionException {
             while (true) {
                 try {
                     showMessageToUser("Input vehicleType (leave blank if null, one of those: PLANE, HELICOPTER, BOAT, BICYCLE, CHOPPER):");
-                    vehicle.setType(reader.readLine());
+                    String userInput = reader.readLine();
+                    checkIfUserStops(userInput);
+                    vehicle.setType(userInput);
                     return;
                 } catch (IllegalArgumentException illegalArgumentException) {
                     showMessageToUser("Wrong input! Please, try again");
@@ -115,11 +149,13 @@ public class ManualBuildingReceiver {
             }
         }
 
-        private void requestFuelTypeUntilFits() {
+        private void requestFuelTypeUntilFits() throws BuildingInterruptionException {
             while (true) {
                 try {
                     showMessageToUser("Input fuelType (leave blank if null, one of those: KEROSENE, MANPOWER, NUCLEAR, PLASMA, ANTIMATTER):");
-                    vehicle.setFuelType(reader.readLine());
+                    String userInput = reader.readLine();
+                    checkIfUserStops(userInput);
+                    vehicle.setFuelType(userInput);
                     return;
                 } catch (IllegalArgumentException illegalArgumentException) {
                     showMessageToUser("Wrong input! Please, try again");
@@ -129,7 +165,7 @@ public class ManualBuildingReceiver {
             }
         }
 
-        public Vehicle buildStepByStep() {
+        private Vehicle buildStepByStep() throws BuildingInterruptionException {
             requestNameUntilFits();
             requestCoordinateXUntilFits();
             requestCoordinateYUntilFits();
@@ -142,7 +178,14 @@ public class ManualBuildingReceiver {
         }
     }
 
-    public Vehicle build() {
+    /**
+     * Creates VehicleBuilder objects and calls its build method<br>
+     * Inside vehicle is created, then modified by user, then returned
+     *
+     * @return built vehicle
+     * @throws BuildingInterruptionException if user types "/stop" during building process
+     */
+    public Vehicle build() throws BuildingInterruptionException {
         VehicleBuilder vehicleBuilder = new VehicleBuilder();
         return vehicleBuilder.buildStepByStep();
     }

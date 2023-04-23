@@ -9,16 +9,11 @@ import java.util.Vector;
  * Class for storing collection and IDGenerator
  */
 public class CollectionStorage {
-    /**
-     * Vector-type collection of Vehicles
-     */
     private final Vector<Vehicle> dataSet;
-    /**
-     * Creates and stores unique IDs for Vehicles
-     */
     private final IDGenerator idGenerator;
 
     /**
+     * Receives collection and IDGenerator
      * @param vector vector of Vehicles
      * @param idGenerator already existing IDGenerator
      */

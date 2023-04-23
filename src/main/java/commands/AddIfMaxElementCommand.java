@@ -6,12 +6,9 @@ import java.io.IOException;
 
 /**
  * Command for adding elements to the collection if the condition (greater than the greatest) is matched.
- * Has 2 different realizations: by user input and by script arguments
  */
 public class AddIfMaxElementCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final CollectionModifyingCommandReceiver receiver;
 
     /**
@@ -25,7 +22,7 @@ public class AddIfMaxElementCommand implements Command {
      * @return information about the command
      */
     public String showInfo() {
-        return "No argument required. User builds an element. If the element is greater that the greatest element in the dataset, it is added to dataset";
+        return "No argument required. If the element is greater that the greatest element in the dataset, it is added to dataset. May call user to build element manually";
     }
 
     /**

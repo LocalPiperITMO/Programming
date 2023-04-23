@@ -6,46 +6,28 @@ import exceptions.NoArgumentException;
 import java.time.LocalDate;
 
 /**
- * Vehicle
  * Element of collection, has arguments that are set separately
  */
 public class Vehicle implements Comparable<Vehicle> {
-    /**
-     * Unique number, set automatically
-     */
+
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    /**
-     * Name, can't be null or empty
-     */
 
     private String name; //Поле не может быть null, Строка не может быть пустой
-    /**
-     * Coordinates, can't be null
-     */
+
     private final Coordinates coordinates = new Coordinates(); //Поле не может быть null
-    /**
-     * Date, set automatically
-     */
+
     private final java.time.LocalDate creationDate = LocalDate.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    /**
-     * enginePower, can only be long type, greater than 0
-     */
+
     private long enginePower; //Значение поля должно быть больше 0
-    /**
-     * fuelConsumption, can only be long type, greater than 0
-     */
+
     private long fuelConsumption; //Значение поля должно быть больше 0
-    /**
-     * VehicleType, can be either null or one of the pre-defined arguments
-     */
+
     private VehicleType type; //Поле может быть null
-    /**
-     * FuelType, can be either null or one of the pre-defined arguments
-     */
+
     private FuelType fuelType; //Поле может быть null
 
     /**
-     * ID is set by IDGenerator
+     * ID is set by IDGenerator<br>
      * Used for chaining
      *
      * @param id new ID
@@ -64,7 +46,7 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     /**
-     * Sets new enginePower. Returns Vehicle
+     * Sets new enginePower. Returns Vehicle if successful, otherwise throws corresponding exception<br>
      * Used for chaining
      *
      * @param arg new enginePower
@@ -84,7 +66,7 @@ public class Vehicle implements Comparable<Vehicle> {
 
 
     /**
-     * Sets new fuelConsumption. Returns Vehicle
+     * Sets new fuelConsumption. Returns Vehicle if successful, otherwise throws corresponding exception<br>
      * Used for chaining
      *
      * @param arg new fuelConsumption
@@ -104,7 +86,7 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     /**
-     * Sets new fuelType. Returns Vehicle
+     * Sets new fuelType. Returns Vehicle if successful, otherwise throws corresponding exception<br>
      * Used for chaining
      *
      * @param arg new fuelType
@@ -120,14 +102,14 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     /**
-     * Sets new name. Returns Vehicle
+     * Sets new name. Returns Vehicle if successful, otherwise throws corresponding exception<br>
      * Used for chaining
      *
      * @param arg new name
      * @return this instance of Vehicle
      */
     public Vehicle setName(String arg) throws NoArgumentException {
-        if (arg.trim().length() == 0) {
+        if (arg.trim().length() == 0 || arg.length() > 20) {
             throw new NoArgumentException();
         } else {
             this.name = arg;
@@ -136,7 +118,7 @@ public class Vehicle implements Comparable<Vehicle> {
     }
 
     /**
-     * Sets new vehicleType. Returns Vehicle
+     * Sets new vehicleType. Returns Vehicle if successful, otherwise throws corresponding exception<br>
      * Used for chaining
      *
      * @param arg new vehicleType
@@ -206,9 +188,16 @@ public class Vehicle implements Comparable<Vehicle> {
      * @return string representation of element
      */
     public String toString() {
-        return getId() + " " + getName() + " " + getCreationDate() + " "
-                + getCoordinates().getX() + " " + getCoordinates().getY() + " " + getEnginePower() + " " + getFuelConsumption() + " "
-                + getType() + " " + getFuelType();
+        return String.format("%7d " + "%-20s " + "%12s " + "%15.6f " + "%11d " + "%15d " + "%15d " + "%-10s " + "%-10s",
+                getId(),
+                getName(),
+                getCreationDate(),
+                getCoordinates().getX(),
+                getCoordinates().getY(),
+                getEnginePower(),
+                getFuelConsumption(),
+                getType(),
+                getFuelType());
     }
 
     /**

@@ -3,22 +3,26 @@ package receivers;
 import collection.CollectionStorage;
 import converters.CSVToVectorConverter;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 /**
- * Receiver class
+ * Receiver class<br>
  * Stores realization for commands that work with the collection as a whole (such as 'save' and 'clear')
  */
 public class CollectionProcessingCommandReceiver {
-    /**
-     * Stores Vehicle vector
-     */
+
     private final CollectionStorage storage;
 
+    private final CSVToVectorConverter converter;
+
+    /**
+     * Receives storage from Invoker<br>
+     * Creates converter object to perform "save" command
+     * @param storage contains the collection
+     */
     public CollectionProcessingCommandReceiver(CollectionStorage storage) {
         this.storage = storage;
+        this.converter = new CSVToVectorConverter();
     }
 
     /**
@@ -27,8 +31,11 @@ public class CollectionProcessingCommandReceiver {
      * @return command execution report (sent to TextReceiver)
      */
     public String clear() {
-        storage.getDataSet().removeAllElements();
-        return "Collection has been emptied";
+        if (storage.getDataSet().size()!=0) {
+            storage.getDataSet().removeAllElements();
+            return "Collection has been emptied";
+        }
+        return "Collection is already empty";
     }
 
     /**
@@ -37,19 +44,7 @@ public class CollectionProcessingCommandReceiver {
      * @return command execution report (sent to TextReceiver)
      */
     public String save() throws IOException {
-        prepareFile();
-        CSVToVectorConverter converter = new CSVToVectorConverter("FILE");
-        converter.writeToCSV(storage.getDataSet());
+        converter.saveToFile(storage.getDataSet());
         return "Saved successfully";
-    }
-
-    /**
-     * Cleans file before saving to it
-     * Private method
-     */
-    private void prepareFile() throws IOException {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(System.getenv("FILE"), false)) {
-            fileOutputStream.write("".getBytes(StandardCharsets.UTF_8));
-        }
     }
 }

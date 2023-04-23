@@ -4,6 +4,7 @@ package user;
 import collection.CollectionStorage;
 import commands.*;
 import datatype.Vehicle;
+import exceptions.BuildingInterruptionException;
 import exceptions.InvalidCommandNameException;
 import exceptions.NoArgumentException;
 import receivers.*;
@@ -11,6 +12,7 @@ import receivers.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * Invoker class
@@ -18,30 +20,20 @@ import java.util.HashSet;
  * Stores commandHashMap used for accessing commands
  */
 public class Invoker {
-    /**
-     * Contains every command
-     */
     private final HashMap<String, Command> commandHashMap;
     private final HashSet<String> complexCommandSet;
-    /**
-     * User argument (if the command requires one)
-     */
     private String argument;
-    /**
-     * User-inputted command name
-     */
     private String commandName;
-    /**
-     * Enables output stream
-     */
     private final TextReceiver textReceiver;
-    /**
-     * Sent to ExecuteScriptCommandReceiver
-     */
     private final ManualBuildingReceiver manualBuildingReceiver;
     private final CollectionModifyingCommandReceiver collectionModifyingCommandReceiver;
 
-
+    /**
+     * Initializes map of commands
+     * Creates command receivers, that are send to corresponding commands
+     * Crates text receiver for output purposes
+     * @param storage contains the collection
+     */
     public Invoker(CollectionStorage storage) {
         this.commandHashMap = new HashMap<>();
         this.complexCommandSet = new HashSet<>();
@@ -94,13 +86,22 @@ public class Invoker {
         try {
             setCommandNameAndArgument(readRequest(userInput));
             if (checkIfComplexCommand()) {
-                askUserToInputArgumentsAndSetBuiltVehicle();
+                if (checkIfUpdate()) {
+                    performActionsIfUpdate();
+                } else {
+                    askUserToInputArgumentsAndSetBuiltVehicle();
+                    textReceiver.print(callCommandAndReturnExecutionReport(findCommandElseThrowError()));
+                }
+            } else {
+                textReceiver.print(callCommandAndReturnExecutionReport(findCommandElseThrowError()));
             }
-            textReceiver.print(callCommandAndReturnExecutionReport(findCommandElseThrowError()));
         } catch (InvalidCommandNameException e) {
-            textReceiver.print("There is no command named \"" + commandName + "\". Try again");
+            if (commandName.length() != 0) {
+                textReceiver.print("There is no command named \"" + commandName + "\". Try again");
+            }
+        } catch (BuildingInterruptionException e) {
+            textReceiver.print("User terminated building process");
         }
-
     }
 
     private String[] readRequest(String userInput) {
@@ -124,7 +125,19 @@ public class Invoker {
         return complexCommandSet.contains(commandName);
     }
 
-    private void askUserToInputArgumentsAndSetBuiltVehicle() {
+    private boolean checkIfUpdate() {
+        return Objects.equals(commandName, "update");
+    }
+
+    private void performActionsIfUpdate() throws BuildingInterruptionException {
+        UpdateElementCommand command = (UpdateElementCommand) commandHashMap.get("update");
+        if (command.checkIfValidID(argument)) {
+            askUserToInputArgumentsAndSetBuiltVehicle();
+            textReceiver.print(callCommandAndReturnExecutionReport(commandHashMap.get("update")));
+        }
+    }
+
+    private void askUserToInputArgumentsAndSetBuiltVehicle() throws BuildingInterruptionException {
         Vehicle vehicle = manualBuildingReceiver.build();
         collectionModifyingCommandReceiver.setCurrentVehicle(vehicle);
     }

@@ -1,7 +1,7 @@
 package datatype;
 
 /**
- * FuelType
+ * FuelType<br>
  * Argument type, used for storing name of fuel type used by element
  */
 public enum FuelType {
@@ -10,9 +10,6 @@ public enum FuelType {
     NUCLEAR(3),
     PLASMA(4),
     ANTIMATTER(5);
-    /**
-     * Used for sorting via fuelType
-     */
     private final int position;
 
     /**

@@ -5,12 +5,9 @@ import receivers.CollectionModifyingCommandReceiver;
 import java.io.IOException;
 /**
  * Command for removing elements from the collection if the condition (greater than the current) is matched.
- * Has 2 different realizations: by user input and by script arguments
  */
 public class RemoveGreaterElementsCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final CollectionModifyingCommandReceiver receiver;
 
     /**
@@ -24,7 +21,7 @@ public class RemoveGreaterElementsCommand implements Command {
      * @return information about the command
      */
     public String showInfo() {
-        return "No argument required. User builds an element. Removes all the elements from the dataset greater than the given one";
+        return "No argument required. Removes all the elements from the dataset greater than the given one. May call user to build element manually";
     }
 
     /**

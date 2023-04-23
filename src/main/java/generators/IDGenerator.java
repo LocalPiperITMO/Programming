@@ -3,14 +3,19 @@ package generators;
 import java.util.HashSet;
 
 /**
- * Generator class
+ * Generator class<br>
  * Used in element building
  */
 public class IDGenerator {
-    /**
-     * Contains every existing ID
-     */
+
     private final HashSet<Integer> idSet = new HashSet<>();
+
+    /**
+     * @return set of unique IDs
+     */
+    public HashSet<Integer> getIdSet() {
+        return idSet;
+    }
 
     /**
      * Used to generate unique ID

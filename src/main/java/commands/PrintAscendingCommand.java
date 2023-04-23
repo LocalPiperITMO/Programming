@@ -6,9 +6,7 @@ import receivers.SortingCommandReceiver;
  * Command for printing elements in ascending order (elements sorted by sum)
  */
 public class PrintAscendingCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final SortingCommandReceiver receiver;
 
     /**
@@ -22,7 +20,7 @@ public class PrintAscendingCommand implements Command {
      * @return information about the command
      */
     public String showInfo() {
-        return "No argument required. Displays every element sorted by ID";
+        return "No argument required. Displays every element sorted by EnginePower, then by FuelConsumption, then by ID";
     }
 
     /**

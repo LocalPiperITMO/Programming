@@ -8,9 +8,7 @@ import java.io.IOException;
  * Command for clearing the collection.
  */
 public class ClearCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final CollectionProcessingCommandReceiver receiver;
     /**
      * @param receiver receiver with command realization

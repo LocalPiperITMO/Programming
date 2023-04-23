@@ -1,17 +1,13 @@
 package datatype;
 
 /**
- * Coordinates
+ * Coordinates<br>
  * Argument type, stores X and Y coordinates
  */
 public class Coordinates {
-    /**
-     * Coordinate X (can be non-integer)
-     */
+
     private Float x;
-    /**
-     * Coordinate Y (can only be integer)
-     */
+
     private int y;
 
     /**
@@ -29,7 +25,7 @@ public class Coordinates {
     }
 
     /**
-     * Sets new X, returning Coordinates
+     * Sets new X, returning Coordinates if successful, otherwise throws corresponding exception<br>
      * Used for chaining.
      *
      * @param arg new argument
@@ -44,7 +40,7 @@ public class Coordinates {
     }
 
     /**
-     * Sets new Y, returning Coordinates
+     * Sets new Y, returning Coordinates if successful, otherwise throws corresponding exception<br>
      * Used for chaining.
      *
      * @param arg new argument

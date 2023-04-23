@@ -8,10 +8,20 @@ import generators.IDGenerator;
 
 import java.util.List;
 
+/**
+ * Building receiver<br>
+ * Builds objects using script lines
+ */
 public class ScriptBuildingReceiver {
     private final IDGenerator idGenerator;
     private final TextReceiver textReceiver;
 
+    /**
+     * Gets IDGenerator for building purposes and text receiver in order to output an error if one occurs
+     *
+     * @param idGenerator  generates random ID
+     * @param textReceiver outputs errors
+     */
     public ScriptBuildingReceiver(IDGenerator idGenerator, TextReceiver textReceiver) {
         this.idGenerator = idGenerator;
         this.textReceiver = textReceiver;
@@ -35,6 +45,14 @@ public class ScriptBuildingReceiver {
         return currentVehicle;
     }
 
+    /**
+     * Gets list of arguments, then builds vehicle using these arguments<br>
+     * If building goes wrong, throws error and terminates building process
+     *
+     * @param vehicleProperties list of arguments for building
+     * @return built element
+     * @throws ScriptBuildingException if an error occurred while building
+     */
     public Vehicle buildOrThrowError(List<String> vehicleProperties) throws ScriptBuildingException {
         try {
             return build(vehicleProperties);

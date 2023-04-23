@@ -6,9 +6,7 @@ import receivers.SortingCommandReceiver;
  * Command for printing elements sorted by their fuelType
  */
 public class PrintFieldAscendingFuelTypeCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final SortingCommandReceiver receiver;
 
     /**
@@ -22,7 +20,7 @@ public class PrintFieldAscendingFuelTypeCommand implements Command {
      * @return information about the command
      */
     public String showInfo() {
-        return "No argument required. Displays only ID and FuelType of every element, sorted by FuelType";
+        return "No argument required. Displays only ID and FuelType of every element, sorted by FuelType, then by ID";
     }
 
     /**

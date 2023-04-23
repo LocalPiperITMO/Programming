@@ -4,36 +4,32 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 import datatype.Vehicle;
-import exceptions.LessOrEqualToZeroException;
-import exceptions.NoArgumentException;
+import exceptions.*;
 import generators.IDGenerator;
 import receivers.TextReceiver;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
 
 /**
- * Converter that can turn CSV file to Vector and Vector to CSV file
+ * Converter class where every operation regarding information channeling from files to collections and backwards occur.
  */
 public class CSVToVectorConverter {
-    /**
-     * Used when writing to file
-     */
     private final String fileName;
-    /**
-     * Used as an output stream
-     */
     private final TextReceiver textReceiver;
-    /**
-     * Used when generating Vehicles from CSV file
-     */
     private final IDGenerator idGenerator = new IDGenerator();
 
-    public CSVToVectorConverter(String fileName) {
-        this.fileName = fileName;
+    /**
+     * Gets environment variable named "FILE" and creates receiver for text output
+     */
+    public CSVToVectorConverter() {
+        this.fileName = "FILE";
         this.textReceiver = new TextReceiver();
     }
 
@@ -46,139 +42,275 @@ public class CSVToVectorConverter {
 
     /**
      * @return vector of Vehicles
-     * @throws CsvException if there is a problem parsing CSV file
      */
-    public Vector<Vehicle> getVector() throws IOException, CsvException {
-        return convertStringListToVehicleVector(convertCSVtoStringList(this.fileName));
+    public Vector<Vehicle> getVector() throws InvalidPathException, IOException {
+        CSVtoStringListConverter converter = new CSVtoStringListConverter();
+        return (new StringListToVehicleVectorConverter()).convertStringListToVector(converter.convertCSVtoStringList());
     }
 
     /**
-     * Writes collection to CSV file
-     * @param dataSet vector of Vehicles
+     * Operation of saving current collection to a previously opened file<br>
+     * If the file was not read from before (for some reason), creates file "output.csv" and saves it here
+     * @param dataSet contains the collection
+     * @throws IOException if unexpected error occurs
      */
-    public void writeToCSV(Vector<Vehicle> dataSet) throws IOException {
-        FileWriter writer;
-        if (openFileWithPathFromEnv(fileName).isPresent()) {
-            writer = new FileWriter(openFileWithPathFromEnv(fileName).get(), true);
-            CSVWriter csvWriter = new CSVWriter(writer);
-            csvWriter.writeAll(convertVehicleVectorToStringList(dataSet));
-            csvWriter.close();
-            writer.close();
-        } else {
-            throw new FileNotFoundException("BITCH WORK PLEASE");
+    public void saveToFile(Vector<Vehicle> dataSet) throws IOException {
+        (new FileSaver(dataSet)).writeToCSV();
+    }
+    private class FileSaver {
+        private final Vector<Vehicle> dataSet;
+
+        /**
+         * Installs collection for means of saving
+         * @param dataSet contains the collection
+         */
+        public FileSaver(Vector<Vehicle> dataSet) {
+            this.dataSet = dataSet;
+        }
+
+        private List<String[]> convertVehicleVectorToStringList() {
+            //Opel,124,4,51,21,CHOPPER,MANPOWER
+            List<String[]> stringList = new ArrayList<>();
+            for (Vehicle vehicle : dataSet) {
+                String type = (vehicle.getType() == null) ? "" : String.valueOf(vehicle.getType());
+                String fuelType = (vehicle.getFuelType() == null) ? "" : String.valueOf(vehicle.getFuelType());
+                String[] line = {
+                        vehicle.getName(),
+                        String.valueOf(vehicle.getCoordinates().getX()),
+                        String.valueOf(vehicle.getCoordinates().getY()),
+                        String.valueOf(vehicle.getEnginePower()),
+                        String.valueOf(vehicle.getFuelConsumption()),
+                        type,
+                        fuelType
+                };
+                stringList.add(line);
+            }
+
+            return stringList;
+        }
+
+        private void writeToCSV() throws IOException {
+            try {
+                writeToExistingFileElseWriteToNewOne();
+            } catch (FileNotFoundException fileNotFoundException) {
+                writeToNewFile();
+            }
+
+        }
+
+        private void writeToExistingFileElseWriteToNewOne() throws IOException {
+            if (getFileWithPathFromEnvIfPathNotNull(fileName).isPresent()) {
+                try {
+                    throwErrorIfFileNotExist(System.getenv(fileName));
+                    prepareFileElseThrowErrorIfNotWriteable(getFileWithPathFromEnvIfPathNotNull(fileName).get());
+                    try (CSVWriter writer = new CSVWriter(new FileWriter(getFileWithPathFromEnvIfPathNotNull(fileName).get(), true))) {
+                        writer.writeAll(convertVehicleVectorToStringList());
+                    }
+                } catch (UnmodifiableFileException unmodifiableFileException) {
+                    writeToNewFile();
+                }
+            } else {
+                throw new FileNotFoundException();
+            }
+        }
+
+        private void writeToNewFile() throws IOException {
+            File file = createFileToSaveTo();
+            try (CSVWriter writer = new CSVWriter(new FileWriter(file, true))) {
+                writer.writeAll(convertVehicleVectorToStringList());
+            }
+        }
+
+        private void checkIfFileWritableElseThrowError(File file) throws UnmodifiableFileException {
+            if (!Files.isWritable(file.toPath())) {
+                sendMessage("Cannot save to file: access denied");
+                throw new UnmodifiableFileException();
+            }
+
+        }
+
+        private File createFileToSaveTo() throws IOException {
+            Path outputPath = Path.of("output.csv");
+            if (!Files.exists(outputPath)) {
+                sendMessage("New file created. Saving to new file...");
+            } else {
+                Files.delete(outputPath);
+                sendMessage("File \"output.csv\" already exists. Saving to this file...");
+            }
+            return new File(String.valueOf(outputPath));
+        }
+
+        private void prepareFileElseThrowErrorIfNotWriteable(File file) throws UnmodifiableFileException, IOException {
+            checkIfFileWritableElseThrowError(file);
+            try (FileOutputStream writer = new FileOutputStream(file, false)) {
+                writer.write("".getBytes(StandardCharsets.UTF_8));
+            }
+        }
+
+    }
+
+    private void throwErrorIfFileNotExist(String envValue) throws FileNotFoundException {
+        if (Files.notExists(Path.of(envValue))) {
+            throw new FileNotFoundException();
+        }
+    }
+
+    private class CSVtoStringListConverter {
+        private List<String[]> convertCSVtoStringList() throws InvalidPathException, IOException {
+            try {
+                throwErrorIfFileNotExist(System.getenv(fileName));
+                return readCSVFromFileAndReturnStringListElseThrowError(createFileIfExistsAndReadableElseThrowError());
+            } catch (NullPointerException nullPointerException) {
+                sendMessage("Error while trying to read environment variable. Check if the path/variable name is correct");
+                throw new InvalidPathException();
+            } catch (FileNotFoundException fileNotFoundException) {
+                sendMessage("File does not exist");
+                throw new FileNotFoundException();
+            } catch (UnreadableFileException unreadableFileException) {
+                return createNewStringList();
+            }
+        }
+
+        private List<String[]> createNewStringList() {
+            sendMessage("Creating empty collection");
+            return new ArrayList<>();
+        }
+
+        private File createFileIfExistsAndReadableElseThrowError() throws FileNotFoundException, UnreadableFileException {
+            if (getFileWithPathFromEnvIfPathNotNull(fileName).isPresent()) {
+                File file = getFileWithPathFromEnvIfPathNotNull(fileName).get();
+                throwErrorIfFileNotReadable(file);
+                return file;
+            }
+            throw new FileNotFoundException();
+        }
+
+        private void throwErrorIfFileNotReadable(File file) throws UnreadableFileException {
+            if (!Files.isReadable(file.toPath())) {
+                sendMessage("Cannot read file: access denied");
+                throw new UnreadableFileException();
+            }
+        }
+
+        private List<String[]> readCSVFromFileAndReturnStringListElseThrowError(File file) throws IOException {
+            try (CSVReader csvReader = new CSVReader(new InputStreamReader(new FileInputStream(file)))) {
+                return csvReader.readAll();
+            } catch (FileNotFoundException e) {
+                sendMessage("File not found");
+                throw new IOException();
+            } catch (IOException | CsvException e) {
+                sendMessage("Something wrong with your CSV-file. Loading failed");
+                throw new IOException();
+            }
+
+        }
+    }
+
+    private class StringListToVehicleVectorConverter {
+        private final Vector<Vehicle> dataset;
+        private int corruptedLinesCounter;
+        private int lineCounter;
+
+        public StringListToVehicleVectorConverter() {
+            this.dataset = new Vector<>();
+            this.corruptedLinesCounter = 0;
+            this.lineCounter = 0;
+        }
+
+        private boolean checkIfEmptyStringList(List<String[]> strings) {
+            return strings.size() == 0;
+        }
+
+        private void increaseLineCounter() {
+            ++this.lineCounter;
+        }
+
+        private void increaseCorruptedLinesCounter() {
+            ++this.corruptedLinesCounter;
+        }
+
+        private void createVectorAndFillWithData(List<String[]> buildingMaterial) {
+            for (String[] line : buildingMaterial) {
+                increaseLineCounter();
+                Optional<Vehicle> vehicle = buildVehicleIfPossible(line);
+                if (vehicle.isPresent()) {
+                    this.dataset.add(vehicle.get());
+                } else {
+                    sendMessage("Vehicle creation failed");
+                }
+            }
+
+        }
+
+        private Optional<Vehicle> buildVehicleIfPossible(String[] parameters) {
+            try {
+                if (checkIfArrayOfRequiredSize(parameters)) {
+                    Vehicle vehicle = new Vehicle();
+                    vehicle.setName(parameters[0])
+                            .getCoordinates()
+                            .setX(parameters[1])
+                            .setY(parameters[2]);
+                    vehicle.setEnginePower(parameters[3])
+                            .setFuelConsumption(parameters[4])
+                            .setType(parameters[5])
+                            .setFuelType(parameters[6])
+                            .setId(idGenerator.generateRandomID());
+                    return Optional.of(vehicle);
+                } else {
+                    sendMessage("Line " + lineCounter + " has incorrect number of arguments");
+                    increaseCorruptedLinesCounter();
+                }
+            } catch (NoArgumentException e) {
+                sendMessage("Line " + lineCounter + " has no argument");
+                increaseCorruptedLinesCounter();
+            } catch (LessOrEqualToZeroException e) {
+                sendMessage("Line " + lineCounter + " has an argument that is less or equal to zero");
+                increaseCorruptedLinesCounter();
+            } catch (NumberFormatException e) {
+                sendMessage("Line " + lineCounter + " has a string value instead of numeric one");
+                increaseCorruptedLinesCounter();
+            } catch (IllegalArgumentException e) {
+                sendMessage("Line " + lineCounter + " has an illegal VehicleType/FuelType value.");
+                increaseCorruptedLinesCounter();
+            }
+            return Optional.empty();
+        }
+
+        private boolean checkIfArrayOfRequiredSize(String[] line) {
+            return line.length == 7;
+        }
+
+        private Vector<Vehicle> convertStringListToVector(List<String[]> text) {
+            if (!checkIfEmptyStringList(text)) {
+                createVectorAndFillWithData(text);
+                sendMessage("Dataset is ready for use. Number of corrupted lines: " + corruptedLinesCounter);
+                return this.dataset;
+            }
+            return new Vector<>();
         }
 
     }
 
     /**
-     * Converts CSV to list of String arrays (used for creating vector of Vehicles).
-     * Private method
-     * @param fileName name of file the list is taken from
-     * @return list of String arrays (arguments for Vehicle building)
-     * @throws CsvException if there is a problem parsing CSV file
+     * Gets environment variable name and tries to find the file with the path stored in the variable<br>
+     * If the path is null, does not return anything
+     * @param fileName environment variable name
+     * @return file if found, otherwise nothing
      */
-    private List<String[]> convertCSVtoStringList(String fileName) throws IOException, CsvException {
-        InputStreamReader reader;
-        if (openFileWithPathFromEnv(fileName).isPresent()) {
-            reader = new InputStreamReader(new FileInputStream(openFileWithPathFromEnv(fileName).get()));
-            CSVReader csvReader = new CSVReader(reader);
-            List<String[]> lines = csvReader.readAll();
-            csvReader.close();
-            reader.close();
-            return lines;
-        }
-        throw new FileNotFoundException(fileName);
-    }
-
-    /**
-     * Checks if file exists. If it does, returns file, otherwise returns empty object (used for creating vector of Vehicles).
-     * Private method
-     * @param fileName name of file to find
-     * @return CSV file otherwise empty object
-     */
-    private Optional<File> openFileWithPathFromEnv(String fileName) {
+    Optional<File> getFileWithPathFromEnvIfPathNotNull(String fileName) {
         String path = System.getenv(fileName);
         if (path != null) {
-            return Optional.of(new File(path));
+            if (path.trim().length() != 0) {
+                return Optional.of(new File(path));
+            } else {
+                return Optional.empty();
+            }
         } else {
             return Optional.empty();
         }
     }
 
-    /**
-     * Converts list of String arrays to collection of Vehicles (final step in vector creation).
-     * Private method.
-     * @param text arguments for building
-     * @return Vehicle vector
-     */
-    private Vector<Vehicle> convertStringListToVehicleVector(List<String[]> text) {
-        int corruptedLines = 0;
-        int lineCounter = 0;
-        Vector<Vehicle> dataSet = new Vector<>();
-        for (String[] line : text) {
-            ++lineCounter;
-            Vehicle vehicle = new Vehicle();
-            try {
-                if (line.length == 7) {
-                    vehicle.getCoordinates()
-                            .setX(line[1])
-                            .setY(line[2]);
-                    vehicle.setName(line[0])
-                            .setEnginePower(line[3])
-                            .setFuelConsumption(line[4])
-                            .setType(line[5])
-                            .setFuelType(line[6])
-                            .setId(idGenerator.generateRandomID());
-                    dataSet.add(vehicle);
-                } else {
-                    textReceiver.print("Line " + lineCounter + " has incorrect number of arguments. Vehicle creation failed");
-                    ++corruptedLines;
-                }
-            } catch (NumberFormatException nfe) {
-                textReceiver.print("Line " + lineCounter + " has a string value instead of numeric one. Vehicle creation failed");
-                ++corruptedLines;
-            } catch (NullPointerException npe) {
-                textReceiver.print("Line " + lineCounter + " has an illegal null value. Vehicle creation failed");
-                ++corruptedLines;
-            } catch (IllegalArgumentException iae) {
-                textReceiver.print("Line " + lineCounter + " has an illegal VehicleType/FuelType value. Vehicle creation failed");
-                ++corruptedLines;
-            } catch (NoArgumentException e) {
-                textReceiver.print("Line " + lineCounter + " has no argument. Vehicle creation failed");
-                ++corruptedLines;
-            } catch (LessOrEqualToZeroException e) {
-                textReceiver.print("Line " + lineCounter + " has an argument that is less or equal to zero. Vehicle creation failed");
-                ++corruptedLines;
-            }
-
-        }
-        textReceiver.print("Dataset is ready for use. Number of corrupted lines: " + corruptedLines);
-        return dataSet;
-    }
-
-    /**
-     * Converts Vehicle vector to list of String arrays (used for saving to CSV file)
-     * @param dataSet vector of Vehicles
-     * @return list of arguments
-     */
-    private List<String[]> convertVehicleVectorToStringList(Vector<Vehicle> dataSet) {
-        //Opel,124,4,51,21,CHOPPER,MANPOWER
-        List<String[]> stringList = new ArrayList<>();
-        for (Vehicle vehicle : dataSet) {
-            String type = (vehicle.getType() == null) ? "" : String.valueOf(vehicle.getType());
-            String fuelType = (vehicle.getFuelType() == null) ? "" : String.valueOf(vehicle.getFuelType());
-            String[] line = {
-                    vehicle.getName(),
-                    String.valueOf(vehicle.getCoordinates().getX()),
-                    String.valueOf(vehicle.getCoordinates().getY()),
-                    String.valueOf(vehicle.getEnginePower()),
-                    String.valueOf(vehicle.getFuelConsumption()),
-                    type,
-                    fuelType
-            };
-            stringList.add(line);
-        }
-
-        return stringList;
+    private void sendMessage(String message) {
+        textReceiver.print(message);
     }
 }

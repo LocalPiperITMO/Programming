@@ -7,9 +7,7 @@ import receivers.DisplayingCommandReceiver;
  * Shows number of elements, creation date and collection type
  */
 public class InfoCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final DisplayingCommandReceiver receiver;
 
     /**

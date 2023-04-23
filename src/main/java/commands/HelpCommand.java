@@ -6,9 +6,7 @@ import receivers.DisplayingCommandReceiver;
  * Command for printing information about every existing command
  */
 public class HelpCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final DisplayingCommandReceiver receiver;
     /**
      * @param receiver receiver with command realization

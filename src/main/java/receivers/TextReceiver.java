@@ -1,7 +1,7 @@
 package receivers;
 
 /**
- * Receiver class
+ * Receiver class<br>
  * Outputs everything to the console (for now)
  */
 public class TextReceiver {

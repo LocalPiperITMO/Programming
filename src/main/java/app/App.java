@@ -1,12 +1,11 @@
 package app;
 
 import collection.CollectionStorage;
-import com.opencsv.exceptions.CsvException;
 import converters.CSVToVectorConverter;
+import exceptions.InvalidPathException;
 import receivers.TextReceiver;
 import user.Client;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -16,17 +15,20 @@ import java.io.IOException;
  */
 public class App {
     /**
-     * @throws CsvException - if there is a problem parsing CSV file
+     * Creates text receiver for output purposes in case something goes wrong<br>
+     * Creates converter class and collection storage class, gets collection prepared<br>
+     * Then creates client class and calls its function, which starts the application<br>
+     * If something goes wrong with parsing file/user decides to leave, closes session
      */
-    public static void main(String[] args) throws IOException, CsvException {
-        CSVToVectorConverter converter = new CSVToVectorConverter("FILE");
-        TextReceiver textReceiver = new TextReceiver();
+    public static void main(String[] args) {
+        TextReceiver receiver = new TextReceiver();
         try {
+            CSVToVectorConverter converter = new CSVToVectorConverter();
             CollectionStorage storage = new CollectionStorage(converter.getVector(), converter.getIdGenerator());
             Client client = new Client(storage);
             client.runningMode();
-        } catch (FileNotFoundException fileNotFoundException) {
-            textReceiver.print("File " + fileNotFoundException.getMessage() + " not found");
+        } catch (InvalidPathException | IOException hardException) {
+            receiver.print("Leaving the program");
         }
     }
 }

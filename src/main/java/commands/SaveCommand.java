@@ -8,9 +8,7 @@ import java.io.IOException;
  * Command for saving collection to the file it was taken from
  */
 public class SaveCommand implements Command {
-    /**
-     * Receiver that contains required method for the command
-     */
+
     private final CollectionProcessingCommandReceiver receiver;
 
     /**

@@ -1,0 +1,131 @@
+package handlers;
+
+import exceptions.UserDisconnectException;
+import output.TextReceiver;
+import packets.CollectionPacket;
+import packets.ReportPacket;
+
+import java.io.*;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.CancelledKeyException;
+import java.nio.channels.SocketChannel;
+import java.nio.channels.UnresolvedAddressException;
+import java.util.List;
+import java.util.Objects;
+
+public class ConnectionHandler {
+    private final TextReceiver receiver = new TextReceiver();
+    private boolean isUserNotified = false;
+
+    public void startConnection(int port) throws UserDisconnectException, InterruptedException {
+        long startTime = System.currentTimeMillis();
+        int RETRY_TIME = 15;
+        while (System.currentTimeMillis() - startTime < RETRY_TIME * 1000) {
+            try (SocketChannel channel = SocketChannel.open(new InetSocketAddress("localhost", port))) {
+                isUserNotified = true;
+                while (true) {
+                    try {
+                        writeToServer(channel);
+                    } catch (NotSerializableException e) {
+                        receiver.print("Not serializable");
+                    }
+                }
+            } catch (UnresolvedAddressException e) {
+                receiver.print("Invalid address, connection failed");
+                throw new UserDisconnectException();
+            } catch (CancelledKeyException e) {
+                receiver.print("I've been caught!");
+                throw new UserDisconnectException();
+            } catch (IOException e) {
+                if (Objects.equals(e.getMessage(), "Connection refused: connect")) {
+                    if (!isUserNotified) {
+                        receiver.print("Couldn't connect to server. Retrying for " + RETRY_TIME + " seconds");
+                        startTime = System.currentTimeMillis();
+                        isUserNotified = true;
+                    }
+                } else if (Objects.equals(e.getMessage(), "Connection reset by peer")) {
+                    receiver.print("Server is down. Retrying...");
+                    startTime = System.currentTimeMillis();
+                }
+                Thread.sleep(1000); // Wait for 1 second before retrying
+            }
+        }
+        receiver.print("Couldn't connect to server. Finishing session...");
+        throw new UserDisconnectException();
+    }
+
+    private void writeToServer(SocketChannel channel) throws IOException, UserDisconnectException {
+        UserInputHandler handler = new UserInputHandler();
+        handler.greetUser();
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(handler.handleInput());
+
+
+        byte[] packetBytes = bos.toByteArray();
+
+        ByteBuffer buffer = ByteBuffer.allocate(packetBytes.length + 4);
+        buffer.putInt(packetBytes.length);
+        buffer.put(packetBytes);
+        buffer.flip();
+
+        while (buffer.hasRemaining()) {
+            channel.write(buffer);
+        }
+        buffer.clear();
+        readFromServer(channel);
+    }
+
+    private void readFromServer(SocketChannel channel) throws UserDisconnectException {
+        ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
+
+        try {
+            while (sizeBuffer.hasRemaining()) {
+                int bytesRead = channel.read(sizeBuffer);
+                if (bytesRead == -1) {
+                    return;
+                }
+            }
+
+            sizeBuffer.flip();
+
+            int reportSize = sizeBuffer.getInt();
+            ByteBuffer reportBuffer = ByteBuffer.allocate(reportSize);
+
+            while (reportBuffer.hasRemaining()) {
+                int bytesRead = channel.read(reportBuffer);
+                if (bytesRead == -1) {
+                    return;
+                }
+            }
+
+            reportBuffer.flip();
+
+            ByteArrayInputStream bis = new ByteArrayInputStream(reportBuffer.array());
+            ObjectInputStream ois = new ObjectInputStream(bis);
+            try {
+                Object userObject = ois.readObject();
+                if (userObject instanceof List<?> receivedList) {
+                    for (Object object : receivedList) {
+                        if (object instanceof ReportPacket packet) {
+                            receiver.print(packet.getReport());
+                            if (packet.getReport().equalsIgnoreCase("Goodbye")) {
+                                throw new UserDisconnectException();
+                            }
+                        } else if (object instanceof CollectionPacket<?> collectionPacket) {
+                            receiver.printCollection(collectionPacket.getPacketIdentifier(), collectionPacket.getCollection());
+                        }
+                    }
+                }
+            } catch (ClassNotFoundException e) {
+                System.out.println("Well, shit");
+            }
+        } catch (IOException e) {
+            System.out.println("Error while sending request to server: server is currently busy");
+            throw new UserDisconnectException();
+        }
+    }
+
+}

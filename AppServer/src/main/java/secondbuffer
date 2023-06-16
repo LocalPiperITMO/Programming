@@ -1,0 +1,112 @@
+public class CommunicationHandler {
+    private final TextReceiver receiver = new TextReceiver();
+    private ServerSocketChannel serverChannel;
+    private boolean isConnected;
+    private Selector selector;
+
+    public void startServer(int port) throws IOException {
+        isConnected = false;
+        serverChannel = ServerSocketChannel.open();
+        serverChannel.bind(new InetSocketAddress("localhost", port));
+        serverChannel.configureBlocking(false);
+        selector = Selector.open();
+
+        serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+        receiver.printToLog(this.getClass().getSimpleName(), "Waiting for connections...");
+        while (true) {
+            int readyKeys = selector.select();
+            if (readyKeys == 0) {
+                continue;
+            }
+            Iterator<SelectionKey> keyIterator = selector.selectedKeys().iterator();
+
+            while (keyIterator.hasNext()) {
+                SelectionKey key = keyIterator.next();
+
+                if (key.isAcceptable()) {
+                    handleAcceptable(key);
+                } else if (key.isReadable()) {
+                    try {
+                        handleReadable(key);
+                    } catch (IOException e) {
+                        receiver.printToLog(this.getClass().getSimpleName(), "Connection closed by client");
+                        key.channel().close();
+                        key.cancel();
+                        isConnected = false;
+                    }
+                } else if (key.isWritable()) {
+                    handleWritable(key);
+                }
+                keyIterator.remove();
+            }
+        }
+
+    }
+
+    private void handleAcceptable(SelectionKey key) throws IOException {
+        if (!isConnected) {
+            SocketChannel clientChannel = ((ServerSocketChannel) key.channel()).accept();
+            clientChannel.configureBlocking(false);
+            clientChannel.register(selector, SelectionKey.OP_READ);
+            isConnected = true;
+            receiver.printToLog(this.getClass().getSimpleName(), "Accepted connection from " + clientChannel.getRemoteAddress());
+        } else {
+            receiver.printToLog(this.getClass().getSimpleName(), "Upcoming connection rejected");
+            key.channel().close();
+        }
+    }
+
+    private void handleReadable(SelectionKey key) throws IOException {
+        SocketChannel clientChannel = (SocketChannel) key.channel();
+
+        PacketHandler packetHandler = new PacketHandler();
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        int bytesRead;
+
+        while ((bytesRead = clientChannel.read(buffer)) > 0) {
+            buffer.flip();
+
+            while (buffer.remaining() >= 4) {
+                int dataLength = buffer.getInt();
+                byte[] data = new byte[dataLength];
+
+                if (buffer.remaining() < dataLength) {
+                    buffer.position(buffer.position() - 4);
+                    buffer.compact();
+                    return;
+                }
+
+                buffer.get(data);
+
+                try (ByteArrayInputStream bis = new ByteArrayInputStream(data);
+                     ObjectInputStream ois = new ObjectInputStream(bis)) {
+                    Object userObject = ois.readObject();
+
+                    if (userObject instanceof CommandDescriptionPacket packet) {
+                        receiver.printToLog(this.getClass().getSimpleName(), "Received packet from " + clientChannel.getRemoteAddress());
+                        packetHandler.handleUserPacket(packet);
+                    } else if (userObject instanceof List<?> receivedList) {
+                        receiver.printToLog(this.getClass().getSimpleName(), "Received list of packets from " + clientChannel.getRemoteAddress());
+                        for (Object object : receivedList) {
+                            if (object instanceof CommandDescriptionPacket packet) {
+                                packetHandler.handleUserPacket(packet);
+                            }
+                        }
+                    }
+
+                } catch (ClassNotFoundException e) {
+                    receiver.printToLog("ERROR", "An error occurred trying to read packet");
+                }
+            }
+            buffer.compact();
+        }
+        if (bytesRead == -1) {
+            receiver.printToLog(this.getClass().getSimpleName(), "Connection closed by client: " + clientChannel.getRemoteAddress());
+            clientChannel.close();
+            key.cancel();
+        }
+    }
+
+    private void handleWritable(SelectionKey key) {
+
+    }

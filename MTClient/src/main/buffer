@@ -1,0 +1,105 @@
+public class CommunicationHandler {
+    private final int port;
+    private SocketChannel channel;
+    private final TextReceiver receiver = new TextReceiver();
+
+    public CommunicationHandler(int port) {
+        this.port = port;
+    }
+
+    public void startConnection() {
+        connectToServer();
+        //TODO:authorize
+        writeToServer();
+        readFromServer();
+
+    }
+
+    private void connectToServer() {
+        try {
+            channel = SocketChannel.open(new InetSocketAddress("localhost", port));
+        } catch (IOException e) {
+            throw new UserDisconnectException();
+        }
+    }
+
+    private void writeToServer() {
+
+        Runnable writeTask = () -> {
+            UserInputHandler handler = new UserInputHandler();
+            try (ByteArrayOutputStream bos = new ByteArrayOutputStream(); ObjectOutputStream oos = new ObjectOutputStream(bos)) {
+
+                handler.greetUser();
+
+                oos.writeObject(handler.handleInput());
+                byte[] packetBytes = bos.toByteArray();
+
+                ByteBuffer buffer = ByteBuffer.allocate(packetBytes.length + 4);
+                buffer.putInt(packetBytes.length);
+                buffer.put(packetBytes);
+                buffer.flip();
+
+                while (buffer.hasRemaining()) {
+                    channel.write(buffer);
+                }
+            } catch (IOException e) {
+                receiver.print("Error writing to server: " + e.getMessage());
+                // Log the error
+            }
+        };
+        Executors.newSingleThreadExecutor().execute(writeTask);
+    }
+
+    private void readFromServer() {
+        Runnable readTask = () -> {
+            try {
+                ByteBuffer sizeBuffer = ByteBuffer.allocate(Integer.BYTES);
+                while (sizeBuffer.hasRemaining()) {
+                    int bytesRead = channel.read(sizeBuffer);
+                    if (bytesRead == -1) {
+                        return;
+                    }
+                }
+                sizeBuffer.flip();
+
+                int reportSize = sizeBuffer.getInt();
+                ByteBuffer reportBuffer = ByteBuffer.allocate(reportSize);
+
+                while (reportBuffer.hasRemaining()) {
+                    int bytesRead = channel.read(reportBuffer);
+                    if (bytesRead == -1) {
+                        return;
+                    }
+                }
+                reportBuffer.flip();
+
+                ByteArrayInputStream bis = new ByteArrayInputStream(reportBuffer.array());
+                try (ObjectInputStream ois = new ObjectInputStream(bis)) {
+                    Object userObject = ois.readObject();
+
+                    if (userObject instanceof List<?> receivedList) {
+                        for (Object object : receivedList) {
+                            if (object instanceof ReportPacket packet) {
+                                receiver.print(packet.getReport());
+                                if (packet.getReport().equalsIgnoreCase("Goodbye")) {
+                                    throw new UserDisconnectException();
+                                }
+                            } else if (object instanceof CollectionPacket<?> collectionPacket) {
+                                receiver.printCollection(collectionPacket.getPacketIdentifier(), collectionPacket.getCollection());
+                            }
+                        }
+                    } else if (userObject instanceof ReportPacket singlePacket) {
+                        receiver.print(singlePacket.getReport());
+                    }
+                } catch (ClassNotFoundException e) {
+                    receiver.print("Well, shit");
+                    // Log the error
+                }
+            } catch (IOException e) {
+                receiver.print("Error reading from server: " + e.getMessage());
+                // Log the error
+            }
+        };
+        Executors.newSingleThreadExecutor().execute(readTask);
+    }
+}

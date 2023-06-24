@@ -1,0 +1,34 @@
+private byte[] readByteStreamFromChannel(SocketChannel channel) throws IOException {
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        byte[] data = new byte[0];
+
+        while (channel.read(buffer) > 0) {
+            buffer.flip();
+            data = prepareByteArrayWithData(buffer, data);
+            if (buffer.remaining() < 4) {
+                buffer.compact();
+            } else {
+                int dataLength = buffer.getInt();
+                buffer = ByteBuffer.allocate(dataLength);
+            }
+        }
+        return data;
+    }
+
+    private byte[] prepareByteArrayWithData(ByteBuffer buffer, byte[] data) {
+        while (buffer.remaining() >= 4) {
+            int dataLength = buffer.getInt();
+            System.out.println(dataLength);
+            byte[] newData = new byte[data.length + dataLength];
+
+            if (buffer.remaining() < dataLength) {
+                buffer.position(buffer.position() - 4);
+                buffer.compact();
+                return new byte[0];
+            }
+            buffer.get(newData, data.length, dataLength);
+            System.arraycopy(data, 0, newData, 0, data.length);
+            data = newData;
+        }
+        return data;
+    }

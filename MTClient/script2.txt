@@ -1,0 +1,10 @@
+print_ascending
+update 11
+Unique Shovel
+8712
+1231
+512312
+123123
+PLANE
+NUCLEAR
+print_field_ascending_fuel_type

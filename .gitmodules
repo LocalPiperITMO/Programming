@@ -1,3 +1,3 @@
-[submodule "lab"]
+[submodule "lab6"]
 	path = lab6
 	url = git@github.com:LocalPiper/lab6.git

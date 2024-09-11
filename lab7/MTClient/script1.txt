@@ -1,0 +1,6 @@
+show
+reorder
+help
+info
+remove_by_id 11
+execute_script script2.txt

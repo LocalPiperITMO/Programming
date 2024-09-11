@@ -1,0 +1,16 @@
+show:-:null,null:-:No argument required. Displays every element of the dataset
+help:-:null,null:-:No argument required. Displays this message
+reorder:-:null,null:-:No argument required. Displays every element of the dataset in reverse order of the current sorting
+info:-:null,null:-:No argument required. Displays the information about the dataset (type of dataset, creation date, number of elements)
+add:-:Vehicle,null:-:No argument required. Building command. Adds pre-built element to dataset
+add_if_max:-:Vehicle,null:-:No argument required. Building command. If the element is greater that the greatest element in the dataset, it is added to dataset
+remove_greater:-:Vehicle,null:-:No argument required. Building command. Removes all the elements from the dataset greater than the given one. Does not delete elements not created by this user
+remove_by_id:-:null,Integer:-:Required argument - ID(integer). Removes an element with the given ID, if one exists. Does not delete elements not created by this user
+update:-:Vehicle,Integer:-:Required argument - ID(integer). Building command. Updates the element with the given ID, if one exists. Does not alter elements not created by this user
+print_ascending:-:null,null:-:No argument required. Displays every element sorted by EnginePower, then by FuelConsumption, then by ID
+print_field_ascending_fuel_type:-:null,null:-:No argument required. Displays only ID and FuelType of every element, sorted by FuelType, then by ID
+clear:-:null,null:-:No argument required. Clears the dataset. Does not delete elements not created by this user
+exit:-:null,null:-:No argument required. Ends the session. Collection is saved
+execute_script:-:null,String:-:Required argument - path(string). Opens file and executes commands from it
+/stop:-:null,null:-:No argument required. Interrupts building process. Works only during element building
+filter_by_fuel_consumption:-:null,Long:-:Required argument - fuelConsumption(long). Filters the collection, leaving elements that match given value

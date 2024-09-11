@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/BuildingInterruptionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/InvalidPathException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/UnmodifiableFileException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exceptions/UnreadableFileException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/allclasses-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/allpackages-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/app/App.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/app/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/app/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/collection/CollectionStorage.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/collection/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/collection/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/AddElementCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/AddIfMaxElementCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/ClearCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/Client.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/Command.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/ExecuteScriptCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/FilterByFuelConsumptionCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/HelpCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/InfoCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/Invoker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/PrintAscendingCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/PrintFieldAscendingFuelTypeCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/Receiver.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/RemoveByIDCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/RemoveGreaterElementsCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/ReorderCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/SaveCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/ShowCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/UpdateElementCommand.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/commands/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/converters/CSVToVectorConverter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/converters/CSVtoStringListConverter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/converters/StringListToVehicleVectorConverter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/converters/VehicleVectorToStringListConverter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/converters/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/converters/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/copy.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/datatype/Coordinates.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/datatype/FuelType.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/datatype/Vehicle.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/datatype/VehicleType.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/datatype/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/datatype/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/element-list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/exceptions/EmptyDatasetException.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/exceptions/InvalidArgumentsWhileVehicleBuildingViaScriptException.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/exceptions/InvalidCommandNameException.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/exceptions/LessOrEqualToZeroException.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/exceptions/NoArgumentException.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/exceptions/RecursionException.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/exceptions/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/exceptions/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generators/IDGenerator.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generators/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/generators/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/help-doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-13.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-14.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-15.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-16.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-17.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-18.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-19.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-20.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index-files/index-9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/basic_input.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/basic_input.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/collection/CollectionStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/collection/CollectionStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/AddIfMaxElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ClearCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/FilterByFuelConsumptionCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/InfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintAscendingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintAscendingCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/PrintFieldAscendingFuelTypeCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/PrintFieldAscendingFuelTypeCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveByIDCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/RemoveGreaterElementsCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ReorderCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ReorderCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/commands/UpdateElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/converters/CSVToVectorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/converters/CSVToVectorConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/FuelType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/FuelType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/Vehicle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datatype/VehicleType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datatype/VehicleType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/EmptyDatasetException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/EmptyDatasetException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/InvalidCommandNameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/InvalidCommandNameException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/LessOrEqualToZeroException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/LessOrEqualToZeroException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/NoArgumentException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/NoArgumentException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/RecursionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/RecursionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exceptions/ScriptBuildingException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exceptions/ScriptBuildingException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/generators/IDGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/generators/IDGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newscript.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newscript.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/CollectionModifyingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/CollectionModifyingCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/CollectionProcessingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/CollectionProcessingCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/DisplayingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/DisplayingCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/ExecuteScriptCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/ExecuteScriptCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/ManualBuildingReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/ManualBuildingReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/ScriptBuildingReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/ScriptBuildingReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/SimpleArgumentCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/SimpleArgumentCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/SortingCommandReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/SortingCommandReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/receivers/TextReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/receivers/TextReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/script.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/user/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/user/Invoker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/user/Invoker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/jquery-ui.overrides.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/legal/ASSEMBLY_EXCEPTION" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/legal/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/legal/jquery.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/legal/jqueryUI.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/member-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/module-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/overview-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/overview-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/package-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/BuilderCommandReceiver.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/CollectionProcessingCommandReceiver.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/DisplayingCommandReceiver.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/ExecuteScriptCommandReceiver.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/SimpleArgumentCommandReceiver.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/SortingCommandReceiver.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/TextReceiver.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/receivers/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/glass.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/script-dir/jquery-3.6.0.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/script-dir/jquery-ui.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/script-dir/jquery-ui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/search-page.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/serialized-form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/tag-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/type-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/user/Client.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/user/Invoker.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/user/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/user/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/validators/ConversionValidator.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/validators/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/validators/package-tree.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2LyzDKF61ohhkKZO5a1loDGNP5O" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Honor/IdeaProjects/test&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Honor\IdeaProjects\App\src\main\java" />
+      <recent name="C:\Users\Honor\IdeaProjects\App\src\main\java\files" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.App" />
+      <module name="App" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="converters.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d6361f99-fe56-4314-af28-058784d77c62" name="Changes" comment="" />
+      <created>1676857990716</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676857990716</updated>
+      <workItem from="1676857992381" duration="121000" />
+      <workItem from="1676858144557" duration="23000" />
+      <workItem from="1676858535123" duration="1694000" />
+      <workItem from="1676860259924" duration="3035000" />
+      <workItem from="1676863443668" duration="318000" />
+      <workItem from="1676863777319" duration="1337000" />
+      <workItem from="1676865162328" duration="4244000" />
+      <workItem from="1676870257823" duration="2035000" />
+      <workItem from="1676872329689" duration="6877000" />
+      <workItem from="1676964001551" duration="7511000" />
+      <workItem from="1677032876703" duration="7000" />
+      <workItem from="1677052527830" duration="2760000" />
+      <workItem from="1677252022124" duration="8031000" />
+      <workItem from="1677266600250" duration="206000" />
+      <workItem from="1677267103470" duration="1646000" />
+      <workItem from="1677268778973" duration="2340000" />
+      <workItem from="1677409391462" duration="5510000" />
+      <workItem from="1677429655474" duration="6437000" />
+      <workItem from="1677454954922" duration="4666000" />
+      <workItem from="1677460028087" duration="2000000" />
+      <workItem from="1677462353271" duration="5649000" />
+      <workItem from="1677468397709" duration="1077000" />
+      <workItem from="1677484656845" duration="2472000" />
+      <workItem from="1677556696014" duration="6711000" />
+      <workItem from="1677583520413" duration="3160000" />
+      <workItem from="1677587193196" duration="8750000" />
+      <workItem from="1677603010898" duration="1631000" />
+      <workItem from="1677604774040" duration="14261000" />
+      <workItem from="1677620512733" duration="1611000" />
+      <workItem from="1677622209284" duration="1728000" />
+      <workItem from="1677623986900" duration="869000" />
+      <workItem from="1677624876764" duration="481000" />
+      <workItem from="1677633549568" duration="6257000" />
+      <workItem from="1677640500639" duration="8601000" />
+      <workItem from="1677652591496" duration="551000" />
+      <workItem from="1677653157945" duration="184000" />
+      <workItem from="1677653368866" duration="4756000" />
+      <workItem from="1677659032460" duration="752000" />
+      <workItem from="1677660557596" duration="280000" />
+      <workItem from="1677660877016" duration="52000" />
+      <workItem from="1677661103476" duration="6000" />
+      <workItem from="1677665953684" duration="3654000" />
+      <workItem from="1677669905558" duration="9000" />
+      <workItem from="1677670714842" duration="5388000" />
+      <workItem from="1677759456415" duration="6000" />
+      <workItem from="1677761417747" duration="768000" />
+      <workItem from="1677762472422" duration="488000" />
+      <workItem from="1677762983409" duration="80000" />
+      <workItem from="1677929722280" duration="6181000" />
+      <workItem from="1677936465537" duration="2146000" />
+      <workItem from="1678010916289" duration="7365000" />
+      <workItem from="1678036866446" duration="44000" />
+      <workItem from="1678051046092" duration="4546000" />
+      <workItem from="1678121705368" duration="2969000" />
+      <workItem from="1678191271583" duration="2817000" />
+      <workItem from="1678194348801" duration="5309000" />
+      <workItem from="1678216085875" duration="788000" />
+      <workItem from="1678216901214" duration="959000" />
+      <workItem from="1678340462055" duration="596000" />
+      <workItem from="1678345378844" duration="270000" />
+      <workItem from="1678345789211" duration="3523000" />
+      <workItem from="1678656193776" duration="7063000" />
+      <workItem from="1678751715453" duration="3619000" />
+      <workItem from="1678841091274" duration="10201000" />
+      <workItem from="1678855225522" duration="498000" />
+      <workItem from="1678855812674" duration="691000" />
+      <workItem from="1678860159698" duration="7679000" />
+      <workItem from="1678867976068" duration="273000" />
+      <workItem from="1678873662547" duration="9275000" />
+      <workItem from="1678975669632" duration="1443000" />
+      <workItem from="1678990431631" duration="104000" />
+      <workItem from="1679237210230" duration="18130000" />
+      <workItem from="1679268900294" duration="4115000" />
+      <workItem from="1679273070364" duration="8000" />
+      <workItem from="1679273245981" duration="939000" />
+      <workItem from="1679413585694" duration="1644000" />
+      <workItem from="1679480047155" duration="88000" />
+      <workItem from="1679561018809" duration="14000" />
+      <workItem from="1679851596421" duration="3592000" />
+      <workItem from="1679891184253" duration="1291000" />
+      <workItem from="1680049589175" duration="7081000" />
+      <workItem from="1680056759715" duration="319000" />
+      <workItem from="1680075245162" duration="84000" />
+      <workItem from="1680075783919" duration="199000" />
+      <workItem from="1680076239240" duration="657000" />
+      <workItem from="1680086633663" duration="12000" />
+      <workItem from="1680088044038" duration="9222000" />
+      <workItem from="1680098570149" duration="563000" />
+      <workItem from="1680170724288" duration="10000" />
+      <workItem from="1680195130197" duration="329000" />
+      <workItem from="1680195743982" duration="12000" />
+      <workItem from="1680779747793" duration="156000" />
+      <workItem from="1680780029011" duration="2000" />
+      <workItem from="1681153191857" duration="12000" />
+      <workItem from="1681213647194" duration="5285000" />
+      <workItem from="1681234420340" duration="6666000" />
+      <workItem from="1681244131286" duration="59000" />
+      <workItem from="1681244527972" duration="2410000" />
+      <workItem from="1681271786165" duration="2872000" />
+      <workItem from="1681277716292" duration="2809000" />
+      <workItem from="1681281303886" duration="606000" />
+      <workItem from="1681282117377" duration="7754000" />
+      <workItem from="1681293941112" duration="863000" />
+      <workItem from="1681296850258" duration="2408000" />
+      <workItem from="1681299397081" duration="11000" />
+      <workItem from="1681300858912" duration="6014000" />
+      <workItem from="1681375356420" duration="242000" />
+      <workItem from="1681394190990" duration="270000" />
+      <workItem from="1681464823853" duration="9133000" />
+      <workItem from="1681500626073" duration="2438000" />
+      <workItem from="1681544704173" duration="4887000" />
+      <workItem from="1681584595455" duration="5842000" />
+      <workItem from="1681655294731" duration="627000" />
+      <workItem from="1681675418403" duration="434000" />
+      <workItem from="1681675868983" duration="1006000" />
+      <workItem from="1681677075415" duration="2640000" />
+      <workItem from="1681731449473" duration="52000" />
+      <workItem from="1681759910135" duration="2964000" />
+      <workItem from="1681791675440" duration="4969000" />
+      <workItem from="1681807843467" duration="4449000" />
+      <workItem from="1681820519063" duration="17996000" />
+      <workItem from="1681912092941" duration="643000" />
+      <workItem from="1681922778480" duration="8955000" />
+      <workItem from="1681985119296" duration="3056000" />
+      <workItem from="1681988564850" duration="36000" />
+      <workItem from="1681988611452" duration="153000" />
+      <workItem from="1681988775704" duration="56000" />
+      <workItem from="1681988842927" duration="600000" />
+      <workItem from="1681989516963" duration="251000" />
+      <workItem from="1681989779254" duration="140000" />
+      <workItem from="1681994550737" duration="3575000" />
+      <workItem from="1681999589174" duration="1679000" />
+      <workItem from="1682001289658" duration="69000" />
+      <workItem from="1682001407870" duration="271000" />
+      <workItem from="1682001696818" duration="1215000" />
+      <workItem from="1682002934940" duration="409000" />
+      <workItem from="1682003353059" duration="2651000" />
+      <workItem from="1682075450894" duration="4047000" />
+      <workItem from="1682100680141" duration="2546000" />
+      <workItem from="1682104192704" duration="12000" />
+      <workItem from="1682169359778" duration="707000" />
+      <workItem from="1682172644525" duration="373000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="converters.CSVToVectorConverter" memberName="textReceiver" />
+        <PinnedItemInfo parentTag="generators.IDGenerator" memberName="idSet" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
